@@ -215,8 +215,16 @@
 // Şema: TEST-KATALOGU.md'de. Yeni test = bu diziye yeni nesne.
 const CEVAP5 = ["Hiç öyle değil","Pek değil","Bazen","Çoğunlukla","Tamamen öyle"];
 // "Ona Sor" formatı puanlı cevap setleri
-const BILGI = [{t:"Bildi ✅",p:2},{t:"Kısmen bildi",p:1},{t:"Bilemedi",p:0}];
-const TEPKI = [{t:"Hemen ve içten cevapladı 💛",p:3},{t:"Zorlandı ama denedi",p:2},{t:"Geçiştirdi, şakaya vurdu",p:1},{t:"Cevaplamak istemedi",p:0}];
+const BILGI = [
+  {t:"Anında ve tam bildi — üstüne detay bile ekledi 🎯",p:3},
+  {t:"Yaklaşık bildi; ana hattı doğruydu",p:2},
+  {t:"Yanlış bildi ama gerçekten düşünüp uğraştı",p:1},
+  {t:"'Ne bileyim ben' — geçiştirdi",p:0}];
+const TEPKI = [
+  {t:"Durup düşündü, içten ve dolu bir cevap verdi 💛",p:3},
+  {t:"Kısa ama samimi cevapladı",p:2},
+  {t:"Şakaya vurdu, konuyu yumuşatıp kaçtı",p:1},
+  {t:"Cevaplamadı ya da konuyu değiştirdi",p:0}];
 
 const TESTLER = [
 {
@@ -278,41 +286,92 @@ const TESTLER = [
 },
 {
   id:"seviyor-mu",
-  baslik:"Seviyor mu? Sevgi Belirtileri Testi",
-  aciklama:"24 soruda onun davranışlarını, sevgi araştırmalarının kriterlerine göre değerlendir.",
-  kaynak:"Rubin'in Sevgi Ölçeği (1970), Rusbult'un Yatırım Modeli (1980) ve Gottman'ın çift araştırmalarından uyarlanmıştır.",
-  sure:"~4 dk", cevaplar:CEVAP5, tip:"toplam",
+  baslik:"Seviyor mu? Davranış Analizi",
+  aciklama:"15 gerçek hayat senaryosu — her soruda onun en olası davranışını seç, davranış haritası yüzdeni görsün.",
+  kaynak:"Rubin'in Sevgi Ölçeği (1970), Rusbult'un Yatırım Modeli ve Gottman'ın 'ilgi çağrısına dönüş' araştırmalarından senaryo formatına uyarlanmıştır.",
+  sure:"~5 dk", tip:"toplam",
   sorular:[
-    {q:"Zor bir gün geçirdiğimde ilk arayacağım kişi olmaktan mutluluk duyar."},
-    {q:"Planlarını yaparken beni de hesaba katar."},
-    {q:"Bana özel şeylerini — korkularını, hayallerini — benimle paylaşır."},
-    {q:"Bir süre görüşemediğimizde beni özlediğini belli eder."},
-    {q:"Hasta ya da üzgün olduğumda kendiliğinden ilgilenir."},
-    {q:"Konuşurken gözlerimin içine bakarak dinler."},
-    {q:"Benim mutluluğum için kendi rahatından vazgeçebilir."},
-    {q:"Yanımdayken telefonuyla değil, benimle ilgilenir."},
-    {q:"Anlattığım küçük ayrıntıları hatırlar (sevdiğim şeyler, önemli günler)."},
-    {q:"Beni hayatındaki insanlara tanıtmıştır ya da tanıtmak ister."},
-    {q:"Gelecekten bahsederken 'biz' diye konuşur."},
-    {q:"Bir sorunumuz olduğunda kaçmak yerine konuşmayı seçer."},
-    {q:"Bana sadece bir şeye ihtiyacı olduğunda ulaşır.",ters:true},
-    {q:"Başarılarıma neredeyse benden çok sevinir."},
-    {q:"Ona küçük bir mesaj attığımda ilgiyle karşılık verir."},
-    {q:"Benim için zaman yaratır; sürekli 'müsait değilim' demez."},
-    {q:"Sözler verir ama arkasını getirmez.",ters:true},
-    {q:"Kalabalık bir ortamda bile gözleri beni arar."},
-    {q:"Kararlarında fikrimi sorar ve dikkate alır."},
-    {q:"Kötü bir gün geçirdiğinde bana anlatır — maskesini indirir."},
-    {q:"İlişkimiz için çaba ister isteyen şeyler yapar (yol gelir, sürpriz yapar, özür diler)."},
-    {q:"Sosyal medyada aktifken mesajıma saatlerce dönmediği olur.",ters:true},
-    {q:"Bana yakın olmak, dokunmak için fırsat yaratır."},
-    {q:"Sevgisini sadece sözle değil, davranışla gösterir."}
+    {q:"Ona 'bugün çok kötü bir gün geçirdim' dedin. En olası tepkisi hangisi?",sec:[
+      {t:"İşini bırakır; arar ya da yanıma gelir",p:3},
+      {t:"'Geçmiş olsun, anlatmak ister misin?' diye yazar",p:2},
+      {t:"'Üzüldüm' der, konu kısa sürede değişir",p:1},
+      {t:"Görür; cevap gelmeyebilir bile",p:0}]},
+    {q:"Kalabalık bir ortamdasınız. Onu uzaktan izlesen ne görürsün?",sec:[
+      {t:"Gözleri beni arıyor; sık sık göz göze geliyoruz, arada yanıma geliyor",p:3},
+      {t:"Ara sıra bakışıp gülümsüyoruz",p:2},
+      {t:"Kendi dünyasında; ben gitsem bir süre fark etmez",p:1},
+      {t:"Beni o ortamda tanımıyormuş gibi davranıyor",p:0}]},
+    {q:"Sana bir söz verdi (buluşma, arama, halledilecek bir iş). Genelde ne olur?",sec:[
+      {t:"Söz verdiyse yapılır; değişiklik olursa önceden haber verir",p:3},
+      {t:"Çoğunlukla tutar, arada unuttuğu olur",p:2},
+      {t:"Tutarsa sürpriz olur",p:1},
+      {t:"Söz verdiğini bile hatırlamaz",p:0}]},
+    {q:"İki hafta önce ona anlattığın önemli bir konuyu bugün tekrar açsan?",sec:[
+      {t:"Detaylarıyla hatırlar — hatta arada 'ne oldu o iş?' diye sormuştur bile",p:3},
+      {t:"Ana hatlarını hatırlar",p:2},
+      {t:"'Sen bana onu anlatmış mıydın?'",p:1},
+      {t:"Hiç dinlememiş olduğu ortaya çıkar",p:0}]},
+    {q:"Mesajlaşma/arama ritminiz gerçekte nasıl?",sec:[
+      {t:"Gün içinde kendiliğinden yazar; sesini duymak için arar",p:3},
+      {t:"Genelde ben başlatırım ama hızlı ve ilgiyle döner",p:2},
+      {t:"Geç ve kısa cevaplar: 'hı', 'olur', 'bilmem'",p:1},
+      {t:"Mesajlarım saatlerce/günlerce görülüp dönülmeyebiliyor",p:0}]},
+    {q:"Gelecek (tatil, seneye, hayaller) konuşulurken onun dili nasıl?",sec:[
+      {t:"'Biz' diye kurar; planın içinde ben de varım",p:3},
+      {t:"Beni kattığı olur ama netleşmekten kaçınır",p:2},
+      {t:"Hep 'ben' der; benim yerim belirsiz",p:1},
+      {t:"Gelecek konusu açılınca konuyu kapatır",p:0}]},
+    {q:"Güzel bir haber aldın (iş, okul, başarı). İlk tepkisi?",sec:[
+      {t:"Benden çok sevinir; herkese anlatacak gibi olur",p:3},
+      {t:"İçten tebrik eder, detayları sorar",p:2},
+      {t:"'Güzelmiş' der, geçer",p:1},
+      {t:"Küçümser ya da lafı kendine getirir",p:0}]},
+    {q:"Hastalandın. En gerçekçi senaryo hangisi?",sec:[
+      {t:"Başımda biter: çorba, ilaç, takip",p:3},
+      {t:"Sürekli sorar, arar; uzaktan elinden geleni yapar",p:2},
+      {t:"Bir 'geçmiş olsun' mesajı gelir, o kadar",p:1},
+      {t:"Haberi bile olmaz — çünkü sormaz",p:0}]},
+    {q:"Onun çevresi (arkadaşları, ailesi) senin hakkında ne biliyor?",sec:[
+      {t:"Beni tanıyorlar; ortamlarına dahilim",p:3},
+      {t:"Varlığımı biliyorlar; tanışma yolda",p:2},
+      {t:"Sadece bir iki kişi biliyor",p:1},
+      {t:"Beni sakladığını hissediyorum",p:0}]},
+    {q:"Aranızda bir kırgınlık/sorun olduğunda onun tavrı?",sec:[
+      {t:"Konuşmayı o başlatır; çözmeden bırakmaz",p:3},
+      {t:"Ben açarsam kaçmaz, birlikte çözeriz",p:2},
+      {t:"'Abartıyorsun' der, geçiştirir",p:1},
+      {t:"Küser, kaybolur, sessizlikle cezalandırır",p:0}]},
+    {q:"Senin için kendi rahatından vazgeçtiğini gördün mü?",sec:[
+      {t:"Evet — hem de bunu başıma kakmadan yapar",p:3},
+      {t:"Ara sıra; biraz söylenerek ama yapar 😅",p:2},
+      {t:"Ancak kendi işine de geliyorsa",p:1},
+      {t:"Hatırlamıyorum",p:0}]},
+    {q:"Fiziksel yakınlık (sarılmak, el tutmak) sizde nasıl işliyor?",sec:[
+      {t:"Onun için doğal ihtiyaç; kendiliğinden yakınlaşır",p:3},
+      {t:"Yakınız ama genelde ben başlatırım",p:2},
+      {t:"Sadece belirli anlarda yakınlaşır",p:1},
+      {t:"Aramızda hep bir mesafe var",p:0}]},
+    {q:"Onun sosyal medyasında/telefonunda senin yerin ne?",sec:[
+      {t:"Görünürüm: paylaşır, etiketler, saklamaz",p:3},
+      {t:"Paylaşmayı sevmez ama sorana gururla söyler",p:2},
+      {t:"İlişkimiz 'gizli' gibi duruyor",p:1},
+      {t:"Sakladığına dair somut şeyler gördüm",p:0}]},
+    {q:"En son ne zaman sırf 'aklıma geldin' diye bir şey yaptı (mesaj, küçük hediye, şarkı)?",sec:[
+      {t:"Bu hafta içinde",p:3},
+      {t:"Geçen ay içinde",p:2},
+      {t:"Çok eskiden olmuştu",p:1},
+      {t:"Hiç olmadı",p:0}]},
+    {q:"Dürüst ol: bu ilişkide çabayı kim taşıyor?",sec:[
+      {t:"O, en az benim kadar taşıyor",p:3},
+      {t:"Dalgalanıyor ama ikimiz de oradayız",p:2},
+      {t:"Çoğunlukla ben taşıyorum",p:1},
+      {t:"Tek kürek çeken benim",p:0}]}
   ],
   profiller:[
-    {min:72,baslik:"Davranışları güçlü sevgi işaretleri veriyor 💛",metin:"Araştırmaların 'sevginin davranışsal göstergeleri' dediği neredeyse her alanda yüksek puan verdin: önemseme, bağlılık, sana dönüş ve ilişkiye yatırım. Sözlerden bağımsız olarak, davranış tablosu tutarlı biçimde 'seviyor' diyor.",oneri:"Bu tabloyu korumanın yolu karşılıklılık: onun ilgi çağrılarına senin de dönmen. Gottman'a göre iyi giden ilişkileri ayakta tutan şey büyük jestler değil, bu küçük dönüşlerin sürekliliği."},
-    {min:48,baslik:"İlgi var ama tutarsız — netleşme aşaması",metin:"Bazı alanlarda güçlü işaretler var (muhtemelen ilgi ve yakınlık), bazı alanlarda ise davranışlar sözlerin gerisinde kalıyor. Bu tablo çoğu zaman 'sevmiyor' değil, 'henüz emin değil ya da göstermekte zorlanıyor' anlamına gelir.",oneri:"Düşük puan verdiğin sorulara tek tek bak: hangi alanda eksik hissediyorsun? O alanı suçlama dili kullanmadan konuşmak ('şunu yaptığında çok iyi hissediyorum, daha sık olsa ne güzel olur') davranışı değiştirmenin en araştırma-destekli yolu."},
-    {min:24,baslik:"Karışık sinyaller — sözler ve davranışlar örtüşmüyor",metin:"Testin işaret ettiği tablo: ilgi anları var ama süreklilik, yatırım ve önemseme boyutları zayıf. Araştırmalar net: sevgiyi en iyi yordayan şey yoğun anlar değil, tutarlı davranıştır.",oneri:"Kendine şu soruyu sor: 'Bu ilişkide gördüğüm ilgi, benim verdiğimin kaçta kaçı?' Cevabın seni üzüyorsa, beklentilerini açıkça ifade etmek ve karşılığını gözlemlemek için kendine bir süre tanı. Belirsizlik, netlikten daha çok yorar."},
-    {min:0,baslik:"Davranışsal işaretler zayıf — kendine sorman gereken sorular var",metin:"Bu sonuç 'seni kimse sevmez' demek değil; bu kişinin davranışlarının, sevgi araştırmalarının kriterlerini şu anda karşılamadığını gösteriyor. Umut verici anlar olabilir, ama tablo genelinde önemseme ve yatırım görünmüyor.",oneri:"En değerli sorun şu: 'Ben bu ilişkide neyi umut ettiğim için kalıyorum?' Bu soruya vereceğin dürüst cevap, yüz testten daha değerli."}
+    {min:36,baslik:"Davranış haritası net: seviyor 💛",metin:"Seçtiğin senaryolar, sevgi araştırmalarının aradığı işaretlerin neredeyse hepsini gösteriyor: ilgine dönüyor, seni hatırlıyor, geleceğine katıyor, çevresine dahil ediyor ve zora düştüğünde orada. Sözlerden bağımsız olarak davranış tablosu tutarlı.",oneri:"Bu tabloyu koruyan şey karşılıklılık: onun ilgi çağrılarına senin de dönmen. Gottman'a göre ilişkiyi taşıyan büyük jestler değil, bu küçük dönüşlerin sürekliliği."},
+    {min:24,baslik:"İşaretler var ama tablo dalgalı",metin:"Bazı senaryolarda güçlü işaretler seçtin, bazılarında zayıf. Bu tablo çoğu zaman 'sevmiyor' değil; 'göstermekte tutarsız' ya da 'henüz emin değil' anlamına gelir. Kritik soru: güçlü işaretler mi artıyor, zayıflar mı?",oneri:"Düşük puan verdiğin senaryolara bak — eksik hissettiğin alan tam orası. O alanı suçlamadan konuş: 'şunu yaptığında çok iyi hissediyorum' kalıbı, davranış değiştirmenin en araştırma-destekli yolu."},
+    {min:12,baslik:"Karışık sinyaller — sözler ve davranış örtüşmüyor",metin:"Seçimlerin, ilgi anları olan ama süreklilik, yatırım ve önemseme boyutları zayıf bir tablo çiziyor. Araştırmalar net: sevgiyi en iyi yordayan şey yoğun anlar değil, tutarlı davranıştır.",oneri:"Kendine şu soruyu sor: 'Bu ilişkide gördüğüm ilgi, verdiğimin kaçta kaçı?' Cevap seni üzüyorsa beklentini açıkça söyle ve davranış değişiyor mu diye belirli bir süre gözle. Belirsizlik, netlikten çok daha yorucudur."},
+    {min:0,baslik:"Davranışlar konuşuyor — ve söyledikleri iyi değil",metin:"Seçtiğin senaryoların çoğu, araştırmaların 'düşük yatırım, düşük önemseme' dediği uca düşüyor. Bu sonuç senin değerinle ilgili değil; bu kişinin sana şu anki davranışlarıyla ilgili.",oneri:"En değerli soru şu: 'Ben bu ilişkide neyi umut ettiğim için kalıyorum?' Umudun somut bir karşılığı var mı, yoksa sadece potansiyele mi tutunuyorsun — bu ayrımı dürüstçe yapmak, yüz testten daha değerli."}
   ]
 },
 {
@@ -678,7 +737,8 @@ function bitir(){
     eksenCiz([{ad:"Kaygı ekseni",yuzde:Math.round(kaygi/(nK*4)*100)},{ad:"Kaçınma ekseni",yuzde:Math.round(kacinma/(nC*4)*100)}]);
     document.getElementById("s-puan").textContent="";
   }else{
-    puan=puanlar.reduce((a,b)=>a+b,0);max=t.sorular.length*4;
+    puan=puanlar.reduce((a,b)=>a+b,0);
+    max=t.sorular.reduce((a,s)=>a+(s.sec?Math.max(...s.sec.map(o=>o.p)):4),0);
     profil=t.profiller.find(p=>puan>=p.min);
     halkaCiz(Math.round(puan/max*100),"PUANIN");
     document.getElementById("s-puan").textContent=puan+" / "+max+" puan";
