@@ -144,6 +144,10 @@
   .disclaimer{font-size:.72rem;color:var(--sonuk);margin-top:32px;text-align:center;line-height:1.7}
   .disclaimer a{color:var(--gul2)}
   .hide{display:none}
+.yazi-giris{width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid rgba(199,165,255,.35);border-radius:16px;color:var(--sut,#FBF1F7);font-family:inherit;font-size:1.05rem;padding:15px 18px;margin-bottom:12px;outline:none}
+.yazi-giris:focus{border-color:var(--gul,#FF5C8A);box-shadow:0 0 0 3px rgba(255,92,138,.18)}
+.selam-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,92,138,.10);border:1px solid rgba(255,92,138,.35);border-radius:99px;padding:7px 16px;font-size:.82rem;letter-spacing:.4px;color:var(--sut,#FBF1F7)}
+.selam-chip a{color:var(--lila,#C7A5FF);text-decoration:none;font-weight:700;margin-left:4px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -159,7 +163,20 @@
     <a class="uc" href="../index.html">ANA SAYFA</a>
   </header>
 
+  <div id="ekran-profil" class="hide">
+    <div class="oynatici-bas">
+      <button class="geri" id="pfGeri" onclick="pfGeri()">← geri</button>
+      <span class="sayac" id="pfSayac"></span>
+    </div>
+    <div class="progress"><i id="pfBar" style="width:0%"></i></div>
+    <div class="soru-kart" id="pfKart">
+      <div class="soru" id="pfSoru"></div>
+      <div id="pfCevaplar"></div>
+    </div>
+  </div>
+
   <div id="ekran-liste">
+    <div id="selam" style="display:none;justify-content:center;margin-bottom:14px"></div>
     <p class="ust-etiket">ARAŞTIRMA TEMELLİ İLİŞKİ TESTLERİ</p>
     <h1 class="buyuk">Tahmin etme,<br><em>kalbine sor.</em></h1>
     <p class="alt-yazi">Uydurma test yok: her biri yayımlanmış psikoloji araştırmalarından uyarlandı. Kaynağı kartın üzerinde görürsün.</p>
@@ -755,9 +772,78 @@ const HAREKET_OK = matchMedia("(prefers-reduced-motion: no-preference)").matches
   kur();addEventListener("resize",kur);
   if(HAREKET_OK){(function dongu(t){ciz(t||0);requestAnimationFrame(dongu);})();}
   else ciz(0);
-})();function toplamAdim(t){return t.tip==="eslesme"? t.sorular.length*2 : t.sorular.length;}
+})();// ============ PROFİL (karşılama sihirbazı) ============
+const PROFIL_ADIMLAR=[
+ {k:"durum",q:"Önce seni tanıyalım 💗 İlişki durumun ne?",sec:["💑 Sevgilim var","💍 Nişanlıyım / söz kesildi","👰 Evliyim","🌪️ Karmaşık / yeni başladı"]},
+ {k:"sure",q:"Ne kadar zamandır birliktesiniz?",sec:["🌱 6 aydan az","🌸 6 ay – 2 yıl","🌳 2 – 5 yıl","🏡 5 yıldan fazla"]},
+ {k:"ad",q:"Onun adı ne? Testlerde sorularını ismiyle soralım 😊",tip:"yazi"},
+ {k:"cocuk",q:"Çocuğunuz var mı?",sec:["Yok","1 çocuk","2 veya daha fazla","Yolda 🤰"]},
+ {k:"tempo",q:"Temponuz nasıl? Birlikte vakit için…",sec:["🕰️ Her gün bol bol birlikteyiz","💼 İş yoğun, ancak akşamları görüşüyoruz","📅 Haftada birkaç kez buluşuyoruz","✈️ Uzak mesafe / çok yoğun çalışıyor"]}
+];
+let PROFIL=null; try{PROFIL=JSON.parse(localStorage.getItem("ksProfil")||"null");}catch(e){}
+let pfIx=0, pfVeri={};
+function profilBaslat(dolu){pfIx=0;pfVeri=dolu?Object.assign({},PROFIL):{};goster("profil");pfGosterAdim();}
+function pfGosterAdim(){
+  const a=PROFIL_ADIMLAR[pfIx], N=PROFIL_ADIMLAR.length;
+  document.getElementById("pfBar").style.width=(pfIx/N*100)+"%";
+  document.getElementById("pfSayac").textContent=(pfIx+1)+" / "+N;
+  document.getElementById("pfSoru").textContent=a.q;
+  const c=document.getElementById("pfCevaplar");c.innerHTML="";
+  if(a.tip==="yazi"){
+    const g=document.createElement("input");g.className="yazi-giris";g.maxLength=20;
+    g.placeholder="örn. Mehmet";g.value=pfVeri.ad||"";g.autocomplete="off";
+    const b=document.createElement("button");b.className="btn";b.textContent="Devam 💛";
+    b.onclick=()=>{pfVeri.ad=g.value.trim();pfIleri();};
+    g.addEventListener("keydown",e=>{if(e.key==="Enter")b.click();});
+    const atla=document.createElement("button");atla.className="btn sec";atla.textContent="İsim vermeden devam et";
+    atla.onclick=()=>{pfVeri.ad="";pfIleri();};
+    c.appendChild(g);c.appendChild(b);c.appendChild(atla);
+    setTimeout(()=>g.focus(),120);
+  }else{
+    a.sec.forEach(t=>{
+      const b=document.createElement("button");b.className="cevap";b.textContent=t;
+      if(pfVeri[a.k]===t)b.style.borderColor="var(--gul,#FF5C8A)";
+      b.onclick=()=>{pfVeri[a.k]=t;pfIleri();};
+      c.appendChild(b);
+    });
+  }
+  const k=document.getElementById("pfKart");k.classList.remove("gir");void k.offsetWidth;k.classList.add("gir");
+}
+function pfIleri(){pfIx++; pfIx<PROFIL_ADIMLAR.length?pfGosterAdim():pfBitir();}
+function pfGeri(){if(pfIx>0){pfIx--;pfGosterAdim();}else if(PROFIL)anasayfa();}
+function pfBitir(){
+  PROFIL=pfVeri;
+  if(PROFIL.ad)PROFIL.ad=PROFIL.ad.charAt(0).toLocaleUpperCase("tr")+PROFIL.ad.slice(1);
+  try{localStorage.setItem("ksProfil",JSON.stringify(PROFIL));}catch(e){}
+  anasayfa();
+}
+// Türkçe -e/-a hâli: Mehmet'e, Ayşe'ye, Umut'a...
+function adEk(ad){
+  const s=ad.toLocaleLowerCase("tr"), unlu="aeıioöuü"; let son="";
+  for(let i=s.length-1;i>=0;i--){if(unlu.includes(s[i])){son=s[i];break;}}
+  const kalin="aıou".includes(son), unluBiter=unlu.includes(s[s.length-1]);
+  return "'"+(unluBiter?"y":"")+(kalin?"a":"e");
+}
+function kisisel(txt){
+  if(!PROFIL||!PROFIL.ad)return txt;
+  const A=PROFIL.ad, AE=A+adEk(A);
+  return txt
+    .replace(/ŞİMDİ ONA SOR/g,"ŞİMDİ "+AE.toLocaleUpperCase("tr")+" SOR")
+    .replace(/Ona sor/g,AE+" sor")
+    .replace(/\bona\b/g,AE)
+    .replace(/\bONA\b/g,AE.toLocaleUpperCase("tr"));
+}
+function selamCiz(){
+  const el=document.getElementById("selam");
+  if(!PROFIL){el.style.display="none";return;}
+  const parca=[PROFIL.durum,PROFIL.sure,PROFIL.ad?("💗 "+PROFIL.ad):null].filter(Boolean)
+    .map(x=>x.replace(/^[^\wÇĞİÖŞÜçğıöşü]+\s*/,""));
+  el.innerHTML='<span class="selam-chip">'+parca.join(" · ")+'<a onclick="profilBaslat(true)">düzenle</a></span>';
+  el.style.display="flex";
+}
+function toplamAdim(t){return t.tip==="eslesme"? t.sorular.length*2 : t.sorular.length;}
 function anasayfa(){
-  goster("liste"); aktifTest=null;
+  goster("liste"); aktifTest=null; selamCiz();
   const el=document.getElementById("liste"); el.innerHTML="";
   TESTLER.forEach((t,ix)=>{
     const cift = (t.tip==="onasor"||t.tip==="eslesme");
@@ -773,13 +859,13 @@ function anasayfa(){
   });
   el.querySelectorAll(".card").forEach((k,i)=>setTimeout(()=>k.classList.add("dogdu"), HAREKET_OK? 90*i : 0));
 }
-function goster(id){["liste","test","sonuc"].forEach(e=>document.getElementById("ekran-"+e).classList.add("hide"));document.getElementById("ekran-"+id).classList.remove("hide");window.scrollTo(0,0);}
+function goster(id){["profil","liste","test","sonuc"].forEach(e=>document.getElementById("ekran-"+e).classList.add("hide"));document.getElementById("ekran-"+id).classList.remove("hide");window.scrollTo(0,0);}
 function canlandir(){const k=document.getElementById("soruKart");k.classList.remove("gir");void k.offsetWidth;k.classList.add("gir");}
 function basla(id){aktifTest=TESTLER.find(t=>t.id===id);soruIx=0;puanlar=[];goster("test");aktifTest.yonerge?yonergeGoster():soruGoster();}
 function yonergeGoster(){
   document.getElementById("pbar").style.width="0%";
   document.getElementById("sayac").textContent="";
-  document.getElementById("soru").textContent="📣 "+aktifTest.yonerge;
+  document.getElementById("soru").textContent="📣 "+kisisel(aktifTest.yonerge);
   const c=document.getElementById("cevaplar");c.innerHTML="";
   const b=document.createElement("button");b.className="btn";b.textContent="Anladım, başlıyoruz 💛";
   b.onclick=()=>soruGoster();c.appendChild(b);canlandir();
@@ -799,7 +885,7 @@ function soruGoster(){
   }
   document.getElementById("pbar").style.width=(soruIx/N*100)+"%";
   document.getElementById("sayac").textContent=sayacTxt;
-  document.getElementById("soru").textContent=baslik;
+  document.getElementById("soru").textContent=kisisel(baslik);
   const c=document.getElementById("cevaplar");c.innerHTML="";
   s.sec.forEach((o,i)=>{
     const b=document.createElement("button");b.className="cevap";b.textContent=o.t;
@@ -926,7 +1012,7 @@ function paylas(){
   if(navigator.share){navigator.share({text:metin}).catch(()=>{});}
   else{navigator.clipboard.writeText(metin);alert("Sonuç kopyalandı — istediğin yere yapıştırabilirsin 💛");}
 }
-anasayfa();
+PROFIL?anasayfa():profilBaslat();
 </script>
 
 <script>
