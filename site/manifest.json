@@ -1,0 +1,17 @@
+{
+  "name": "Kalbine Sor — İlişki Testleri",
+  "short_name": "Kalbine Sor",
+  "description": "Gerçek psikoloji araştırmalarından uyarlanmış ilişki testleri ve AI ilişki koçu.",
+  "start_url": "/test/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FAF5F0",
+  "theme_color": "#B3446C",
+  "lang": "tr",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
