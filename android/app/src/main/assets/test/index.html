@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0E0614">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kalbine Sor">
+<title>Kalbine Sor — İlişki Testleri</title>
+<meta name="description" content="Gerçek psikoloji araştırmalarından uyarlanmış ilişki testleri: Seviyor mu? Ona Sor: Sevgi Ölçer.">
+<style>
+  :root{
+    --zemin:#0E0614; --kart:#1D0E22; --kart2:#261230; --cam:rgba(38,18,48,.72);
+    --cizgi:#3B1C44; --cizgi2:#5C2C63;
+    --murekkep:#FBF1F7; --soluk:#CBA6C4; --sonuk:#8F6590;
+    --gul:#FF5C8A; --gul2:#FF9AB8; --lila:#C7A5FF; --altin:#FFD98A;
+    --grad:linear-gradient(120deg,#FF5C8A,#FFB37C 45%,#C7A5FF);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{background:var(--zemin)}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:var(--zemin);color:var(--murekkep);line-height:1.6;min-height:100vh;overflow-x:hidden}
+
+  /* ==== büyülü atmosfer ==== */
+  #gokyuzu{position:fixed;inset:0;z-index:0;pointer-events:none}
+  .aurora{position:fixed;z-index:0;pointer-events:none;filter:blur(70px);opacity:.55;border-radius:50%}
+  .aurora.a1{width:70vmax;height:55vmax;top:-25vmax;right:-20vmax;background:radial-gradient(closest-side,rgba(255,92,138,.30),transparent)}
+  .aurora.a2{width:60vmax;height:60vmax;bottom:-28vmax;left:-22vmax;background:radial-gradient(closest-side,rgba(151,113,255,.24),transparent)}
+  .aurora.a3{width:34vmax;height:34vmax;top:38%;left:58%;background:radial-gradient(closest-side,rgba(255,183,124,.14),transparent)}
+  @media (prefers-reduced-motion: no-preference){
+    .aurora.a1{animation:sal1 26s ease-in-out infinite alternate}
+    .aurora.a2{animation:sal2 34s ease-in-out infinite alternate}
+    .aurora.a3{animation:sal1 40s ease-in-out infinite alternate-reverse}
+    @keyframes sal1{from{transform:translate(0,0) scale(1)}to{transform:translate(-9vmax,7vmax) scale(1.15)}}
+    @keyframes sal2{from{transform:translate(0,0) scale(1)}to{transform:translate(8vmax,-6vmax) scale(1.12)}}
+  }
+  .sahne{position:relative;z-index:2;max-width:560px;margin:0 auto;padding:18px 20px 80px}
+
+  /* ==== üst bar ==== */
+  .top{display:flex;align-items:center;gap:11px;padding:8px 0 30px}
+  .top svg{width:40px;height:40px;filter:drop-shadow(0 5px 18px rgba(255,92,138,.55))}
+  @media (prefers-reduced-motion: no-preference){
+    .kalp-atis{animation:atis 1.8s ease-in-out infinite;transform-origin:center}
+    @keyframes atis{0%,100%{transform:scale(1)}12%{transform:scale(1.09)}24%{transform:scale(1)}36%{transform:scale(1.05)}48%{transform:scale(1)}}
+  }
+  .marka{font-family:Georgia,serif;font-style:italic;font-size:1.35rem}
+  .top .uc{margin-left:auto;font-size:.76rem;color:var(--gul2);text-decoration:none;font-weight:700;letter-spacing:.1em}
+
+  /* ==== liste ==== */
+  .ust-etiket{display:flex;align-items:center;gap:10px;font-size:.66rem;font-weight:800;letter-spacing:.26em;color:var(--altin);margin-bottom:14px}
+  .ust-etiket::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(255,217,138,.5),transparent)}
+  h1.buyuk{font-family:Georgia,serif;font-weight:500;font-size:clamp(2.1rem,9vw,2.9rem);line-height:1.1;text-wrap:balance;margin-bottom:14px}
+  h1.buyuk em{font-style:italic;background:linear-gradient(100deg,#FF5C8A,#FFD98A,#C7A5FF,#FF5C8A);background-size:280% 100%;
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  @media (prefers-reduced-motion: no-preference){
+    h1.buyuk em{animation:parla 7s linear infinite}
+    @keyframes parla{to{background-position:280% 0}}
+  }
+  .alt-yazi{color:var(--soluk);font-size:.95rem;margin-bottom:30px;max-width:32em}
+
+  .card{position:relative;background:var(--cam);backdrop-filter:blur(10px);border:1px solid var(--cizgi);border-radius:24px;
+    padding:24px 22px 22px;margin-bottom:18px;transition:transform .2s ease,border-color .2s ease,box-shadow .25s ease;opacity:0;transform:translateY(18px)}
+  .card.dogdu{opacity:1;transform:none}
+  @media (prefers-reduced-motion: no-preference){.card{transition:opacity .5s ease,transform .5s ease,border-color .2s,box-shadow .25s}}
+  .card:hover{border-color:var(--cizgi2);box-shadow:0 14px 44px rgba(255,92,138,.13)}
+  .card.one{border:1.5px solid transparent;
+    background:linear-gradient(var(--kart2),var(--kart)) padding-box,
+               linear-gradient(120deg,#FF5C8A,#FFD98A,#C7A5FF,#FF5C8A) border-box;
+    box-shadow:0 16px 50px rgba(255,92,138,.22)}
+  .card.one::before{content:"✦ EN SEVİLEN";position:absolute;top:-11px;right:20px;background:linear-gradient(120deg,#FFD98A,#FF9AB8);
+    color:#2A0E1C;font-size:.62rem;font-weight:900;letter-spacing:.14em;padding:4px 13px;border-radius:99px}
+  .chip{display:inline-block;font-size:.63rem;font-weight:800;letter-spacing:.17em;padding:5px 13px;border-radius:99px;margin-bottom:13px;
+    color:var(--soluk);border:1px solid var(--cizgi2)}
+  .chip.onasor{color:#2A0E1C;background:var(--grad);border:none;box-shadow:0 4px 16px rgba(255,92,138,.35)}
+  .card h3{font-family:Georgia,serif;font-style:italic;font-weight:500;font-size:1.45rem;line-height:1.22;margin-bottom:7px}
+  .meta{font-size:.74rem;color:var(--sonuk);margin-bottom:10px;letter-spacing:.09em}
+  .kaynak{font-size:.74rem;color:var(--soluk);border-left:2px solid var(--altin);padding:2px 0 2px 12px;margin:13px 0 18px}
+  .btn{display:block;width:100%;background:var(--grad);background-size:170% 100%;color:#2A0E1C;padding:16px 20px;border-radius:999px;border:none;
+    font-size:1.02rem;font-weight:800;cursor:pointer;text-align:center;text-decoration:none;font-family:inherit;
+    transition:transform .12s ease,box-shadow .2s ease,background-position .5s ease;box-shadow:0 8px 28px rgba(255,92,138,.32)}
+  .btn:hover{box-shadow:0 10px 36px rgba(255,92,138,.48);background-position:90% 0}
+  .btn:active{transform:scale(.97)}
+  .btn.sec{background:none;box-shadow:none;color:var(--gul2);border:1.5px solid var(--cizgi2)}
+  .btn.sec:hover{border-color:var(--gul);box-shadow:0 6px 22px rgba(255,92,138,.15)}
+  button:focus-visible,a:focus-visible{outline:2px solid var(--lila);outline-offset:3px;border-radius:999px}
+
+  /* ==== oynatıcı ==== */
+  .oynatici-bas{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+  .geri{background:none;border:none;color:var(--gul2);font-weight:700;cursor:pointer;font-size:.88rem;font-family:inherit;padding:8px 0;letter-spacing:.05em}
+  .sayac{font-size:.8rem;color:var(--sonuk);font-variant-numeric:tabular-nums;letter-spacing:.12em}
+  .progress{position:relative;height:6px;background:var(--kart2);border-radius:99px;overflow:visible;margin:8px 0 34px}
+  .progress i{display:block;height:100%;background:var(--grad);border-radius:99px;transition:width .4s cubic-bezier(.3,.8,.3,1);
+    box-shadow:0 0 12px rgba(255,92,138,.7)}
+  .soru-kart{background:var(--cam);backdrop-filter:blur(10px);border:1px solid var(--cizgi);border-radius:24px;padding:26px 22px}
+  @media (prefers-reduced-motion: no-preference){
+    .soru-kart.gir{animation:gir .38s cubic-bezier(.2,.8,.3,1) both}
+    @keyframes gir{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+  }
+  .soru{font-family:Georgia,serif;font-size:1.42rem;line-height:1.4;font-weight:500;margin-bottom:26px;min-height:4.4em;text-wrap:balance}
+  .cevap{display:block;width:100%;background:rgba(14,6,20,.5);border:1.5px solid var(--cizgi);color:var(--murekkep);border-radius:16px;
+    padding:15px 18px;margin-bottom:11px;font-size:.98rem;font-family:inherit;text-align:left;cursor:pointer;
+    transition:border-color .15s,background .15s,transform .1s,box-shadow .15s}
+  .cevap:hover{border-color:var(--gul);box-shadow:0 4px 18px rgba(255,92,138,.18)}
+  .cevap:active{transform:scale(.98)}
+
+  /* ==== sonuç ==== */
+  .halka-alan{position:relative;display:flex;justify-content:center;margin:18px 0 10px}
+  .halka{position:relative;width:196px;height:196px}
+  .halka>svg{transform:rotate(-90deg);filter:drop-shadow(0 0 22px rgba(255,92,138,.35))}
+  .halka .iz{fill:none;stroke:var(--kart2);stroke-width:11}
+  .halka .dolu{fill:none;stroke:url(#halkaGrad);stroke-width:11;stroke-linecap:round;transition:stroke-dashoffset 1.4s cubic-bezier(.2,.75,.2,1)}
+  .halka .orta{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .halka .yuzde{font-family:Georgia,serif;font-size:2.9rem;font-weight:600;line-height:1;font-variant-numeric:tabular-nums;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .halka .etiket{font-size:.6rem;letter-spacing:.26em;color:var(--sonuk);margin-top:7px;font-weight:800}
+  .kalpcik{position:absolute;left:50%;top:50%;font-size:1.05rem;pointer-events:none;opacity:0}
+  @media (prefers-reduced-motion: no-preference){
+    .kalpcik{animation:patla 1s ease-out forwards;animation-delay:var(--gec)}
+    @keyframes patla{
+      0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}
+      12%{opacity:1}
+      100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.15) rotate(var(--dn))}
+    }
+  }
+  .sonuc-baslik{font-family:Georgia,serif;font-style:italic;font-weight:500;font-size:1.65rem;line-height:1.25;text-align:center;text-wrap:balance;margin:12px 0 20px}
+  .eksen{margin:0 0 13px}
+  .eksen .eb{display:flex;justify-content:space-between;font-size:.78rem;color:var(--soluk);margin-bottom:5px}
+  .eksen .eb b{font-variant-numeric:tabular-nums;color:var(--murekkep)}
+  .eksen .ec{height:8px;background:var(--kart2);border-radius:99px;overflow:hidden}
+  .eksen .ec i{display:block;height:100%;background:var(--grad);border-radius:99px;transition:width 1s cubic-bezier(.2,.75,.2,1);box-shadow:0 0 10px rgba(255,92,138,.5)}
+  .s-puan{font-size:.8rem;color:var(--sonuk);text-align:center;margin:6px 0 16px;font-variant-numeric:tabular-nums}
+  .s-metin{margin:0 0 14px}
+  .oneri{background:var(--cam);border:1px solid var(--cizgi);border-radius:18px;padding:16px 18px;margin:0 0 18px;font-size:.94rem;color:var(--soluk)}
+  .oneri strong{color:var(--altin);display:block;margin-bottom:6px;font-size:.7rem;letter-spacing:.2em}
+  .upsell{border-radius:24px;padding:22px;margin-top:24px;border:1.5px solid transparent;
+    background:linear-gradient(var(--kart),var(--kart)) padding-box,linear-gradient(120deg,#FF5C8A,#FFD98A,#C7A5FF) border-box;
+    box-shadow:0 14px 44px rgba(255,92,138,.16)}
+  .upsell h3{font-family:Georgia,serif;font-style:italic;font-weight:500;font-size:1.22rem;margin-bottom:8px}
+  .upsell p{font-size:.9rem;color:var(--soluk);margin-bottom:15px}
+  .disclaimer{font-size:.72rem;color:var(--sonuk);margin-top:32px;text-align:center;line-height:1.7}
+  .disclaimer a{color:var(--gul2)}
+  .hide{display:none}
+.yazi-giris{width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid rgba(199,165,255,.35);border-radius:16px;color:var(--sut,#FBF1F7);font-family:inherit;font-size:1.05rem;padding:15px 18px;margin-bottom:12px;outline:none}
+.yazi-giris:focus{border-color:var(--gul,#FF5C8A);box-shadow:0 0 0 3px rgba(255,92,138,.18)}
+.selam-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,92,138,.10);border:1px solid rgba(255,92,138,.35);border-radius:99px;padding:7px 16px;font-size:.82rem;letter-spacing:.4px;color:var(--sut,#FBF1F7)}
+.selam-chip a{color:var(--lila,#C7A5FF);text-decoration:none;font-weight:700;margin-left:4px;cursor:pointer}
+</style>
+</head>
+<body>
+<canvas id="gokyuzu" aria-hidden="true"></canvas>
+<div class="aurora a1" aria-hidden="true"></div>
+<div class="aurora a2" aria-hidden="true"></div>
+<div class="aurora a3" aria-hidden="true"></div>
+
+<div class="sahne">
+  <header class="top">
+    <svg viewBox="0 0 200 200" class="kalp-atis" aria-hidden="true"><rect width="200" height="200" rx="45" fill="#FF5C8A"/><path d="M100 152C96 148 52 116 46 86 42 64 56 48 76 48c12 0 21 7 24 14 3-7 12-14 24-14 20 0 34 16 30 38-6 30-50 62-54 66Z" fill="#0E0614"/><circle cx="78" cy="92" r="7" fill="#FF5C8A"/><circle cx="100" cy="92" r="7" fill="#FF5C8A"/><circle cx="122" cy="92" r="7" fill="#FF5C8A"/></svg>
+    <span class="marka">kalbine sor</span>
+    <a class="uc" href="../index.html">ANA SAYFA</a>
+  </header>
+
+  <div id="ekran-profil" class="hide">
+    <div class="oynatici-bas">
+      <button class="geri" id="pfGeri" onclick="pfGeri()">← geri</button>
+      <span class="sayac" id="pfSayac"></span>
+    </div>
+    <div class="progress"><i id="pfBar" style="width:0%"></i></div>
+    <div class="soru-kart" id="pfKart">
+      <div class="soru" id="pfSoru"></div>
+      <div id="pfCevaplar"></div>
+    </div>
+  </div>
+
+  <div id="ekran-liste">
+    <div id="selam" style="display:none;justify-content:center;margin-bottom:14px"></div>
+    <p class="ust-etiket">ARAŞTIRMA TEMELLİ İLİŞKİ TESTLERİ</p>
+    <h1 class="buyuk">Tahmin etme,<br><em>kalbine sor.</em></h1>
+    <p class="alt-yazi">Uydurma test yok: her biri yayımlanmış psikoloji araştırmalarından uyarlandı. Kaynağı kartın üzerinde görürsün.</p>
+    <div id="liste"></div>
+    <p class="disclaimer">Testler eğlence ve öz-farkındalık amaçlıdır; psikolojik tanı veya danışmanlık aracı değildir. · <a href="#">KVKK</a></p>
+  </div>
+
+  <div id="ekran-test" class="hide">
+    <div class="oynatici-bas">
+      <button class="geri" onclick="geri()">← geri</button>
+      <span class="sayac" id="sayac"></span>
+    </div>
+    <div class="progress"><i id="pbar" style="width:0%"></i></div>
+    <div class="soru-kart" id="soruKart">
+      <div class="soru" id="soru"></div>
+      <div id="cevaplar"></div>
+    </div>
+  </div>
+
+  <div id="ekran-sonuc" class="hide">
+    <div style="text-align:center"><span class="chip" id="s-testadi"></span></div>
+    <div class="halka-alan" id="halkaAlan">
+      <div class="halka">
+        <svg width="196" height="196" viewBox="0 0 196 196">
+          <defs><linearGradient id="halkaGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#FF5C8A"/><stop offset="55%" stop-color="#FFB37C"/><stop offset="100%" stop-color="#C7A5FF"/>
+          </linearGradient></defs>
+          <circle class="iz" cx="98" cy="98" r="84"/>
+          <circle class="dolu" id="halkaDolu" cx="98" cy="98" r="84" stroke-dasharray="527.79" stroke-dashoffset="527.79"/>
+        </svg>
+        <div class="orta"><span class="yuzde" id="halkaYuzde">%0</span><span class="etiket" id="halkaEtiket">SONUÇ</span></div>
+      </div>
+    </div>
+    <h2 class="sonuc-baslik" id="s-baslik"></h2>
+    <div id="s-eksenler"></div>
+    <div class="s-puan" id="s-puan"></div>
+    <p class="s-metin" id="s-metin"></p>
+    <div class="oneri"><strong>NE YAPABİLİRSİN?</strong><span id="s-oneri"></span></div>
+    <button class="btn" onclick="paylas()" style="margin-bottom:11px">Sonucumu Paylaş 💌</button>
+    <button class="btn sec" onclick="anasayfa()">Başka Test Çöz</button>
+    <div class="upsell">
+      <h3>Puanının hikayesini merak ediyor musun?</h3>
+      <p>Detaylı raporunda: soru soru analiz, güçlü/zayıf alan haritan ve adım adım "ne yapmalı" planın. PDF olarak sende kalır.</p>
+      <!-- OPERASYON: Shopier ürün linki -->
+      <a class="btn" href="#" data-shopier="RAPOR">Detaylı Raporunu Al — 49 TL</a>
+    </div>
+    <p class="disclaimer" id="s-kaynak"></p>
+  </div>
+</div>
+
+<script>
+// ============ TEST VERİLERİ ============
+// TÜM testler şıklıdır: her soruda kendine özgü cevap şıkları, şık başına puan/stil.
+const TESTLER = [
+{
+  id:"ona-sor-sevgi-olcer",
+  baslik:"Ona Sor: Sevgi Ölçer",
+  aciklama:"12 soru. Soruyu ona sor, ŞIKLARI DA OKU — o seçsin, sen işaretle. Sonunda sevgi yüzdesi.",
+  kaynak:"Aron'un 36 Soru deneyi (1997), Gottman'ın çift araştırmaları ve Rusbult'un Yatırım Modeli'nden şıklı formata uyarlanmıştır.",
+  sure:"~8 dk · onunla birlikte", tip:"onasor",
+  yonerge:"Bu bir çift oyunu 😉 Her soruyu ona sesli sor ve ŞIKLARI DA OKU. O hangisini seçerse onu işaretle. Cevabını yönlendirme — bırak kendisi seçsin!",
+  sorular:[
+    {q:"Ona sor: 'Kötü bir gün geçirdiğimi söylesem ilk ne yaparsın?'",eksen:"yatirim",sec:[
+      {t:"A) Her şeyi bırakır, yanına gelirim ya da ararım",p:3},
+      {t:"B) Önce dinlerim, sonra moralini düzeltirim",p:2},
+      {t:"C) Espriyle dağıtmaya çalışırım",p:1},
+      {t:"D) Rahat bırakırım, kendine gelirsin",p:0}]},
+    {q:"Ona sor: 'Beni tek kelimeyle anlatsan hangisi olurdu?'",eksen:"yakinlik",sec:[
+      {t:"A) Huzurum / evim",p:3},
+      {t:"B) Aşkım / heyecanım",p:2},
+      {t:"C) Eğlencem / kankam",p:1},
+      {t:"D) Bilmem ki… zor soru",p:0}]},
+    {q:"Ona sor: 'İlişkimizde en sevdiğin an türü hangisi?'",eksen:"yakinlik",sec:[
+      {t:"A) Baş başa derin sohbet ettiğimiz anlar",p:3},
+      {t:"B) Birlikte gülüp eğlendiğimiz anlar",p:2},
+      {t:"C) Arkadaş ortamında birlikte olmak",p:1},
+      {t:"D) Herkes kendi işindeyken aynı evde olmak",p:0}]},
+    {q:"Ona sor: 'Bir yıl sonrasını düşününce ben neredeyim?'",eksen:"yatirim",sec:[
+      {t:"A) Yanımda — planlarımın içindesin",p:3},
+      {t:"B) Büyük ihtimalle birlikteyiz",p:2},
+      {t:"C) Zaman gösterir",p:1},
+      {t:"D) O kadar ilerisini düşünmem",p:0}]},
+    {q:"Ona sor: 'Bir hafta görüşemesek en çok neyimi özlersin?'",eksen:"yakinlik",sec:[
+      {t:"A) Her şeyini — tek şey seçemem",p:3},
+      {t:"B) Sesini / kokunu / sarılmayı (somut bir şey söyledi)",p:2},
+      {t:"C) Beraber takılmayı",p:1},
+      {t:"D) Bir hafta çabuk geçer ya",p:0}]},
+    {q:"Ona sor: 'Ailene ve arkadaşlarına benden nasıl bahsediyorsun?'",eksen:"yatirim",sec:[
+      {t:"A) Övünerek — seni herkes biliyor",p:3},
+      {t:"B) Ara sıra anlatırım",p:2},
+      {t:"C) Soran olursa söylerim",p:1},
+      {t:"D) Pek bahsetmem, özelim özel",p:0}]},
+    {q:"Ona sor: 'Aramızda sorun olduğunda ilk dürtün ne olur?'",eksen:"yatirim",sec:[
+      {t:"A) Hemen konuşup çözmek",p:3},
+      {t:"B) Biraz sakinleşip sonra konuşmak",p:2},
+      {t:"C) Zamanın çözmesini beklemek",p:1},
+      {t:"D) Konuyu hiç açmamak",p:0}]},
+    {q:"Ona sor: 'Benim için rahatından vazgeçtiğin bir şey say desem?'",eksen:"yatirim",sec:[
+      {t:"A) Anında birkaç örnek sayarım",p:3},
+      {t:"B) Biraz düşünsem bulurum",p:2},
+      {t:"C) Genelde sen vazgeçiyorsun benim için 😅",p:1},
+      {t:"D) Vazgeçmek mi? Aklıma gelmiyor",p:0}]},
+    {q:"Ona sor: 'Beni en son ne zaman özledin?'",eksen:"yakinlik",sec:[
+      {t:"A) Bugün / dün",p:3},
+      {t:"B) Bu hafta içinde",p:2},
+      {t:"C) En son uzak kaldığımızda",p:1},
+      {t:"D) Yan yanayız zaten, özlemek mi?",p:0}]},
+    {q:"Ona sor: 'İlişkimiz için en büyük hayalin hangisine yakın?'",eksen:"yakinlik",sec:[
+      {t:"A) Birlikte yaşlanmak, yuva kurmak",p:3},
+      {t:"B) Birlikte gezmek, biriktirmek, yaşamak",p:2},
+      {t:"C) Böyle güzel devam etsin",p:1},
+      {t:"D) Hayal kurmayı sevmem",p:0}]},
+    {q:"Ona sor: 'Kavga etsek bile benden vazgeçmeni engelleyen ne?'",eksen:"yatirim",sec:[
+      {t:"A) Sen — sensiz olmuyor",p:3},
+      {t:"B) Yaşadıklarımız, verdiğimiz emek",p:2},
+      {t:"C) Birbirimize alışmışız",p:1},
+      {t:"D) Kim vazgeçtiğimi söyledi? 😏",p:0}]},
+    {q:"Son soru 😅 Ona sor: 'Dürüst ol, ilişkimize 10 üzerinden kaç verirsin?'",eksen:"yakinlik",sec:[
+      {t:"A) 9 - 10",p:3},
+      {t:"B) 7 - 8",p:2},
+      {t:"C) 5 - 6",p:1},
+      {t:"D) Cevap vermek istemedi",p:0}]}
+  ],
+  profillerYuzde:[
+    {min:80,baslik:"Güçlü sevgi tablosu 💛",metin:"Seçtiği şıklar tutarlı biçimde yüksek yatırım ve derin bağ anlatıyor: planlarında varsın, çevresinde varsın, zora düştüğünde konuşmayı seçiyor. Araştırmaların diliyle: hem bağlılık hem yakınlık sinyalleri güçlü.",oneri:"Sonucu ona göster — hem güzel bir an yaşarsınız hem de düşük puanlı tek tük şık varsa oradan tatlı bir sohbet çıkar. Bu oyunun asıl kazancı zaten o sohbet (Aron'un deneyi tam bunu kanıtladı)."},
+    {min:60,baslik:"Seviyor — ama bazı teller gevşek",metin:"Çoğu şıkta sıcak ve yatırımlı cevaplar verdi; birkaç alanda ise mesafeli seçimler var. Bu genelde sevgisizlik değil, o alanların hiç konuşulmamış olması.",oneri:"Düşük puanlı şıklara bak: hangi konudaydılar? O konuyu suçlamadan aç: 'Şu soruda verdiğin cevabı merak ettim…' — oyun bahane, sohbet gerçek."},
+    {min:40,baslik:"Karışık sinyaller",metin:"Cevapları bir sıcak bir mesafeli — tutarlı bir yatırım tablosu çizmedi. Tek oyun kesin hüküm vermez (utanmış, dalga geçmiş ya da yorgun olabilir); ama bu tablo genelin yansımasıysa, ilişkinin yönü konuşulmayı bekliyor.",oneri:"Birkaç hafta sonra tekrar oynayın. Bu arada net bir gözlem yap: sözleri mi davranışları mı daha sıcak? Araştırmalara göre ikisi çatışıyorsa davranışa inanılır."},
+    {min:0,baslik:"Zayıf sinyaller",metin:"Seçtiği şıkların çoğu düşük yatırım ucunda: gelecek planında belirsizlik, çevresine taşımama, sorundan kaçınma. Bu senin değerinle ilgili değil — onun bu ilişkiye şu an ne kadar koyduğuyla ilgili.",oneri:"Kendine sorman gereken soru: 'Bu tabloya rağmen kalıyorsam, neyi umut ediyorum?' O umudun somut bir karşılığı var mı — bunu dürüstçe tartmak, yüz oyundan değerli."}
+  ]
+},
+{
+  id:"beni-taniyor-mu",
+  baslik:"Beni Ne Kadar Tanıyor? (Eşleşme Oyunu)",
+  aciklama:"8 soru, 4'er şık. Önce SEN gizlice cevabını seç; sonra aynı şıkları ONA oku, onun seçtiğini işaretle. Eşleşme yüzdeniz çıkar!",
+  kaynak:"Gottman'ın Sevgi Haritaları 20 Soru Oyunu'nun puanlama mantığından uyarlanmıştır (partnerin iç dünyasını bilmek, uzun ömürlü ilişkilerin ortak özelliği).",
+  sure:"~6 dk · onunla birlikte", tip:"eslesme",
+  yonerge:"Kurallar basit: her soru iki kez gelecek. Önce 🙈 SEN cevabını seç (ekranı ona gösterme!). Sonra 💬 aynı soruyu şıklarıyla ONA oku — onun seçtiğini işaretle. Cevabınız eşleşirse puan! Hazır mısın?",
+  sorular:[
+    {q:"Seni en iyi anlatan hafta sonu hangisi?",sec:[
+      {t:"A) Evde battaniye, dizi/film"},{t:"B) Doğaya kaçmak"},{t:"C) Arkadaşlarla buluşmak"},{t:"D) Uyumak ve hiçbir şey yapmamak"}]},
+    {q:"Moralin bozukken en çok neye ihtiyacın olur?",sec:[
+      {t:"A) Konuşup içimi dökmeye"},{t:"B) Sarılmaya — söz istemez"},{t:"C) Yalnız kalmaya"},{t:"D) Kafa dağıtmaya (gezmek, yemek)"}]},
+    {q:"Hangisi seni daha derinden kırar?",sec:[
+      {t:"A) Yalan"},{t:"B) İlgisizlik"},{t:"C) Başkasıyla kıyaslanmak"},{t:"D) Verilen sözün tutulmaması"}]},
+    {q:"Hangi hediye seni daha çok mutlu eder?",sec:[
+      {t:"A) El yazısı mektup / anlamlı küçük bir şey"},{t:"B) Uzun süredir istediğim 'o' şey"},{t:"C) Sürpriz bir deneyim (konser, kaçamak)"},{t:"D) Bana ayrılmış dolu dolu bir gün"}]},
+    {q:"En büyük korkuna en yakın olan hangisi?",sec:[
+      {t:"A) Sevdiklerimi kaybetmek"},{t:"B) Başarısız olmak"},{t:"C) Yalnız kalmak"},{t:"D) Sağlığımı kaybetmek"}]},
+    {q:"Stresliyken ilk belirtin ne olur?",sec:[
+      {t:"A) Sessizleşirim"},{t:"B) Sinirlenirim, tahammülüm düşer"},{t:"C) Durmadan konuşurum"},{t:"D) Uykum/iştahım bozulur"}]},
+    {q:"Seni anında güldüren şey?",sec:[
+      {t:"A) Saçma internet videoları"},{t:"B) Zekice laf sokmalar / kelime oyunları"},{t:"C) Sakarlıklar, fiziksel komiklik"},{t:"D) Ortak anılarımıza gülmek"}]},
+    {q:"İdeal tatilin hangisi?",sec:[
+      {t:"A) Deniz, kum, güneş"},{t:"B) Şehir keşfi, sokaklar, müzeler"},{t:"C) Dağ, doğa, sessizlik"},{t:"D) Otelden çıkmadan tam pansiyon tembellik"}]}
+  ],
+  profillerYuzde:[
+    {min:75,baslik:"Haritan onda 🗺💛",metin:"Cevaplarınızın çoğu eşleşti — Gottman'ın 'sevgi haritası' dediği şey tam bu: iç dünyanı gerçekten biliyor. Araştırmalara göre bu bilgi, ilişkinin zor dönemlerinde en koruyucu güç.",oneri:"Rolleri değiştirip tekrar oynayın: bakalım sen onun haritasını ne kadar taşıyorsun? (Gerçek skor iki yönlü eşleşmedir.)"},
+    {min:50,baslik:"Ana hatları biliyor, detaylar eksik",metin:"Yarıdan fazlası eşleşti: seni tanıyor ama bazı odalara hiç girmemiş. Bu çoğu ilişkide normaldir — harita bir kere çizilmez, güncellenir.",oneri:"Eşleşmeyen soruları sohbete çevirin: 'Bak burada beni bilememişsin, anlatayım' — Gottman çiftlere tam olarak bu oyunu bu yüzden önerir."},
+    {min:25,baslik:"Yüzeyde kalmış",metin:"Eşleşme az: seni genel hatlarıyla tanıyor ama iç dünyana dair seçimlerde ıskaladı. İlişki yeniyse doğal; uzunsa üzerine düşünülecek bir sinyal.",oneri:"Haritayı birlikte çizin: haftada bir 10 dakikalık 'senin dünyanda ne var?' sohbeti, araştırmalardaki en etkili yakınlık pratiklerinden."},
+    {min:0,baslik:"Seni henüz tanımıyor",metin:"Neredeyse hiç eşleşme yok. Bu 'kötü biri' demek değil; ama seni öğrenmek için henüz yeterince merak ve emek göstermediğini söylüyor.",oneri:"Şunu gözle: sen kendinden bahsederken soru soruyor mu, dinliyor mu? Merak, sevginin en erken işaretidir — yokluğu da öyle."}
+  ]
+},
+{
+  id:"seviyor-mu",
+  baslik:"Seviyor mu? Davranış Analizi",
+  aciklama:"15 gerçek hayat senaryosu — her soruda onun en olası davranışını seç, davranış haritası yüzdeni görsün.",
+  kaynak:"Rubin'in Sevgi Ölçeği (1970), Rusbult'un Yatırım Modeli ve Gottman'ın 'ilgi çağrısına dönüş' araştırmalarından senaryo formatına uyarlanmıştır.",
+  sure:"~5 dk", tip:"toplam",
+  sorular:[
+    {q:"Ona 'bugün çok kötü bir gün geçirdim' dedin. En olası tepkisi hangisi?",sec:[
+      {t:"İşini bırakır; arar ya da yanıma gelir",p:3},
+      {t:"'Geçmiş olsun, anlatmak ister misin?' diye yazar",p:2},
+      {t:"'Üzüldüm' der, konu kısa sürede değişir",p:1},
+      {t:"Görür; cevap gelmeyebilir bile",p:0}]},
+    {q:"Kalabalık bir ortamdasınız. Onu uzaktan izlesen ne görürsün?",sec:[
+      {t:"Gözleri beni arıyor; sık sık göz göze geliyoruz, arada yanıma geliyor",p:3},
+      {t:"Ara sıra bakışıp gülümsüyoruz",p:2},
+      {t:"Kendi dünyasında; ben gitsem bir süre fark etmez",p:1},
+      {t:"Beni o ortamda tanımıyormuş gibi davranıyor",p:0}]},
+    {q:"Sana bir söz verdi (buluşma, arama, halledilecek bir iş). Genelde ne olur?",sec:[
+      {t:"Söz verdiyse yapılır; değişiklik olursa önceden haber verir",p:3},
+      {t:"Çoğunlukla tutar, arada unuttuğu olur",p:2},
+      {t:"Tutarsa sürpriz olur",p:1},
+      {t:"Söz verdiğini bile hatırlamaz",p:0}]},
+    {q:"İki hafta önce ona anlattığın önemli bir konuyu bugün tekrar açsan?",sec:[
+      {t:"Detaylarıyla hatırlar — hatta arada 'ne oldu o iş?' diye sormuştur bile",p:3},
+      {t:"Ana hatlarını hatırlar",p:2},
+      {t:"'Sen bana onu anlatmış mıydın?'",p:1},
+      {t:"Hiç dinlememiş olduğu ortaya çıkar",p:0}]},
+    {q:"Mesajlaşma/arama ritminiz gerçekte nasıl?",sec:[
+      {t:"Gün içinde kendiliğinden yazar; sesini duymak için arar",p:3},
+      {t:"Genelde ben başlatırım ama hızlı ve ilgiyle döner",p:2},
+      {t:"Geç ve kısa cevaplar: 'hı', 'olur', 'bilmem'",p:1},
+      {t:"Mesajlarım saatlerce/günlerce görülüp dönülmeyebiliyor",p:0}]},
+    {q:"Gelecek (tatil, seneye, hayaller) konuşulurken onun dili nasıl?",sec:[
+      {t:"'Biz' diye kurar; planın içinde ben de varım",p:3},
+      {t:"Beni kattığı olur ama netleşmekten kaçınır",p:2},
+      {t:"Hep 'ben' der; benim yerim belirsiz",p:1},
+      {t:"Gelecek konusu açılınca konuyu kapatır",p:0}]},
+    {q:"Güzel bir haber aldın (iş, okul, başarı). İlk tepkisi?",sec:[
+      {t:"Benden çok sevinir; herkese anlatacak gibi olur",p:3},
+      {t:"İçten tebrik eder, detayları sorar",p:2},
+      {t:"'Güzelmiş' der, geçer",p:1},
+      {t:"Küçümser ya da lafı kendine getirir",p:0}]},
+    {q:"Hastalandın. En gerçekçi senaryo hangisi?",sec:[
+      {t:"Başımda biter: çorba, ilaç, takip",p:3},
+      {t:"Sürekli sorar, arar; uzaktan elinden geleni yapar",p:2},
+      {t:"Bir 'geçmiş olsun' mesajı gelir, o kadar",p:1},
+      {t:"Haberi bile olmaz — çünkü sormaz",p:0}]},
+    {q:"Onun çevresi (arkadaşları, ailesi) senin hakkında ne biliyor?",sec:[
+      {t:"Beni tanıyorlar; ortamlarına dahilim",p:3},
+      {t:"Varlığımı biliyorlar; tanışma yolda",p:2},
+      {t:"Sadece bir iki kişi biliyor",p:1},
+      {t:"Beni sakladığını hissediyorum",p:0}]},
+    {q:"Aranızda bir kırgınlık/sorun olduğunda onun tavrı?",sec:[
+      {t:"Konuşmayı o başlatır; çözmeden bırakmaz",p:3},
+      {t:"Ben açarsam kaçmaz, birlikte çözeriz",p:2},
+      {t:"'Abartıyorsun' der, geçiştirir",p:1},
+      {t:"Küser, kaybolur, sessizlikle cezalandırır",p:0}]},
+    {q:"Senin için kendi rahatından vazgeçtiğini gördün mü?",sec:[
+      {t:"Evet — hem de bunu başıma kakmadan yapar",p:3},
+      {t:"Ara sıra; biraz söylenerek ama yapar 😅",p:2},
+      {t:"Ancak kendi işine de geliyorsa",p:1},
+      {t:"Hatırlamıyorum",p:0}]},
+    {q:"Fiziksel yakınlık (sarılmak, el tutmak) sizde nasıl işliyor?",sec:[
+      {t:"Onun için doğal ihtiyaç; kendiliğinden yakınlaşır",p:3},
+      {t:"Yakınız ama genelde ben başlatırım",p:2},
+      {t:"Sadece belirli anlarda yakınlaşır",p:1},
+      {t:"Aramızda hep bir mesafe var",p:0}]},
+    {q:"Onun sosyal medyasında/telefonunda senin yerin ne?",sec:[
+      {t:"Görünürüm: paylaşır, etiketler, saklamaz",p:3},
+      {t:"Paylaşmayı sevmez ama sorana gururla söyler",p:2},
+      {t:"İlişkimiz 'gizli' gibi duruyor",p:1},
+      {t:"Sakladığına dair somut şeyler gördüm",p:0}]},
+    {q:"En son ne zaman sırf 'aklıma geldin' diye bir şey yaptı (mesaj, küçük hediye, şarkı)?",sec:[
+      {t:"Bu hafta içinde",p:3},
+      {t:"Geçen ay içinde",p:2},
+      {t:"Çok eskiden olmuştu",p:1},
+      {t:"Hiç olmadı",p:0}]},
+    {q:"Dürüst ol: bu ilişkide çabayı kim taşıyor?",sec:[
+      {t:"O, en az benim kadar taşıyor",p:3},
+      {t:"Dalgalanıyor ama ikimiz de oradayız",p:2},
+      {t:"Çoğunlukla ben taşıyorum",p:1},
+      {t:"Tek kürek çeken benim",p:0}]}
+  ],
+  profiller:[
+    {min:36,baslik:"Davranış haritası net: seviyor 💛",metin:"Seçtiğin senaryolar, sevgi araştırmalarının aradığı işaretlerin neredeyse hepsini gösteriyor: ilgine dönüyor, seni hatırlıyor, geleceğine katıyor, çevresine dahil ediyor ve zora düştüğünde orada. Sözlerden bağımsız olarak davranış tablosu tutarlı.",oneri:"Bu tabloyu koruyan şey karşılıklılık: onun ilgi çağrılarına senin de dönmen. Gottman'a göre ilişkiyi taşıyan büyük jestler değil, bu küçük dönüşlerin sürekliliği."},
+    {min:24,baslik:"İşaretler var ama tablo dalgalı",metin:"Bazı senaryolarda güçlü işaretler seçtin, bazılarında zayıf. Bu tablo çoğu zaman 'sevmiyor' değil; 'göstermekte tutarsız' ya da 'henüz emin değil' anlamına gelir. Kritik soru: güçlü işaretler mi artıyor, zayıflar mı?",oneri:"Düşük puan verdiğin senaryolara bak — eksik hissettiğin alan tam orası. O alanı suçlamadan konuş: 'şunu yaptığında çok iyi hissediyorum' kalıbı, davranış değiştirmenin en araştırma-destekli yolu."},
+    {min:12,baslik:"Karışık sinyaller — sözler ve davranış örtüşmüyor",metin:"Seçimlerin, ilgi anları olan ama süreklilik, yatırım ve önemseme boyutları zayıf bir tablo çiziyor. Araştırmalar net: sevgiyi en iyi yordayan şey yoğun anlar değil, tutarlı davranıştır.",oneri:"Kendine şu soruyu sor: 'Bu ilişkide gördüğüm ilgi, verdiğimin kaçta kaçı?' Cevap seni üzüyorsa beklentini açıkça söyle ve davranış değişiyor mu diye belirli bir süre gözle. Belirsizlik, netlikten çok daha yorucudur."},
+    {min:0,baslik:"Davranışlar konuşuyor — ve söyledikleri iyi değil",metin:"Seçtiğin senaryoların çoğu, araştırmaların 'düşük yatırım, düşük önemseme' dediği uca düşüyor. Bu sonuç senin değerinle ilgili değil; bu kişinin sana şu anki davranışlarıyla ilgili.",oneri:"En değerli soru şu: 'Ben bu ilişkide neyi umut ettiğim için kalıyorum?' Umudun somut bir karşılığı var mı, yoksa sadece potansiyele mi tutunuyorsun — bu ayrımı dürüstçe yapmak, yüz testten daha değerli."}
+  ]
+},
+{
+  id:"baglanma-stili",
+  baslik:"Bağlanma Stilin Ne?",
+  aciklama:"12 gerçek hayat senaryosu — her birinde sana en yakın tepkiyi seç; bağlanma stilin ortaya çıksın.",
+  kaynak:"Levine & Heller'ın 'Attached' testi ve yetişkin bağlanma araştırmalarından (Hazan & Shaver 1987; ECR) senaryo formatına uyarlanmıştır.",
+  sure:"~4 dk", tip:"eksen2",
+  sorular:[
+    {q:"Mesaj attın, saatler geçti, cevap yok. İçinden geçen en gerçekçi olan?",sec:[
+      {t:"A) 'Meşguldür' der, işime dönerim",k:0,c:0},
+      {t:"B) Kötü senaryolar dönmeye başlar; telefonu bırakamam",k:2,c:0},
+      {t:"C) 'Zaten fazla mı yazıyorum' deyip ben de geri çekilirim",k:0,c:2},
+      {t:"D) İçim içimi yer ama umursamıyormuş gibi soğuk davranırım",k:2,c:2}]},
+    {q:"'Seni ailemle tanıştırmak istiyorum' dedi. İlk hissin?",sec:[
+      {t:"A) Sıkışma hissi — 'daha çok erken değil mi?'",k:0,c:2},
+      {t:"B) Heyecan — doğal bir sonraki adım",k:0,c:0},
+      {t:"C) Mutluluk + 'ya beğenmezlerse' kaygısı",k:2,c:0},
+      {t:"D) İstiyorum ama panikleyip bahane bulabilirim",k:2,c:2}]},
+    {q:"Berbat bir gün geçirdin. Ne yaparsın?",sec:[
+      {t:"A) Kendi başıma hallederim; anlatmak yük gibi gelir",k:0,c:2},
+      {t:"B) Anlatmak isterim ama 'ya sıkarsam' deyip vazgeçerim",k:2,c:2},
+      {t:"C) Ona anlatırım; paylaşınca hafiflerim",k:0,c:0},
+      {t:"D) Anlatırım ama doyamam; teselli az gelirse kırılırım",k:2,c:0}]},
+    {q:"Partnerin bir haftalığına arkadaş tatiline gidiyor. Tepkin?",sec:[
+      {t:"A) 'İyi eğlenceler' — özlerim ama hayat bu",k:0,c:0},
+      {t:"B) Görünürde 'sorun yok'; içeride terk edilme alarmı",k:2,c:2},
+      {t:"C) İçim rahat etmez; sık sık yazma ihtiyacı duyarım",k:2,c:0},
+      {t:"D) Açıkçası rahatlarım; kendi alanım genişler",k:0,c:2}]},
+    {q:"Tartışma çıktı. Senin tipik hamlen?",sec:[
+      {t:"A) Konuşmadan duramam; gece yarısı bile üstüne giderim",k:2,c:0},
+      {t:"B) Kapanırım: 'konuşacak bir şey yok'",k:0,c:2},
+      {t:"C) Önce üstüne giderim, sonra birden duvar örerim",k:2,c:2},
+      {t:"D) Sakinleşince oturup konuşuruz",k:0,c:0}]},
+    {q:"'Bu ilişki nereye gidiyor?' sorusu sende ne uyandırır?",sec:[
+      {t:"A) Rahatım; net cevabım var",k:0,c:0},
+      {t:"B) Bu soru hiç sorulmasın; etiketler bunaltır",k:0,c:2},
+      {t:"C) Cevabı çok istiyorum ama sorunca kaçacak diye soramıyorum",k:2,c:2},
+      {t:"D) Asıl korkum onun cevabı: 'ya emin değilse'",k:2,c:0}]},
+    {q:"Partnerin ağlıyor, desteğe ihtiyacı var. İçindeki ilk his?",sec:[
+      {t:"A) Panik: 'yeterince iyi teselli edemezsem beni daha az mı sever?'",k:2,c:0},
+      {t:"B) Yanında olmak doğal gelir; ne yapacağımı bilirim",k:0,c:0},
+      {t:"C) Donarım; yoğun duygu beni kaçırır",k:0,c:2},
+      {t:"D) Yaklaşmak isterim ama beceremem korkusuyla geri çekilirim",k:2,c:2}]},
+    {q:"Yeni biriyle tanıştın, ilgi karşılıklı. İlk haftalardaki iç sesin?",sec:[
+      {t:"A) 'Neden görüldüde bıraktı?' — hep tetikteyim",k:2,c:0},
+      {t:"B) İlgi artınca ben azaltırım; riske girmem",k:0,c:2},
+      {t:"C) Keyfini çıkarırım, akışına bırakırım",k:0,c:0},
+      {t:"D) Bir gün aşırı yakınım, ertesi gün kaçacak delik ararım",k:2,c:2}]},
+    {q:"Eski ilişkilerine dönüp bak: en tanıdık örüntü hangisi?",sec:[
+      {t:"A) Gel-git: ben kaçtım kovalandım / kovaladım kaçıldı",k:2,c:2},
+      {t:"B) Hep daha çok seven bendim; doyamadım",k:2,c:0},
+      {t:"C) 'Bunaldım' hissi ve benim uzaklaşmamla bitenler",k:0,c:2},
+      {t:"D) Genelde güven vardı; bitenler de saygıyla bitti",k:0,c:0}]},
+    {q:"Partnerin 'biraz kendime zaman lazım' dedi. Yorumun?",sec:[
+      {t:"A) Sağlıklı bir ihtiyaç; bana da iyi gelir",k:0,c:0},
+      {t:"B) 'Benden soğudu' — kanıt aramaya başlarım",k:2,c:0},
+      {t:"C) Harika, ben de tam bunu isteyecektim",k:0,c:2},
+      {t:"D) Dışım 'tabii canım', içim yıkım",k:2,c:2}]},
+    {q:"Sevildiğini en çok ne zaman hissedersin?",sec:[
+      {t:"A) Sürekli söylendiğinde — bir gün eksilse şüphe başlar",k:2,c:0},
+      {t:"B) Gündelik küçük tutarlılıklarda",k:0,c:0},
+      {t:"C) Bana alan bırakıldığında",k:0,c:2},
+      {t:"D) Tam hissedemiyorum; kanıt hep yetersiz",k:2,c:2}]},
+    {q:"İlişkide en büyük korkun?",sec:[
+      {t:"A) Kendimi kaybetmek / boğulmak",k:0,c:2},
+      {t:"B) Terk edilmek",k:2,c:0},
+      {t:"C) Hem terk edilmek hem sıkışmak — ikisi birden",k:2,c:2},
+      {t:"D) Büyük bir korkum yok; sorunlar çözülür",k:0,c:0}]}
+  ],
+  profillerEksen:{
+    "guvenli":{baslik:"Güvenli Bağlanma 🌿",metin:"Senaryolardaki seçimlerin hem yakınlıkta hem bağımsızlıkta rahat olduğunu gösteriyor. Araştırmalara göre bu stil, ilişki doyumunun en güçlü yordayıcılarından.",oneri:"Güçlü yanın istikrar. Dikkat: partnerin kaygılı ya da kaçıngansa onun tetiklenme anlarını 'anlamsız' bulma — stiller farklı dillerdir, çeviri ister."},
+    "kaygili":{baslik:"Kaygılı Bağlanma 🌊",metin:"Seçimlerin, zihninin sık sık 'ya giderse' alarmı çaldığını gösteriyor. Sevgin derin; alarm sistemin fazla hassas. Bu stil genelde erken dönemde tutarsız ilgiyle şekillenir.",oneri:"Alarm çaldığında tek soru: 'Somut kanıtım ne?' Geç dönülen mesaj veri değildir; davranış örüntüsü veridir. Bu ayrımı yapmayı öğrenmek, kaygılı stilin en güçlü panzehiri."},
+    "kacingan":{baslik:"Kaçıngan Bağlanma 🏔",metin:"Seçimlerin, yakınlık arttıkça geri çekilme örüntüsünü gösteriyor. Bağımsızlık senin güvenlik stratejin olmuş — muhtemelen 'duygularınla kendin ilgilen' mesajıyla büyüdün.",oneri:"Küçük egzersiz: geri çekilmek istediğin anda tam tersini yap — hissettiğini TEK cümleyle söyle. Kas böyle gelişir. Kaçınman, partnerinde 'ulaşamıyorum' yarası açar; bunu bilmek bile davranışı yumuşatır."},
+    "korkulu":{baslik:"Korkulu-Kaçıngan Bağlanma 🌗",metin:"Seçimlerinde iki sistem aynı anda çalışıyor: 'gel' ve 'git'. Yakınlığı çok istiyor, yaklaşınca alarma geçiyorsun — en yorucu örüntü bu.",oneri:"İyi haber: bağlanma stilleri değişebilir ('kazanılmış güvenli bağlanma' araştırmalarla gösterildi). Bu örüntüde bir uzmanla çalışmak özellikle değerli — test sadece aynayı tutar."}
+  }
+},
+{
+  id:"ask-tipi",
+  baslik:"Aşkınız Hangi Tip?",
+  aciklama:"12 soru, her birinde 4 şık — yakınlık, tutku ve bağlılık ölçülür; 8 aşk tipinden sizinki çıkar.",
+  kaynak:"Sternberg'in Üçgen Aşk Kuramı'ndan (1986) şıklı formata uyarlanmıştır.",
+  sure:"~4 dk", tip:"eksen3",
+  sorular:[
+    {q:"İçini gerçekten döktüğün en son an?",eksen:"yakinlik",sec:[
+      {t:"A) Bu hafta — ona her şeyi anlatabiliyorum",p:3},{t:"B) Arada oluyor; çoğu şeyi paylaşırım",p:2},{t:"C) Sadece büyük konularda açılırım",p:1},{t:"D) İç dünyamı pek açmam",p:0}]},
+    {q:"Zor bir karar vermen gerekiyor. O bu sürecin neresinde?",eksen:"yakinlik",sec:[
+      {t:"A) İlk danıştığım kişi",p:3},{t:"B) Genelde fikrini alırım",p:2},{t:"C) Bazen söylerim, karar benim",p:1},{t:"D) Danışmak aklıma gelmiyor",p:0}]},
+    {q:"'Beni gerçekten anlıyor' cümlesi senin için?",eksen:"yakinlik",sec:[
+      {t:"A) Tamamen doğru",p:3},{t:"B) Çoğunlukla doğru",p:2},{t:"C) Ara sıra",p:1},{t:"D) Anlaşılmadığımı hissediyorum",p:0}]},
+    {q:"Birlikte sessiz kalmak sizde nasıl?",eksen:"yakinlik",sec:[
+      {t:"A) Sessizlik bile iyi — rahatız",p:3},{t:"B) Genelde rahat",p:2},{t:"C) Biraz gerginlik hissedilir",p:1},{t:"D) Sessizlik = aramızda duvar",p:0}]},
+    {q:"Ona baktığında hâlâ 'çekici' diyor musun?",eksen:"tutku",sec:[
+      {t:"A) Hem de nasıl",p:3},{t:"B) Evet",p:2},{t:"C) Alıştım artık; düşünmüyorum",p:1},{t:"D) Açıkçası hayır",p:0}]},
+    {q:"Romantik anlarınız (öpüşme, bakışma, dans)?",eksen:"tutku",sec:[
+      {t:"A) Hâlâ titretiyor",p:3},{t:"B) Sıcak ve güzel",p:2},{t:"C) Kısa bir rutine döndü",p:1},{t:"D) Nadiren oluyor",p:0}]},
+    {q:"Gün içinde aklına düşüyor mu?",eksen:"tutku",sec:[
+      {t:"A) Sık sık — bazen işimi bölüyor",p:3},{t:"B) Ara ara, güzel anlarda",p:2},{t:"C) Ancak bir şey hatırlatırsa",p:1},{t:"D) Fark ettim ki pek gelmiyor",p:0}]},
+    {q:"Fiziksel yakınlığınız için en dürüst tarif?",eksen:"tutku",sec:[
+      {t:"A) Canlı ve karşılıklı",p:3},{t:"B) İyi",p:2},{t:"C) Azaldı",p:1},{t:"D) Neredeyse yok",p:0}]},
+    {q:"Beş yıl sonrasını hayal et. O görüntüde var mı?",eksen:"baglilik",sec:[
+      {t:"A) Kesin var — merkezde",p:3},{t:"B) Büyük ihtimalle var",p:2},{t:"C) Bulanık",p:1},{t:"D) Göremiyorum",p:0}]},
+    {q:"Zor bir dönemde 'gitmek' fikri?",eksen:"baglilik",sec:[
+      {t:"A) Aklıma gelmiyor — çözeriz",p:3},{t:"B) Gelse de tutunurum",p:2},{t:"C) Ara sıra ciddi ciddi geliyor",p:1},{t:"D) Sık geliyor",p:0}]},
+    {q:"Bu ilişkiyi koruma sorumluluğunu ne kadar hissediyorsun?",eksen:"baglilik",sec:[
+      {t:"A) Tam — sevgiyi korumak benim de işim",p:3},{t:"B) Yüksek",p:2},{t:"C) Dalgalı",p:1},{t:"D) Zayıf",p:0}]},
+    {q:"'Biz' demek sana nasıl geliyor?",eksen:"baglilik",sec:[
+      {t:"A) Doğal — kimliğimin parçası",p:3},{t:"B) Rahat",p:2},{t:"C) Hâlâ alışamadım",p:1},{t:"D) 'Ben' demeyi yeğliyorum",p:0}]}
+  ],
+  profillerUc:{
+    "111":{baslik:"Tam Aşk 💎",metin:"Sternberg'in 'consummate love' dediği nadir kombinasyon: yakınlık, tutku ve bağlılığın üçü de yüksek. Kurama göre aşkın en dolu hali — ve korunması, kurulmasından zordur.",oneri:"Üç bileşene düzenli küçük yatırım yap: sohbet (yakınlık), flört (tutku), plan (bağlılık). Sternberg'in uyarısı: ihmal edilen bileşen sessizce söner."},
+    "110":{baslik:"Romantik Aşk 🌹",metin:"Yakınlık ve tutku güçlü; bağlılık henüz aynı seviyede değil. En heyecanlı evrelerden — ve doğal bir yol ayrımına gider: derinleşmek ya da buharlaşmak.",oneri:"Bağlılık konuşarak kurulur: 'Biz nereye gidiyoruz?' sorusundan kaçmayın — doğru zamanda romantizmi bozmaz, büyütür."},
+    "101":{baslik:"Yoldaş Aşkı 🫂",metin:"Yakınlık ve bağlılık sağlam; tutku sakinlemiş. Uzun ilişkilerin en yaygın ve en dayanıklı tipi — ama tutkunun sönmesi kader değil.",oneri:"Tutku Ölçer testini çöz; sonuca göre yenilik ve fiziksel yakınlığı bilinçli geri çağırın (Acevedo & Aron: uzun ilişkide tutku mümkün)."},
+    "011":{baslik:"Yıldırım Aşkı ⚡",metin:"Tutku ve bağlılık yüksek, birbirinizi derinden tanıma (yakınlık) geride. Sternberg buna 'fatuous love' der: hızlı yanan, temeli sonradan atılan aşk.",oneri:"Temeli şimdi atın: 'Beni Ne Kadar Tanıyor?' eşleşme oyununu birlikte oynayın — eksik odaları sohbete dönüştürün."},
+    "100":{baslik:"Arkadaşça Sevgi 🤝",metin:"Yakınlık güçlü; tutku ve bağlılık sakin. Değerli bir bağ — ama romantik ilişki beklentisiyle yaşanıyorsa bir tarafta eksiklik hissi birikebilir.",oneri:"Dürüst soru: bu ilişkiden ne bekliyorsun? 'Daha fazlası' ise bunu şimdi konuşmak, yıllar sonra konuşmaktan az acıtır."},
+    "010":{baslik:"Tutulma 🔥",metin:"Tutku tek başına sahnede: çekim yoğun, tanıma ve bağlılık henüz yok. Her büyük aşk böyle başlar ama her tutulma büyük aşka dönüşmez.",oneri:"Keyfini çıkar; kararları tutkunun zirvesinde verme. Yakınlık büyüdükçe bu ateşin neye dönüştüğünü göreceksin."},
+    "001":{baslik:"Kararlı Bağ 🧭",metin:"Bağlılık yüksek, yakınlık ve tutku düşük — Sternberg'in 'boş aşk' dediği durum. Dönemsel olabilir; kalıcılaşması konuşulması gereken bir sinyal.",oneri:"İskelet sağlam, içi doldurulabilir: haftada bir telefonsuz 30 dakikalık gerçek sohbet, yakınlığı geri inşanın ilk tuğlası."},
+    "000":{baslik:"Henüz Tanımsız 🌫",metin:"Üç bileşen de düşük görünüyor. Çok yeni bir ilişkinin doğal hali olabilir — ya da uzun bir uzaklaşmanın fotoğrafı.",oneri:"Hangisi olduğunu süre söyler: yeniyse bir ay sonra tekrar çöz; yıllanmışsa bu tablo kendine dürüst sorular sormak için bir davet."}
+  }
+},
+{
+  id:"tutku-olcer",
+  baslik:"Hâlâ Aşık mısın? Tutku Ölçer",
+  aciklama:"10 an, 10 soru — her birinde en dürüst şıkkı seç, tutkunun nabzı halkada dolsun.",
+  kaynak:"Hatfield & Sprecher'in Tutkulu Aşk Ölçeği'nden (1986) senaryo formatına uyarlanmıştır.",
+  sure:"~3 dk", tip:"toplam",
+  sorular:[
+    {q:"Adı telefon ekranında belirdiği ilk saniyede?",sec:[
+      {t:"A) İçimde hâlâ bir kıpırtı olur",p:3},{t:"B) Hoş bir sıcaklık; gülümserim",p:2},{t:"C) Nötr — kim aradıysa o",p:1},{t:"D) Bazen açmayı erteliyorum",p:0}]},
+    {q:"Onu kalabalıkta uzaktan gördüğünde?",sec:[
+      {t:"A) Hâlâ 'vay be, benimki' diyorum",p:3},{t:"B) İçim ısınıyor, yanına gidiyorum",p:2},{t:"C) Herhangi bir tanıdık görmüş gibiyim",p:1},{t:"D) Bazen fark etmemiş gibi yapıyorum",p:0}]},
+    {q:"Elini omzuna koyduğunda?",sec:[
+      {t:"A) O elektrik hâlâ var",p:3},{t:"B) Güven veren bir sıcaklık",p:2},{t:"C) Alışkanlık; ne iyi ne kötü",p:1},{t:"D) Bazen içimden çekilmek geçiyor",p:0}]},
+    {q:"Gün içinde aklına gelme sıklığı?",sec:[
+      {t:"A) Sık sık — bazen işimi bölüyor",p:3},{t:"B) Ara ara, güzel anlarda",p:2},{t:"C) Ancak bir şey hatırlatırsa",p:1},{t:"D) Fark ettim ki pek gelmiyor",p:0}]},
+    {q:"Bu akşam buluşacaksınız. Bekleyiş nasıl?",sec:[
+      {t:"A) İple çekiyorum; plan bile kurdum",p:3},{t:"B) Keyifle bekliyorum",p:2},{t:"C) Normal bir akşam işte",p:1},{t:"D) Bugün tek kalmayı tercih ederdim",p:0}]},
+    {q:"Biri onu övdü: 'çok çekici biri'. Sende?",sec:[
+      {t:"A) Gurur + tatlı bir sahiplenme kıvılcımı",p:3},{t:"B) 'Evet, öyledir' — gurur",p:2},{t:"C) 'Hı-hı' deyip geçerim",p:1},{t:"D) Umurumda değil",p:0}]},
+    {q:"Başına komik/önemli bir şey geldi. İlk dürtün?",sec:[
+      {t:"A) Anında ona yazmak, aramak",p:3},{t:"B) Akşam görüşünce anlatmak",p:2},{t:"C) Aklıma gelirse anlatırım",p:1},{t:"D) Anlatma ihtiyacı duymuyorum",p:0}]},
+    {q:"Öpüşmeleriniz için en dürüst tarif?",sec:[
+      {t:"A) Hâlâ kalbimi hızlandırıyor",p:3},{t:"B) Sıcak ve bağlayıcı",p:2},{t:"C) Selamlaşma gibi kısa bir rutin",p:1},{t:"D) Nadiren oluyor",p:0}]},
+    {q:"Onsuz geçen birkaç gün sana ne yapıyor?",sec:[
+      {t:"A) Ciddi özlem; sesi bile iyi geliyor",p:3},{t:"B) Özlüyorum ama hayat akıyor",p:2},{t:"C) Fark yaratmıyor",p:1},{t:"D) Açıkçası nefes alanı gibi geliyor",p:0}]},
+    {q:"'Bu insana âşığım' cümlesi içinden geçince?",sec:[
+      {t:"A) Tereddütsüz evet",p:3},{t:"B) Evet — ama ilk günkü gibi değil, daha sakin",p:2},{t:"C) Emin değilim",p:1},{t:"D) Uzun süredir kurmadım o cümleyi",p:0}]}
+  ],
+  profiller:[
+    {min:25,baslik:"Tutku dorukta 🔥",metin:"Seçimlerin tutkulu aşkın klasik işaretlerini gösteriyor: zihinsel meşguliyet, çekim, heyecan. Araştırmalar (Acevedo & Aron, 2012) bunun uzun ilişkilerde bile sürebildiğini gösterdi — sen kanıtsın.",oneri:"Tutkuyu besleyen şey yenilik: birlikte hiç yapmadığınız bir şey planla. Aron'un deneyleri yeni ve heyecanlı ortak deneyimlerin tutkuyu tazelediğini gösteriyor."},
+    {min:17,baslik:"Aşk olgunlaşıyor 🌾",metin:"Tutku orada ama ilk günlerin ateşi yerini daha sakin, derin bir bağa bırakıyor. Bu, araştırmaların 'yoldaş aşkına geçiş' dediği doğal evrim — kayıp değil, dönüşüm.",oneri:"Tamamen sakinliğe bırakmak zorunda değilsin: haftalık 'flört gecesi' klişesi, araştırmalarda gerçekten işe yarayan az sayıda şeyden biri."},
+    {min:9,baslik:"Kor közleniyor 🕯",metin:"Tutku göstergelerinin çoğu sönük. Her ilişkide dönemsel olur (stres, rutin, yorgunluk); önemli olan köz tamamen sönmeden fark etmek.",oneri:"Küçük başla: beklentisiz fiziksel yakınlığı gündelik hayata geri getir (sarılma, el tutma). Tutku çoğu zaman büyük jestlerle değil küçük temaslarla döner."},
+    {min:0,baslik:"Tutku uykuda 🌑",metin:"Seçimlerinin çoğu 'sönmüş' uçta. Tek başına ilişki bitti demek değil — ama görmezden gelinecek bir veri de değil.",oneri:"İki soru: (1) Bu sönüş ne zamandır sürüyor? (2) Geri istemeye istekli misin? İkincisi 'evet'se, bunu partnerinle konuşmak ilk adım."}
+  ]
+},
+{
+  id:"ask-tarzin",
+  baslik:"Aşk Tarzın Hangisi?",
+  aciklama:"10 senaryo, her birinde 3 farklı karakter cevabı — seçimlerin 6 aşk stilinden seninkini ortaya çıkarır.",
+  kaynak:"Lee'nin Aşk Renkleri kuramı (1973) ve Hendrick Aşk Tutumları Ölçeği'nden; şık dengesi Chapman/TKI zorunlu-seçim tasarımıyla kurulmuştur.",
+  sure:"~3 dk", tip:"stil",
+  stilAd:{eros:"Romantik (Eros)",ludus:"Özgür Ruh (Ludus)",storge:"Arkadaş-Sevgili (Storge)",pragma:"Akılcı (Pragma)",mania:"Fırtınalı (Mania)",agape:"Adayan (Agape)"},
+  sorular:[
+    {q:"Yeni tanıştın ve çok hoşlandın. İlk haftalarda hangisi sensin?",sec:[
+      {t:"A) Yoğun yaşarım: mesajlar, buluşmalar, kıvılcım",stil:"eros"},
+      {t:"B) Acele etmem; uyumumuza ve hedeflere bakarım",stil:"pragma"},
+      {t:"C) Keyfine bakarım; tek kapıya oynamam",stil:"ludus"}]},
+    {q:"'Seni seviyorum'u ilk ne zaman dersin?",sec:[
+      {t:"A) Hissettiğim an — beklemek yalan olur",stil:"eros"},
+      {t:"B) İyice güvendiğimde; arkadaşlıktan emin olunca",stil:"storge"},
+      {t:"C) Genelde erken derim; sonra cevabını bekleyip durur kalbim",stil:"mania"}]},
+    {q:"Partnerin zor bir dönemde. Senin yaklaşımın?",sec:[
+      {t:"A) Kendimi ikinci plana atarım; yeter ki o iyileşsin",stil:"agape"},
+      {t:"B) Sakin ve güvenilir destek olurum, hep oradayım",stil:"storge"},
+      {t:"C) Sorunu çözecek pratik planlar kurarım",stil:"pragma"}]},
+    {q:"Kıskançlıkla aran nasıl?",sec:[
+      {t:"A) İnişli çıkışlı; kaybetme korkusu beni sarabiliyor",stil:"mania"},
+      {t:"B) Bana göre değil — özgürlük iki taraflı",stil:"ludus"},
+      {t:"C) Tutkunun doğal gölgesi; hissederim ama yakmam",stil:"eros"}]},
+    {q:"İdeal ilişki tarifin hangisi?",sec:[
+      {t:"A) En yakın arkadaşınla aşk yaşamak",stil:"storge"},
+      {t:"B) Hayat hedefleri uyumlu sağlam bir ortaklık",stil:"pragma"},
+      {t:"C) Koşulsuz sevgi — vermek işin özü",stil:"agape"}]},
+    {q:"Ayrılık sonrası sen hangisisin?",sec:[
+      {t:"A) Yıkılırım; dünyam durur",stil:"mania"},
+      {t:"B) Üzülürüm ama çabuk toparlarım; hayat devam",stil:"ludus"},
+      {t:"C) Yavaş ve sessiz iyileşirim; dostluk kaybı gibi yaşarım",stil:"storge"}]},
+    {q:"Partnerinin sana hiç uymayan bir huyu var. Ne yaparsın?",sec:[
+      {t:"A) Sevgim büyükse kabullenirim; değişsin diye zorlamam",stil:"agape"},
+      {t:"B) Uzun vadede sorun mu diye mantığa vururum",stil:"pragma"},
+      {t:"C) Tutku sürdükçe kusur görünmüyor bana",stil:"eros"}]},
+    {q:"Aynı anda iki kişiden hoşlanmak sence?",sec:[
+      {t:"A) Bağlanmadıysam gayet olabilir",stil:"ludus"},
+      {t:"B) İmkânsız — ben tek kişiye saplanırım",stil:"mania"},
+      {t:"C) Olursa karşılaştırır, mantıklı olanı seçerim",stil:"pragma"}]},
+    {q:"Sevgini en çok nasıl gösterirsin?",sec:[
+      {t:"A) Fedakârlıkla — onun ihtiyacı benimkinden önce",stil:"agape"},
+      {t:"B) Romantizmle — dokunuş, söz, sürpriz",stil:"eros"},
+      {t:"C) Süreklilikle — her koşulda orada olarak",stil:"storge"}]},
+    {q:"İlişkide seni en çok ne korkutur?",sec:[
+      {t:"A) Terk edilmek",stil:"mania"},
+      {t:"B) Özgürlüğümü kaybetmek",stil:"ludus"},
+      {t:"C) Ona yeterince veremiyor olmak",stil:"agape"}]}
+  ],
+  profillerStil:{
+    eros:{baslik:"Romantik (Eros) 🌹",metin:"Seçimlerin aşkı çekim, estetik ve yoğun duygu olarak yaşadığını gösteriyor. Eros, araştırmalarda ilişki doyumuyla en güçlü pozitif ilişkiyi gösteren stillerden.",oneri:"Gücün tutkun; riskin, ilk yoğunluk düşünce 'aşk bitti' sanmak. Duygunun dalgalanması normaldir — dalganın dibinde karar verme."},
+    ludus:{baslik:"Özgür Ruh (Ludus) 🎭",metin:"Aşkı özgürlük ve hafiflik alanı olarak yaşıyorsun; bağlanma baskısı seni kaçırır. Bu bir kusur değil, bir stil — ama farklı stildeki partnerle çarpışma kaçınılmaz.",oneri:"En kritik şey dürüstlük: ne arayıp ne aramadığını baştan söylemek hem seni hem karşındakini korur."},
+    storge:{baslik:"Arkadaş-Sevgili (Storge) 🫂",metin:"Senin aşkın yavaş demlenir: önce güven, sonra sevgi. Araştırmalar bu stilin uzun ömürlü ve dayanıklı ilişkiler kurduğunu gösteriyor.",oneri:"Riskin: 'heyecan yok' diye kendini fırtınalı tiplerle kıyaslamak. Senin süper gücün istikrar — küçümseme."},
+    pragma:{baslik:"Akılcı (Pragma) 🧭",metin:"Aşkı kalbinle birlikte aklınla seçersin: uyum, hedefler, hayat pratiği. Uzun vadeli kararlar için güçlü bir pusula.",oneri:"Dikkat: kriter listesi bazen kalbin sesini bastırır. Ara sıra listeyi kapat, sadece sor: 'Yanındayken nasıl hissediyorum?'"},
+    mania:{baslik:"Fırtınalı (Mania) 🌪",metin:"Aşkın volümü sende hep yüksek: büyük mutluluklar, büyük kaygılar. Bu stil çoğu zaman kaygılı bağlanmayla el ele gider — sevgin gerçek, alarm sistemin hassas.",oneri:"Duyguyu bastırma; şiddetini yönetmeyi öğren. 'Bağlanma Stilin' testini de çöz — fırtınanın kaynağını orada net göreceksin."},
+    agape:{baslik:"Adayan (Agape) 🕊",metin:"Vermek senin aşk dilin; fedakârlıkta zorlanmazsın. Stillerin en cömerdi — ve karşılıksız kaldığında en çok yıpratanı.",oneri:"Unutma: sürekli veren olmak erdem değil, dengesizliktir. Senin ihtiyaçların da ilişkinin gündemine girmeyi hak ediyor."}
+  }
+},
+{
+  id:"kiskanclik",
+  baslik:"Kıskançlık Seviyen",
+  aciklama:"10 kıskançlık anı — her birinde en gerçekçi tepkini seç; düşünce-duygu-davranış haritanı gör.",
+  kaynak:"Pfeiffer & Wong'un Çok Boyutlu Kıskançlık Ölçeği'nin (1989) 'durum + tepki yelpazesi' kalıbından uyarlanmıştır.",
+  sure:"~3 dk", tip:"toplam",
+  sorular:[
+    {q:"Telefonu masada ters duruyor ve bir bildirim geldi. Sen?",sec:[
+      {t:"A) Fark etmem bile",p:0},{t:"B) Kim diye merak ederim ama sormam",p:1},{t:"C) 'Kimdi?' diye sorarım; içim kurcalanır",p:2},{t:"D) Fırsatını bulursam bakarım",p:3}]},
+    {q:"Bir arkadaşının story'sinde, tanımadığın biriyle gülerken gördün. İlk hareketin?",sec:[
+      {t:"A) 'Güzel eğlenmişler' der geçerim",p:0},{t:"B) 'Kimmiş o?' içimden geçer, takılmam",p:1},{t:"C) Sorarım; cevap beni tam rahatlatmaz",p:2},{t:"D) O kişinin profilini bulup incelerim",p:3}]},
+    {q:"'İş yerinden biriyle çok iyi anlaşıyoruz' dedi. İçinden geçen?",sec:[
+      {t:"A) Ne güzel, iyi bir ortamı olsun",p:0},{t:"B) Hafif bir 'hmm' — sonra unuturum",p:1},{t:"C) O kişiyi sorgulamaya başlarım: kim, kaç yaşında, evli mi",p:2},{t:"D) O günden sonra iş saatlerini zihnimden takip ederim",p:3}]},
+    {q:"Eski sevgilisi fotoğrafını beğendi. Tepkin?",sec:[
+      {t:"A) Beğeni işte; anlam yüklemem",p:0},{t:"B) Gözüme takılır ama bir şey demem",p:1},{t:"C) 'Bunu gördün mü?' diye açarım konuyu",p:2},{t:"D) Eskiye dair her şeyi yeniden sorgularım; kavga çıkabilir",p:3}]},
+    {q:"Bu akşam sensiz bir davete gidiyor. Akşamın nasıl geçer?",sec:[
+      {t:"A) Kendi akşamımın keyfini çıkarırım",p:0},{t:"B) Arada aklıma gelir, 'iyi eğlensin' derim",p:1},{t:"C) Kimlerle olduğunu düşünmekten kendimi alamam; ara ara yazarım",p:2},{t:"D) Story'leri, etiketleri, kimin gittiğini takip ederim",p:3}]},
+    {q:"Sohbette ilk kez duyduğun bir isim geçti: 'Elif'le kahve içtik.' Sen?",sec:[
+      {t:"A) Sohbete devam ederim; isim isimdir",p:0},{t:"B) 'Elif kim?' diye doğal bir merakla sorarım",p:1},{t:"C) Soru üstüne soru sorarım; ton değişir",p:2},{t:"D) İsmi aklıma yazarım; sosyal medyada ararım",p:3}]},
+    {q:"Telefonuna yeni şifre koyduğunu fark ettin. İlk düşüncen?",sec:[
+      {t:"A) Herkesin şifresi var; benim de var",p:0},{t:"B) 'Değiştirmiş' diye not ederim, kurcalamam",p:1},{t:"C) 'Neden değiştirdin?' diye sorarım; cevap yetmez",p:2},{t:"D) Saklayacak bir şeyi olduğuna neredeyse eminimdir",p:3}]},
+    {q:"Sosyal medyada birine yazdığı yorum sana fazla samimi geldi. Sen?",sec:[
+      {t:"A) Üslubu böyle; herkese sıcaktır",p:0},{t:"B) Bir an duraksarım, sonra geçerim",p:1},{t:"C) Ekran görüntüsünü alıp ona gösteririm",p:2},{t:"D) O kişinin tüm etkileşim geçmişini kazarım",p:3}]},
+    {q:"Sana ayırdığı vakit azaldı, telefonda geçirdiği süre arttı. Yaklaşımın?",sec:[
+      {t:"A) Yoğun bir dönemdedir; açık açık sorarım, cevabına güvenirim",p:0},{t:"B) Gözlemlerim; sürerse konuşurum",p:1},{t:"C) 'Kiminle yazışıyorsun?' sorusu sıklaşır bende",p:2},{t:"D) Telefonu elinden düştüğü an ekrana bakarım",p:3}]},
+    {q:"Dürüst ol: kıskançlığın ilişkilerinde nasıl bir iz bıraktı?",sec:[
+      {t:"A) İz bırakacak kadar yer kaplamadı",p:0},{t:"B) Ara sıra tatlı-tuzlu tartışma, o kadar",p:1},{t:"C) Ciddi kavgalara sebep oldu",p:2},{t:"D) İlişki(ler) bu yüzden bitti / bitme noktasına geldi",p:3}]}
+  ],
+  profiller:[
+    {min:23,baslik:"Kıskançlık dümende 🌋",metin:"Seçimlerin düşünce, duygu ve davranışın üçünde de kıskançlığın yüksek çalıştığını gösteriyor. Araştırmalara göre kontrol davranışları (telefon kontrolü, takip) güveni onarmaz; erozyona uğratır — ve en çok seni yorar.",oneri:"Kıskançlık çoğu zaman ilişkiden değil, değersizlik korkusundan beslenir. 'Bağlanma Stilin' testini çöz; tablo tanıdıksa bir uzmanla çalışmak bu döngüyü kırmanın en hızlı yolu."},
+    {min:15,baslik:"Alarm sık çalıyor 🔔",metin:"Kıskançlık sende ara sıra değil, düzenli devrede. Duygu doğal; sorun, yalancı alarmla gerçek sinyali ayırt etmekte zorlanmak.",oneri:"Alarm çaldığında tek soru: 'Elimde davranışsal kanıt var mı, senaryo mu yazıyorum?' Kanıt yoksa duyguyu suçlamasız söyle: 'Şunu görünce bir şey hissettim' — sorgudan çok daha iyi çalışır."},
+    {min:8,baslik:"Sağlıklı doz 💛",metin:"Kıskançlık var ama dümende değil — araştırmacıların 'bağın işareti' saydığı ılımlı bölgedesin: hissediyorsun ve yönetebiliyorsun.",oneri:"Bu dengeyi koru: hissettiğinde bastırmak yerine kısaca ifade etmek ('bunu görünce bir şey hissettim'), dozu düşük tutmanın en iyi yolu."},
+    {min:0,baslik:"Sakin liman 🌊",metin:"Kıskançlık senin ilişki deneyiminde neredeyse yer kaplamıyor. Genelde güvenli bağlanma ve sağlam özgüven işareti.",oneri:"Tek kontrol sorusu: bu sakinlik güvenden mi, mesafeden mi? İlgisizlikten gelen 'kıskanmam' ile güvenden gelen 'kıskanmam' farklıdır — dürüst cevap sende."}
+  ]
+},
+{
+  id:"iliski-saglami",
+  baslik:"İlişkiniz Ne Kadar Sağlam?",
+  aciklama:"12 sahne, her birinde sizin evinizde en çok yaşanana en yakın şıkkı seç.",
+  kaynak:"Gottman'ın 'Dört Atlı' bulguları ve Sağlam İlişki Evi modelinden (Gottman & Levenson uzun dönem çift çalışmaları) senaryo formatına uyarlanmıştır.",
+  sure:"~4 dk", tip:"toplam",
+  sorular:[
+    {q:"Bir tartışma başlıyor. Genelde nasıl başlar?",sec:[
+      {t:"A) Sakin; konu neyse onunla",p:3},{t:"B) Gergin ama saygılı",p:2},{t:"C) Suçlamayla: 'Sen zaten hep…'",p:1},{t:"D) Yüksek sesle, sertçe",p:0}]},
+    {q:"Tartışmanın ortasında en sık görülen sahne?",sec:[
+      {t:"A) Dinleyip anlamaya çalışıyoruz",p:3},{t:"B) Savunmalar var ama sonunda çözüme geliyoruz",p:2},{t:"C) Karşılıklı suçlama yarışı",p:1},{t:"D) Biri tamamen kapanıyor ya da çekip gidiyor",p:0}]},
+    {q:"Kavga bitti. Sonrası?",sec:[
+      {t:"A) Kısa sürede barışırız — espri, sarılma, konuşma",p:3},{t:"B) Bir gün içinde konuşup toparlarız",p:2},{t:"C) Günlerce küslük",p:1},{t:"D) Konu halının altına; birikiyor",p:0}]},
+    {q:"Onun şu sıralar yaşadıkları hakkında ne kadar bilgin var?",sec:[
+      {t:"A) Detaylı — derdini, sevincini, gündemini bilirim",p:3},{t:"B) Ana hatlarıyla",p:2},{t:"C) Az; pek konuşmuyoruz",p:1},{t:"D) Hiç; sormuyoruz birbirimize",p:0}]},
+    {q:"En son ne zaman 'iyi ki varsın' benzeri bir şey duydun ya da söyledin?",sec:[
+      {t:"A) Bu hafta",p:3},{t:"B) Bu ay",p:2},{t:"C) Hatırlamıyorum",p:1},{t:"D) Bizde öyle şeyler söylenmez",p:0}]},
+    {q:"Ortak gelecek konuşmaları (ev, tatil, hayaller) nasıl geçer?",sec:[
+      {t:"A) Heyecanla; hayallerimiz ortak",p:3},{t:"B) Ara ara, fena değil",p:2},{t:"C) O konular pek açılmaz",p:1},{t:"D) Açılınca ayrı telden çalarız",p:0}]},
+    {q:"Zor bir haftandasın. O ne yapıyor?",sec:[
+      {t:"A) Yükü fiilen paylaşıyor",p:3},{t:"B) Soruyor, moral veriyor",p:2},{t:"C) Fark etmiyor",p:1},{t:"D) Üstüne bir de o yük ekliyor",p:0}]},
+    {q:"Evde/aranızda sessizlik olduğunda bu sessizlik…",sec:[
+      {t:"A) Huzur",p:3},{t:"B) Nötr",p:2},{t:"C) Hafif gerginlik",p:1},{t:"D) Soğuk savaş",p:0}]},
+    {q:"Ona bir şey söylerken kendini sansürler misin?",sec:[
+      {t:"A) Hayır; her konuyu açabilirim",p:3},{t:"B) Nadiren, hassas konularda",p:2},{t:"C) Sık sık kelime seçerim",p:1},{t:"D) Çoğu konu mayınlı arazi",p:0}]},
+    {q:"Birlikte gülmek sizde ne sıklıkta?",sec:[
+      {t:"A) Her gün bir şeye güleriz",p:3},{t:"B) Sık sık",p:2},{t:"C) Nadir",p:1},{t:"D) En son ne zamandı, hatırlamıyorum",p:0}]},
+    {q:"'Aynı takımdayız' hissi?",sec:[
+      {t:"A) Her zaman — dünyaya karşı biz",p:3},{t:"B) Genelde",p:2},{t:"C) Bazen rakip gibiyiz",p:1},{t:"D) Çoğunlukla karşı taraflardayız",p:0}]},
+    {q:"Şefkat ve fiziksel yakınlık (sarılma, dokunma) sizde…",sec:[
+      {t:"A) Doğal ve düzenli",p:3},{t:"B) Var ama azaldı",p:2},{t:"C) Özel günlere kaldı",p:1},{t:"D) Neredeyse bitti",p:0}]}
+  ],
+  profiller:[
+    {min:27,baslik:"Sağlam temel 🏡",metin:"Seçimlerin Gottman'ın 'ustalar' dediği çiftlerin imzasını taşıyor: risk işaretleri (suçlama, küçümseme, duvar örme) düşük; tanıma, takdir ve onarım yüksek. Kavga etmiyorsunuz demek değil — kavgayı yönetebiliyorsunuz demek.",oneri:"Sağlam ilişkinin tuzağı rehavet. Haftada bir 'senin dünyanda neler var?' sohbeti, bu puanı korumanın en ucuz sigortası."},
+    {min:15,baslik:"Temel sağlam ama bakım istiyor 🔧",metin:"Sevgi ve iyi niyet görünüyor; ama bazı sahnelerde risk örüntüleri (muhtemelen tartışma biçimleri) yerleşmeye başlamış. İyi haber: Gottman'a göre belirleyici olan kavga sayısı değil, onarım girişimlerinin tutması.",oneri:"Düşük puan verdiğin sahnelere bak: hangisi sizin eviniz? O tek örüntüyü hedefle — örn. suçlamayla başlıyorsa cümleye 'sen' yerine 'ben' ile başlamak bile tabloyu ölçülür biçimde düzeltir."},
+    {min:0,baslik:"Alarm bölgesi 🚨",metin:"Seçtiğin sahneler (sürekli suçlama, küçümseme, duvar örme, sansür) Gottman'ın araştırmalarında ilişkinin geleceği için en riskli sinyaller. 'Bitti' demek değil — ama 'kendiliğinden düzelir' de demek değil.",oneri:"İki dürüst soru: (1) İkiniz de bu tabloyu değiştirmek istiyor musunuz? (2) Kendi başınıza mı deneyeceksiniz? Çift terapisi tam bu tablo için var ve işe yaradığı iyi belgelenmiş."}
+  ]
+},
+{
+  id:"hizli-checkup",
+  baslik:"Hızlı Check-up",
+  aciklama:"7 soru, 2 dakika — ilişki doyumunun anlık fotoğrafı: yeşil, sarı ya da kırmızı bölge.",
+  kaynak:"Hendrick'in İlişki Değerlendirme Ölçeği'nden (1988) şıklı formata uyarlanmıştır.",
+  sure:"~2 dk", tip:"toplam",
+  sorular:[
+    {q:"Bu ilişkiyi yakın bir arkadaşına anlatırken içinden gelen ilk cümle?",sec:[
+      {t:"A) 'İyi ki o var'",p:3},{t:"B) 'İyiyiz; ufak pürüzler işte'",p:2},{t:"C) 'Valla bilmiyorum…'",p:1},{t:"D) Şikâyet ederdim",p:0}]},
+    {q:"Başlarken beklediklerinle bugünü kıyasla:",sec:[
+      {t:"A) Beklediğimden bile iyi",p:3},{t:"B) Aşağı yukarı beklediğim gibi",p:2},{t:"C) Beklentimin altında",p:1},{t:"D) Bambaşka ve kötü yönde",p:0}]},
+    {q:"İhtiyaçların (ilgi, destek, alan) bu ilişkide…",sec:[
+      {t:"A) Karşılanıyor",p:3},{t:"B) Çoğunlukla karşılanıyor",p:2},{t:"C) Ara sıra karşılanıyor",p:1},{t:"D) Nadiren karşılanıyor",p:0}]},
+    {q:"Çevrendeki ilişkilere baktığında?",sec:[
+      {t:"A) İyi ki bizimki bizimki",p:3},{t:"B) Ortalamanın üstündeyiz",p:2},{t:"C) Ortalamayız",p:1},{t:"D) Başkalarınınkine imreniyorum",p:0}]},
+    {q:"Zamanı geri alsan?",sec:[
+      {t:"A) Yine onu seçerdim, düşünmeden",p:3},{t:"B) Muhtemelen yine onu",p:2},{t:"C) Emin değilim",p:1},{t:"D) Farklı seçerdim",p:0}]},
+    {q:"'Onu seviyorum' cümlesi şu an sende nasıl duruyor?",sec:[
+      {t:"A) Tam kalpten",p:3},{t:"B) Evet, seviyorum",p:2},{t:"C) Sevgi mi alışkanlık mı, karışık",p:1},{t:"D) Söylesem zorlama olur",p:0}]},
+    {q:"Seni gerçekten kaygılandıran konu var mı?",sec:[
+      {t:"A) Yok",p:3},{t:"B) Küçük şeyler",p:2},{t:"C) Bir-iki büyük konu var",p:1},{t:"D) Birden çok ve büyüyorlar",p:0}]}
+  ],
+  profiller:[
+    {min:17,baslik:"Yeşil bölge 🟢",metin:"Doyum göstergelerin yüksek: beklenti, ihtiyaç ve sevgi hatlarının üçü de çalışıyor. Bu kısa test derin analiz değil ama fotoğraf net — bugün itibarıyla iyi bir yerdesiniz.",oneri:"Fotoğrafı filme çevir: ayda bir çöz, puanın seyrini izle. Doyum düşüşleri erken yakalanınca kolay onarılır."},
+    {min:11,baslik:"Sarı bölge 🟡",metin:"İlişki ayakta ama bazı göstergeler kıpırdıyor: muhtemelen beklenti ile gerçeklik arasında açılan bir makas var. Sarı bölge, ilişkilerin en yaygın ve müdahaleye en açık bölgesidir.",oneri:"En düşük puanlı sorun neydi? Konuşulacak konu tam orası. Derinleşmek için 'İlişkiniz Ne Kadar Sağlam?' testine geç."},
+    {min:0,baslik:"Kırmızı bölge 🔴",metin:"Doyum göstergelerinin çoğu düşük. Tek başına 'bitir' demek değil — ama 'böyle devam etmesin' demek, kesin.",oneri:"İki yol: birlikte onarmak (iki taraf da istemeli) ya da dürüst bir değerlendirme. Süreğen mutsuzlukta çift terapisi gerçekten işe yarayan bir araçtır — güçsüzlerin değil, ciddiye alanların tercihi."}
+  ]
+}
+];
+
+// ============ UYGULAMA ============
+let aktifTest=null, soruIx=0, puanlar=[];
+const CEVRE = 2*Math.PI*84;
+const HAREKET_OK = matchMedia("(prefers-reduced-motion: no-preference)").matches;
+
+/* ---- büyülü gökyüzü: yıldızlar + süzülen kalpler ---- */
+(function(){
+  const cv=document.getElementById("gokyuzu"),ctx=cv.getContext("2d");
+  let W,H,P=[];
+  function kur(){
+    const dpr=Math.min(devicePixelRatio||1,2);
+    W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;
+    cv.style.width=W+"px";cv.style.height=H+"px";ctx.setTransform(dpr,0,0,dpr,0,0);
+    P=[];
+    for(let i=0;i<46;i++)P.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.4,f:Math.random()*6.28,h:Math.random()<.14,v:Math.random()*.16+.04});
+  }
+  function ciz(t){
+    ctx.clearRect(0,0,W,H);
+    P.forEach(p=>{
+      const a=.25+.45*Math.abs(Math.sin(t/1400+p.f));
+      if(p.h){ctx.globalAlpha=a*.8;ctx.font="9px serif";ctx.fillStyle="#FF8FB0";ctx.fillText("♥",p.x,p.y);}
+      else{ctx.globalAlpha=a;ctx.fillStyle="#E8D9F5";ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.28);ctx.fill();}
+      p.y-=p.v;if(p.y<-12){p.y=H+10;p.x=Math.random()*W;}
+    });
+    ctx.globalAlpha=1;
+  }
+  kur();addEventListener("resize",kur);
+  if(HAREKET_OK){(function dongu(t){ciz(t||0);requestAnimationFrame(dongu);})();}
+  else ciz(0);
+})();// ============ PROFİL (karşılama sihirbazı) ============
+const PROFIL_ADIMLAR=[
+ {k:"durum",q:"Önce seni tanıyalım 💗 İlişki durumun ne?",sec:["💑 Sevgilim var","💍 Nişanlıyım / söz kesildi","👰 Evliyim","🌪️ Karmaşık / yeni başladı"]},
+ {k:"sure",q:"Ne kadar zamandır birliktesiniz?",sec:["🌱 6 aydan az","🌸 6 ay – 2 yıl","🌳 2 – 5 yıl","🏡 5 yıldan fazla"]},
+ {k:"ad",q:"Onun adı ne? Testlerde sorularını ismiyle soralım 😊",tip:"yazi"},
+ {k:"cocuk",q:"Çocuğunuz var mı?",sec:["Yok","1 çocuk","2 veya daha fazla","Yolda 🤰"]},
+ {k:"tempo",q:"Temponuz nasıl? Birlikte vakit için…",sec:["🕰️ Her gün bol bol birlikteyiz","💼 İş yoğun, ancak akşamları görüşüyoruz","📅 Haftada birkaç kez buluşuyoruz","✈️ Uzak mesafe / çok yoğun çalışıyor"]}
+];
+let PROFIL=null; try{PROFIL=JSON.parse(localStorage.getItem("ksProfil")||"null");}catch(e){}
+let pfIx=0, pfVeri={};
+function profilBaslat(dolu){pfIx=0;pfVeri=dolu?Object.assign({},PROFIL):{};goster("profil");pfGosterAdim();}
+function pfGosterAdim(){
+  const a=PROFIL_ADIMLAR[pfIx], N=PROFIL_ADIMLAR.length;
+  document.getElementById("pfBar").style.width=(pfIx/N*100)+"%";
+  document.getElementById("pfSayac").textContent=(pfIx+1)+" / "+N;
+  document.getElementById("pfSoru").textContent=a.q;
+  const c=document.getElementById("pfCevaplar");c.innerHTML="";
+  if(a.tip==="yazi"){
+    const g=document.createElement("input");g.className="yazi-giris";g.maxLength=20;
+    g.placeholder="örn. Mehmet";g.value=pfVeri.ad||"";g.autocomplete="off";
+    const b=document.createElement("button");b.className="btn";b.textContent="Devam 💛";
+    b.onclick=()=>{pfVeri.ad=g.value.trim();pfIleri();};
+    g.addEventListener("keydown",e=>{if(e.key==="Enter")b.click();});
+    const atla=document.createElement("button");atla.className="btn sec";atla.textContent="İsim vermeden devam et";
+    atla.onclick=()=>{pfVeri.ad="";pfIleri();};
+    c.appendChild(g);c.appendChild(b);c.appendChild(atla);
+    setTimeout(()=>g.focus(),120);
+  }else{
+    a.sec.forEach(t=>{
+      const b=document.createElement("button");b.className="cevap";b.textContent=t;
+      if(pfVeri[a.k]===t)b.style.borderColor="var(--gul,#FF5C8A)";
+      b.onclick=()=>{pfVeri[a.k]=t;pfIleri();};
+      c.appendChild(b);
+    });
+  }
+  const k=document.getElementById("pfKart");k.classList.remove("gir");void k.offsetWidth;k.classList.add("gir");
+}
+function pfIleri(){pfIx++; pfIx<PROFIL_ADIMLAR.length?pfGosterAdim():pfBitir();}
+function pfGeri(){if(pfIx>0){pfIx--;pfGosterAdim();}else if(PROFIL)anasayfa();}
+function pfBitir(){
+  PROFIL=pfVeri;
+  if(PROFIL.ad)PROFIL.ad=PROFIL.ad.charAt(0).toLocaleUpperCase("tr")+PROFIL.ad.slice(1);
+  try{localStorage.setItem("ksProfil",JSON.stringify(PROFIL));}catch(e){}
+  anasayfa();
+}
+// Türkçe -e/-a hâli: Mehmet'e, Ayşe'ye, Umut'a...
+function adEk(ad){
+  const s=ad.toLocaleLowerCase("tr"), unlu="aeıioöuü"; let son="";
+  for(let i=s.length-1;i>=0;i--){if(unlu.includes(s[i])){son=s[i];break;}}
+  const kalin="aıou".includes(son), unluBiter=unlu.includes(s[s.length-1]);
+  return "'"+(unluBiter?"y":"")+(kalin?"a":"e");
+}
+function kisisel(txt){
+  if(!PROFIL||!PROFIL.ad)return txt;
+  const A=PROFIL.ad, AE=A+adEk(A);
+  return txt
+    .replace(/ŞİMDİ ONA SOR/g,"ŞİMDİ "+AE.toLocaleUpperCase("tr")+" SOR")
+    .replace(/Ona sor/g,AE+" sor")
+    .replace(/\bona\b/g,AE)
+    .replace(/\bONA\b/g,AE.toLocaleUpperCase("tr"));
+}
+function selamCiz(){
+  const el=document.getElementById("selam");
+  if(!PROFIL){el.style.display="none";return;}
+  const parca=[PROFIL.durum,PROFIL.sure,PROFIL.ad?("💗 "+PROFIL.ad):null].filter(Boolean)
+    .map(x=>x.replace(/^[^\wÇĞİÖŞÜçğıöşü]+\s*/,""));
+  el.innerHTML='<span class="selam-chip">'+parca.join(" · ")+'<a onclick="profilBaslat(true)">düzenle</a></span>';
+  el.style.display="flex";
+}
+function toplamAdim(t){return t.tip==="eslesme"? t.sorular.length*2 : t.sorular.length;}
+function anasayfa(){
+  goster("liste"); aktifTest=null; selamCiz();
+  const el=document.getElementById("liste"); el.innerHTML="";
+  TESTLER.forEach((t,ix)=>{
+    const cift = (t.tip==="onasor"||t.tip==="eslesme");
+    const chip = cift ? '<span class="chip onasor">💬 ONA SOR · PARTNERİNLE</span>' : '<span class="chip">KENDİN ÇÖZ</span>';
+    el.innerHTML+=`<div class="card${ix===0?" one":""}">
+      ${chip}
+      <h3>${t.baslik}</h3>
+      <div class="meta">${t.sorular.length} SORU · ${t.sure.toUpperCase()}</div>
+      <p style="font-size:.92rem;color:var(--soluk)">${t.aciklama}</p>
+      <div class="kaynak">${t.kaynak}</div>
+      <button class="btn" onclick="basla('${t.id}')">Teste Başla</button>
+    </div>`;
+  });
+  el.querySelectorAll(".card").forEach((k,i)=>setTimeout(()=>k.classList.add("dogdu"), HAREKET_OK? 90*i : 0));
+}
+function goster(id){["profil","liste","test","sonuc"].forEach(e=>document.getElementById("ekran-"+e).classList.add("hide"));document.getElementById("ekran-"+id).classList.remove("hide");window.scrollTo(0,0);}
+function canlandir(){const k=document.getElementById("soruKart");k.classList.remove("gir");void k.offsetWidth;k.classList.add("gir");}
+function basla(id){aktifTest=TESTLER.find(t=>t.id===id);soruIx=0;puanlar=[];goster("test");aktifTest.yonerge?yonergeGoster():soruGoster();}
+function yonergeGoster(){
+  document.getElementById("pbar").style.width="0%";
+  document.getElementById("sayac").textContent="";
+  document.getElementById("soru").textContent="📣 "+kisisel(aktifTest.yonerge);
+  const c=document.getElementById("cevaplar");c.innerHTML="";
+  const b=document.createElement("button");b.className="btn";b.textContent="Anladım, başlıyoruz 💛";
+  b.onclick=()=>soruGoster();c.appendChild(b);canlandir();
+}
+function soruGoster(){
+  const t=aktifTest, N=toplamAdim(t);
+  let s, baslik, sayacTxt;
+  if(t.tip==="eslesme"){
+    const qi=Math.floor(soruIx/2), faz=soruIx%2;
+    s=t.sorular[qi];
+    baslik=(faz===0?"🙈 ÖNCE SEN (ona gösterme!) — ":"💬 ŞİMDİ ONA SOR ve şıkları oku — ")+s.q;
+    sayacTxt="Soru "+(qi+1)+" / "+t.sorular.length+(faz===0?" · senin cevabın":" · onun cevabı");
+  }else{
+    s=t.sorular[soruIx];
+    baslik=s.q;
+    sayacTxt=(soruIx+1)+" / "+N;
+  }
+  document.getElementById("pbar").style.width=(soruIx/N*100)+"%";
+  document.getElementById("sayac").textContent=sayacTxt;
+  document.getElementById("soru").textContent=kisisel(baslik);
+  const c=document.getElementById("cevaplar");c.innerHTML="";
+  s.sec.forEach((o,i)=>{
+    const b=document.createElement("button");b.className="cevap";b.textContent=o.t;
+    b.onclick=()=>{puanlar[soruIx]=i;soruIx++;soruIx<N?soruGoster():bitir();};
+    c.appendChild(b);
+  });
+  canlandir();
+}
+function geri(){if(soruIx>0){soruIx--;soruGoster();}else anasayfa();}
+
+function sayacCoz(hedef){
+  const el=document.getElementById("halkaYuzde");
+  if(!HAREKET_OK){el.textContent="%"+hedef;return;}
+  const t0=performance.now(),sure=1300;
+  (function adim(t){
+    const k=Math.min((t-t0)/sure,1),e=1-Math.pow(1-k,3);
+    el.textContent="%"+Math.round(hedef*e);
+    if(k<1)requestAnimationFrame(adim);
+  })(t0);
+}
+function kalpPatlat(yuzde){
+  if(!HAREKET_OK||yuzde<55)return;
+  const alan=document.getElementById("halkaAlan");
+  const semboller=["♥","✦","♥","❋"];const renkler=["#FF5C8A","#FFD98A","#C7A5FF","#FF9AB8"];
+  for(let i=0;i<20;i++){
+    const sp=document.createElement("span");sp.className="kalpcik";sp.textContent=semboller[i%4];
+    const aci=Math.random()*6.28,mes=90+Math.random()*90;
+    sp.style.color=renkler[i%4];
+    sp.style.setProperty("--dx",Math.cos(aci)*mes+"px");
+    sp.style.setProperty("--dy",Math.sin(aci)*mes+"px");
+    sp.style.setProperty("--dn",(Math.random()*80-40)+"deg");
+    sp.style.setProperty("--gec",(Math.random()*.35)+"s");
+    alan.appendChild(sp);setTimeout(()=>sp.remove(),1600);
+  }
+}
+function halkaCiz(yuzde,etiket){
+  const alan=document.getElementById("halkaAlan");alan.style.display="flex";
+  document.getElementById("halkaEtiket").textContent=etiket;
+  const d=document.getElementById("halkaDolu");
+  d.style.transition="none";d.style.strokeDashoffset=CEVRE;void d.getBoundingClientRect();
+  d.style.transition="";
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{d.style.strokeDashoffset=CEVRE*(1-yuzde/100);}));
+  sayacCoz(yuzde);kalpPatlat(yuzde);
+}
+function eksenCiz(liste){
+  const el=document.getElementById("s-eksenler");el.innerHTML="";
+  liste.forEach(e=>{
+    el.innerHTML+=`<div class="eksen"><div class="eb"><span>${e.ad}</span><b>%${e.yuzde}</b></div><div class="ec"><i style="width:0%"></i></div></div>`;
+  });
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    el.querySelectorAll(".ec i").forEach((i,ix)=>{i.style.width=liste[ix].yuzde+"%";});
+  }));
+}
+function bitir(){
+  const t=aktifTest;let profil,basOn="";
+  document.getElementById("s-eksenler").innerHTML="";
+  document.getElementById("s-puan").textContent="";
+  const secPuan=(s,ix)=>s.sec[ix].p||0;
+  const secMax=s=>Math.max(...s.sec.map(o=>o.p||0));
+
+  if(t.tip==="eslesme"){
+    let es=0;
+    t.sorular.forEach((s,qi)=>{if(puanlar[qi*2]===puanlar[qi*2+1])es++;});
+    const yuzde=Math.round(es/t.sorular.length*100);
+    document.getElementById("s-puan").textContent=es+" / "+t.sorular.length+" cevap eşleşti";
+    profil=t.profillerYuzde.find(p=>yuzde>=p.min);
+    halkaCiz(yuzde,"EŞLEŞME");
+  }else if(t.tip==="onasor"){
+    let puan=0,max=0;const eks={};
+    t.sorular.forEach((s,i)=>{
+      const pp=secPuan(s,puanlar[i]),mm=secMax(s);
+      puan+=pp;max+=mm;
+      const e=s.eksen||"genel";eks[e]=eks[e]||[0,0];eks[e][0]+=pp;eks[e][1]+=mm;
+    });
+    const yuzde=Math.round(puan/max*100);
+    const ad={yakinlik:"Yakınlık & bağ",yatirim:"Duygusal yatırım"};
+    eksenCiz(Object.entries(eks).map(([e,v])=>({ad:ad[e]||e,yuzde:Math.round(v[0]/v[1]*100)})));
+    profil=t.profillerYuzde.find(p=>yuzde>=p.min);
+    halkaCiz(yuzde,"SEVGİ ÖLÇER");
+  }else if(t.tip==="eksen2"){
+    let kaygi=0,kacinma=0,maxK=0,maxC=0;
+    t.sorular.forEach((s,i)=>{
+      const o=s.sec[puanlar[i]];
+      kaygi+=o.k||0;kacinma+=o.c||0;
+      maxK+=Math.max(...s.sec.map(x=>x.k||0));maxC+=Math.max(...s.sec.map(x=>x.c||0));
+    });
+    const kY=kaygi>maxK/3, cY=kacinma>maxC/3;
+    profil=t.profillerEksen[kY?(cY?"korkulu":"kaygili"):(cY?"kacingan":"guvenli")];
+    document.getElementById("halkaAlan").style.display="none";
+    eksenCiz([{ad:"Kaygı ekseni",yuzde:Math.round(kaygi/maxK*100)},{ad:"Kaçınma ekseni",yuzde:Math.round(kacinma/maxC*100)}]);
+  }else if(t.tip==="eksen3"){
+    const E={yakinlik:[0,0],tutku:[0,0],baglilik:[0,0]};
+    t.sorular.forEach((s,i)=>{E[s.eksen][0]+=secPuan(s,puanlar[i]);E[s.eksen][1]+=secMax(s);});
+    const yz=k=>Math.round(E[k][0]/E[k][1]*100);
+    profil=t.profillerUc[(yz("yakinlik")>=60?"1":"0")+(yz("tutku")>=60?"1":"0")+(yz("baglilik")>=60?"1":"0")];
+    document.getElementById("halkaAlan").style.display="none";
+    eksenCiz([{ad:"Yakınlık",yuzde:yz("yakinlik")},{ad:"Tutku",yuzde:yz("tutku")},{ad:"Bağlılık",yuzde:yz("baglilik")}]);
+  }else if(t.tip==="stil"){
+    const S={},A={};
+    t.sorular.forEach((s,i)=>{
+      s.sec.forEach(o=>{A[o.stil]=(A[o.stil]||0)+1;});
+      const st=s.sec[puanlar[i]].stil;S[st]=(S[st]||0)+1;
+    });
+    let baskin=null;Object.keys(A).forEach(k=>{S[k]=S[k]||0;if(baskin===null||S[k]>S[baskin])baskin=k;});
+    profil=t.profillerStil[baskin];
+    document.getElementById("halkaAlan").style.display="none";
+    eksenCiz(Object.keys(A).map(k=>({ad:t.stilAd[k],yuzde:Math.round(S[k]/A[k]*100)})).sort((a,b)=>b.yuzde-a.yuzde));
+  }else{ // toplam
+    let puan=0,max=0;
+    t.sorular.forEach((s,i)=>{puan+=secPuan(s,puanlar[i]);max+=secMax(s);});
+    profil=t.profiller.find(p=>puan>=p.min);
+    halkaCiz(Math.round(puan/max*100),"PUANIN");
+    document.getElementById("s-puan").textContent=puan+" / "+max+" puan";
+  }
+  document.getElementById("s-testadi").textContent=t.baslik;
+  document.getElementById("s-baslik").textContent=basOn+profil.baslik;
+  document.getElementById("s-metin").textContent=profil.metin;
+  document.getElementById("s-oneri").textContent=profil.oneri;
+  document.getElementById("s-kaynak").textContent="📚 "+t.kaynak+" — Sonuçlar eğlence ve öz-farkındalık amaçlıdır; psikolojik tanı aracı değildir.";
+  goster("sonuc");
+}
+function paylas(){
+  const metin=`"${aktifTest.baslik}" testini çözdüm: ${document.getElementById("s-baslik").textContent}\nSen de dene 👉 kalbinesor.com`;
+  if(navigator.share){navigator.share({text:metin}).catch(()=>{});}
+  else{navigator.clipboard.writeText(metin);alert("Sonuç kopyalandı — istediğin yere yapıştırabilirsin 💛");}
+}
+PROFIL?anasayfa():profilBaslat();
+</script>
+
+<script>
+if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js").catch(()=>{});}
+</script>
+
+<div id="kurBanner" style="display:none;position:fixed;bottom:14px;left:14px;right:14px;max-width:532px;margin:0 auto;background:#261230;color:#FBF1F7;border:1px solid #5C2C63;border-radius:18px;padding:12px 16px;z-index:99;box-shadow:0 12px 34px rgba(0,0,0,.55);font-size:.9rem;align-items:center;gap:10px">
+  <span style="flex:1">📲 Kalbine Sor'u telefonuna uygulama olarak ekle</span>
+  <button onclick="pwaKur()" style="background:linear-gradient(120deg,#FF5C8A,#C7A5FF);color:#2A0E1C;border:none;border-radius:99px;padding:8px 16px;font-weight:800;font-family:inherit;cursor:pointer">Ekle</button>
+  <button onclick="this.parentElement.style.display='none'" style="background:none;border:none;color:#FBF1F7;font-size:1.1rem;cursor:pointer">✕</button>
+</div>
+<script>
+let pwaEvent=null;
+window.addEventListener("beforeinstallprompt",(e)=>{e.preventDefault();pwaEvent=e;const b=document.getElementById("kurBanner");b.style.display="flex";});
+function pwaKur(){if(pwaEvent){pwaEvent.prompt();pwaEvent=null;}document.getElementById("kurBanner").style.display="none";}
+</script>
+</body>
+</html>
