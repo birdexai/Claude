@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#B3446C">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Kalbine Sor">
+<title>Kalbine Sor — İlişki Testleri</title>
+<meta name="description" content="Gerçek psikoloji araştırmalarından uyarlanmış ilişki testleri: Seviyor mu? Bağlanma stilin ne? İlişkin ne kadar sağlam?">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Nunito+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{--gul:#B3446C;--erik:#3B1F33;--krem:#FAF5F0;--amber:#E0A458;--pudra:#F2DCE3}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito Sans',-apple-system,Arial,sans-serif;background:var(--krem);color:var(--erik);line-height:1.55;min-height:100vh}
+  .wrap{max-width:560px;margin:0 auto;padding:16px 18px 60px}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif}
+  .top{display:flex;align-items:center;gap:10px;padding:6px 0 18px}
+  .top svg{width:34px;height:34px}
+  .top b{font-family:'Fraunces',serif;font-size:1.15rem}
+  .btn{display:inline-block;width:100%;background:var(--gul);color:#fff;padding:15px 20px;border-radius:999px;border:none;font-size:1.02rem;font-weight:800;cursor:pointer;text-align:center;text-decoration:none;font-family:inherit}
+  .btn.sec{background:transparent;color:var(--gul);border:2px solid var(--gul)}
+  .card{background:#fff;border:1px solid #eadfe4;border-radius:18px;padding:20px;margin-bottom:14px}
+  .card h3{margin-bottom:6px}
+  .meta{font-size:.8rem;opacity:.7;margin:6px 0 12px}
+  .kaynak{font-size:.75rem;background:var(--pudra);border-radius:10px;padding:8px 12px;margin:10px 0}
+  .progress{height:8px;background:var(--pudra);border-radius:99px;overflow:hidden;margin:14px 0 22px}
+  .progress i{display:block;height:100%;background:var(--gul);border-radius:99px;transition:width .25s}
+  .soru{font-size:1.2rem;font-weight:600;font-family:'Fraunces',serif;margin-bottom:20px;min-height:4.2em}
+  .cevap{display:block;width:100%;background:#fff;border:2px solid #e6d5dc;border-radius:14px;padding:14px 16px;margin-bottom:10px;font-size:1rem;font-family:inherit;text-align:left;cursor:pointer;transition:border-color .12s, background .12s}
+  .cevap:active{border-color:var(--gul);background:var(--pudra)}
+  .geri{background:none;border:none;color:var(--gul);font-weight:800;cursor:pointer;font-size:.9rem;font-family:inherit;padding:8px 0}
+  .skorbar{height:14px;background:var(--pudra);border-radius:99px;overflow:hidden;margin:12px 0 6px}
+  .skorbar i{display:block;height:100%;background:linear-gradient(90deg,var(--amber),var(--gul))}
+  .sonuc-baslik{font-size:1.5rem;margin:10px 0 4px}
+  .oneri{background:var(--pudra);border-radius:14px;padding:14px 16px;margin:14px 0;font-size:.95rem}
+  .upsell{border:2px solid var(--gul);border-radius:18px;padding:18px;margin-top:18px}
+  .upsell h3{color:var(--gul)}
+  .disclaimer{font-size:.75rem;opacity:.7;margin-top:26px;text-align:center}
+  .hide{display:none}
+  .rozet{display:inline-block;background:var(--amber);color:var(--erik);font-size:.72rem;font-weight:800;padding:2px 10px;border-radius:99px;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <svg viewBox="0 0 200 200"><rect width="200" height="200" rx="45" fill="#B3446C"/><path d="M100 152C96 148 52 116 46 86 42 64 56 48 76 48c12 0 21 7 24 14 3-7 12-14 24-14 20 0 34 16 30 38-6 30-50 62-54 66Z" fill="#FAF5F0"/><circle cx="78" cy="92" r="7" fill="#B3446C"/><circle cx="100" cy="92" r="7" fill="#B3446C"/><circle cx="122" cy="92" r="7" fill="#B3446C"/></svg>
+    <b>kalbine sor</b> <span style="font-size:.8rem;opacity:.6">· testler</span> <a href="../index.html" style="margin-left:auto;font-size:.8rem;color:#B3446C;font-weight:800;text-decoration:none">ana sayfa</a>
+  </div>
+
+  <!-- EKRAN: TEST LİSTESİ -->
+  <div id="ekran-liste">
+    <h1 style="font-size:1.6rem;margin-bottom:6px">Hangi sorunun cevabını arıyorsun?</h1>
+    <p style="margin-bottom:18px;font-size:.95rem">Uydurma testler değil: her test, yayımlanmış psikoloji araştırmalarından uyarlandı. Kaynağı testin altında görürsün.</p>
+    <div id="liste"></div>
+    <p class="disclaimer">Testler eğlence ve öz-farkındalık amaçlıdır; psikolojik tanı veya danışmanlık aracı değildir. · <a href="#" style="color:var(--gul)">KVKK</a></p>
+  </div>
+
+  <!-- EKRAN: TEST OYNATICI -->
+  <div id="ekran-test" class="hide">
+    <button class="geri" onclick="geri()">← geri</button>
+    <div class="progress"><i id="pbar" style="width:0%"></i></div>
+    <div class="soru" id="soru"></div>
+    <div id="cevaplar"></div>
+  </div>
+
+  <!-- EKRAN: SONUÇ -->
+  <div id="ekran-sonuc" class="hide">
+    <span class="rozet" id="s-testadi"></span>
+    <h2 class="sonuc-baslik" id="s-baslik"></h2>
+    <div class="skorbar"><i id="s-bar" style="width:0%"></i></div>
+    <div style="font-size:.85rem;opacity:.75" id="s-puan"></div>
+    <p style="margin:14px 0" id="s-metin"></p>
+    <div class="oneri" id="s-oneri"></div>
+    <button class="btn sec" onclick="paylas()" style="margin-bottom:10px">Sonucumu Paylaş 💌</button>
+    <button class="btn sec" onclick="anasayfa()" style="margin-bottom:10px;border-color:#d9c9d1;color:var(--erik)">Başka Test Çöz</button>
+    <div class="upsell">
+      <h3>Puanının hikayesini merak ediyor musun?</h3>
+      <p style="font-size:.92rem;margin:8px 0 14px">Detaylı raporunda: soru soru analiz, güçlü/zayıf alan haritan ve adım adım "ne yapmalı" planın. PDF olarak sende kalır.</p>
+      <!-- OPERASYON: Shopier ürün linki -->
+      <a class="btn" href="#" data-shopier="RAPOR">Detaylı Raporunu Al — 49 TL</a>
+    </div>
+    <p class="disclaimer" id="s-kaynak"></p>
+  </div>
+</div>
+
+<script>
+// ============ TEST VERİLERİ ============
+// Şema: TEST-KATALOGU.md'de. Yeni test = bu diziye yeni nesne.
+const CEVAP5 = ["Hiç öyle değil","Pek değil","Bazen","Çoğunlukla","Tamamen öyle"];
+// "Ona Sor" formatı puanlı cevap setleri
+const BILGI = [{t:"Bildi ✅",p:2},{t:"Kısmen bildi",p:1},{t:"Bilemedi",p:0}];
+const TEPKI = [{t:"Hemen ve içten cevapladı 💛",p:3},{t:"Zorlandı ama denedi",p:2},{t:"Geçiştirdi, şakaya vurdu",p:1},{t:"Cevaplamak istemedi",p:0}];
+
+const TESTLER = [
+{
+  id:"ona-sor-sevgi-olcer",
+  baslik:"Ona Sor: Sevgi Ölçer",
+  aciklama:"Bu testte soruları ONA soracaksın. Cevaplarına ve tepkilerine göre işaretle — sonunda sevgi yüzdesi karşında.",
+  kaynak:"Aron'un ünlü 36 Soru deneyi (1997) ve Gottman'ın Sevgi Haritaları araştırmasından uyarlanmıştır.",
+  sure:"~10 dk · onunla birlikte", tip:"onasor",
+  yonerge:"Bu test tek başına çözülmez 😉 Soruları partnerine soracaksın — yüz yüze, telefonda ya da mesajla. Verdiği cevaba ve tepkisine göre dürüstçe işaretle: sonuç ancak senin dürüstlüğün kadar gerçek olur. Hazırsan başlayalım.",
+  sorular:[
+    {q:"Isınma 🍽 Ona sor: 'Benim en sevdiğim yemek ne?'",eksen:"tanima",sec:BILGI},
+    {q:"Ona sor: 'Benim en yakın arkadaşım kim?'",eksen:"tanima",sec:BILGI},
+    {q:"Ona sor: 'Şu an hayatımdaki en büyük stres kaynağım ne?'",eksen:"tanima",sec:BILGI},
+    {q:"Ona sor: 'Benim en büyük hayalim ne?'",eksen:"tanima",sec:BILGI},
+    {q:"Ona sor: 'Beni bir anda neşelendiren şey nedir?'",eksen:"tanima",sec:BILGI},
+    {q:"Ona sor: 'En çok neyden korkarım?'",eksen:"tanima",sec:BILGI},
+    {q:"Ona sor: 'Geçen hafta beni üzen ya da yoran şey neydi?'",eksen:"tanima",sec:BILGI},
+    {q:"Ona sor: 'Benimle ilgili en sevdiğin üç şey ne?'",eksen:"yatirim",sec:TEPKI},
+    {q:"Ona sor: 'İlk tanıştığımız günden aklında ne kaldı?'",eksen:"yatirim",sec:TEPKI},
+    {q:"Ona sor: 'Benimle hayalini kurduğun bir şey var mı?'",eksen:"yatirim",sec:TEPKI},
+    {q:"Ona sor: 'Sence benim en güçlü yanım ne?'",eksen:"yatirim",sec:TEPKI},
+    {q:"Ona sor: 'Son zamanlarda bende seni endişelendiren bir şey oldu mu?'",eksen:"yatirim",sec:TEPKI},
+    {q:"Ona sor: 'Benim için bir günü mükemmel yapmak istesen ne yapardın?'",eksen:"yatirim",sec:TEPKI},
+    {q:"Ona sor: 'İkimizi tek kelimeyle anlatsan, o kelime ne olurdu?'",eksen:"yatirim",sec:TEPKI},
+    {q:"Final 💛 Ona sor: 'Beni neden seviyorsun?'",eksen:"yatirim",sec:TEPKI}
+  ],
+  profillerYuzde:[
+    {min:80,baslik:"Güçlü sevgi tablosu 💛",metin:"Hem seni gerçekten tanıyor hem de sorulara verdiği tepkiler yüksek duygusal yatırım gösteriyor. Gottman'ın diliyle: senin 'sevgi haritanı' taşıyor — ve bu tesadüfen olmaz; dinleyerek, önemseyerek, zaman ayırarak olur.",oneri:"Bu sonucu ona göster: hem güzel bir an yaşarsınız hem de zorlandığı sorulardan tatlı bir sohbet çıkar. Testin en güzel yan etkisi zaten bu — oynarken yakınlaştınız (Aron'un deneyi tam olarak bunu kanıtlamıştı)."},
+    {min:60,baslik:"Seviyor ama haritan eksik",metin:"Tepkileri sıcak — duygusal yatırım orada. Ama seni tanıma tarafında boşluklar çıktı. Bu genelde sevgisizlik değil; dikkat eksikliği ya da ilişkinin henüz derinleşme fırsatı bulamamış olması.",oneri:"Bilemediği soruların cevaplarını ona sen anlat — ama sınav havasında değil, sohbet olarak. Gottman'a göre sevgi haritası çizilebilir bir şeydir: anlattıkça oluşur."},
+    {min:40,baslik:"Karışık tablo",metin:"Bazı sorularda parladı, çoğunda ya bilemedi ya da geçiştirdi. Tek test kesin hüküm vermez — yorgun ya da mesafeli bir gününe denk gelmiş olabilir. Ama bu tablo genelin yansımasıysa, ilişkide 'tanınmak ve önemsenmek' ihtiyacın tam karşılanmıyor olabilir.",oneri:"Birkaç hafta sonra testi tekrarla (geçmişin kaydediliyor). Bu arada net bir deneme yap: ona kendinle ilgili önemli bir şey anlat ve bir hafta sonra hatırlayıp hatırlamadığına bak."},
+    {min:0,baslik:"Zayıf sinyaller",metin:"Soruların çoğunda ya bilemedi ya da cevaplamaktan kaçındı. Bu sonuç 'seni sevmiyor' diye kesin hüküm değildir; ama araştırmaların sevgiyle ilişkilendirdiği iki temel şey — seni tanımak ve sorularına duygusal emek vermek — bu oyunda ortaya çıkmadı.",oneri:"Kendine sorman gereken soru şu: 'Bu ilişkide görülmek ve önemsenmek ihtiyacım karşılanıyor mu?' Cevabın hayırsa, bunu onunla açıkça konuşmayı hak ediyorsun."}
+  ]
+},
+{
+  id:"beni-taniyor-mu",
+  baslik:"Beni Ne Kadar Tanıyor?",
+  aciklama:"10 soruyu ona sor, bilip bilmediğini işaretle — sevgi haritasının röntgeni.",
+  kaynak:"Gottman'ın Sevgi Haritaları araştırmasından uyarlanmıştır: partnerinin iç dünyasını bilmek, uzun ömürlü ilişkilerin ortak özelliği.",
+  sure:"~5 dk · onunla birlikte", tip:"onasor",
+  yonerge:"Soruları ona sor (yüz yüze ya da mesajla) ve cevabını işaretle. İpucu verme, yardım etme — harita onun kafasında ya var ya yok 😉",
+  sorular:[
+    {q:"Ona sor: 'Benim en sevdiğim yemek ne?'",eksen:"tanima",sec:BILGI},
+    {q:"Ona sor: 'Şu an en yakın olduğum insan kim?'",eksen:"tanima",sec:BILGI},
+    {q:"Ona sor: 'Hayatımdaki en büyük stres kaynağım ne?'",eksen:"tanima",sec:BILGI},
+    {q:"Ona sor: 'En büyük hayalim ne?'",eksen:"tanima",sec:BILGI},
+    {q:"Ona sor: 'Çocukluğumdan en çok anlattığım anı hangisi?'",eksen:"tanima",sec:BILGI},
+    {q:"Ona sor: 'Hangi şarkı/dizi/film benim vazgeçilmezim?'",eksen:"tanima",sec:BILGI},
+    {q:"Ona sor: 'Doğum günümde nasıl bir kutlama isterim?'",eksen:"tanima",sec:BILGI},
+    {q:"Ona sor: 'Beni en çok ne sinirlendirir?'",eksen:"tanima",sec:BILGI},
+    {q:"Ona sor: 'En korktuğum şey ne?'",eksen:"tanima",sec:BILGI},
+    {q:"Ona sor: 'Beni en çok ne kırar?'",eksen:"tanima",sec:BILGI}
+  ],
+  profillerYuzde:[
+    {min:80,baslik:"Haritan onda 🗺💛",metin:"Gottman'ın 'sevgi haritası' dediği şeyin ta kendisi: iç dünyanı taşıyor. Araştırmalara göre bu, ilişkinin zor dönemlerde bile ayakta kalmasının en güçlü desteklerinden.",oneri:"Aynı testi rolleri değiştirerek oynayın — bakalım sen onun haritasını ne kadar taşıyorsun?"},
+    {min:55,baslik:"Ana hatlar tamam, detaylar eksik",metin:"Büyük resmi biliyor ama ince ayrıntılarda boşluklar var. Bu çoğu ilişkide normaldir — harita bir kere çizilip bitmez, güncel tutulması gerekir.",oneri:"Bilemediklerini sohbete dönüştür: 'Bak bunu bilemedin, anlatayım' — Gottman çiftlere tam olarak bu oyunu önerir."},
+    {min:30,baslik:"Yüzeyde kalmış",metin:"Seni genel hatlarıyla tanıyor ama iç dünyana dair sorularda zorlandı. İlişki yeniyse doğal; uzun süredir birlikteyseniz üzerine düşünmeye değer bir sinyal.",oneri:"Haritayı birlikte çizin: haftada bir 'senin dünyanda neler var?' sohbeti — 10 dakikalık bu alışkanlık araştırmalarda en etkili yakınlık pratiklerinden."},
+    {min:0,baslik:"Seni henüz tanımıyor",metin:"Soruların çoğunu bilemedi. Bu 'kötü insan' demek değil; ama seni tanımak için henüz yeterli merak ve emek göstermediğini söylüyor.",oneri:"Şunu gözlemle: sen anlattığında dinliyor mu, soru soruyor mu? Merak, sevginin en erken işaretlerinden biridir — yokluğu da öyle."}
+  ]
+},
+{
+  id:"seviyor-mu",
+  baslik:"Seviyor mu? Sevgi Belirtileri Testi",
+  aciklama:"24 soruda onun davranışlarını, sevgi araştırmalarının kriterlerine göre değerlendir.",
+  kaynak:"Rubin'in Sevgi Ölçeği (1970), Rusbult'un Yatırım Modeli (1980) ve Gottman'ın çift araştırmalarından uyarlanmıştır.",
+  sure:"~4 dk", cevaplar:CEVAP5, tip:"toplam",
+  sorular:[
+    {q:"Zor bir gün geçirdiğimde ilk arayacağım kişi olmaktan mutluluk duyar."},
+    {q:"Planlarını yaparken beni de hesaba katar."},
+    {q:"Bana özel şeylerini — korkularını, hayallerini — benimle paylaşır."},
+    {q:"Bir süre görüşemediğimizde beni özlediğini belli eder."},
+    {q:"Hasta ya da üzgün olduğumda kendiliğinden ilgilenir."},
+    {q:"Konuşurken gözlerimin içine bakarak dinler."},
+    {q:"Benim mutluluğum için kendi rahatından vazgeçebilir."},
+    {q:"Yanımdayken telefonuyla değil, benimle ilgilenir."},
+    {q:"Anlattığım küçük ayrıntıları hatırlar (sevdiğim şeyler, önemli günler)."},
+    {q:"Beni hayatındaki insanlara tanıtmıştır ya da tanıtmak ister."},
+    {q:"Gelecekten bahsederken 'biz' diye konuşur."},
+    {q:"Bir sorunumuz olduğunda kaçmak yerine konuşmayı seçer."},
+    {q:"Bana sadece bir şeye ihtiyacı olduğunda ulaşır.",ters:true},
+    {q:"Başarılarıma neredeyse benden çok sevinir."},
+    {q:"Ona küçük bir mesaj attığımda ilgiyle karşılık verir."},
+    {q:"Benim için zaman yaratır; sürekli 'müsait değilim' demez."},
+    {q:"Sözler verir ama arkasını getirmez.",ters:true},
+    {q:"Kalabalık bir ortamda bile gözleri beni arar."},
+    {q:"Kararlarında fikrimi sorar ve dikkate alır."},
+    {q:"Kötü bir gün geçirdiğinde bana anlatır — maskesini indirir."},
+    {q:"İlişkimiz için çaba ister isteyen şeyler yapar (yol gelir, sürpriz yapar, özür diler)."},
+    {q:"Sosyal medyada aktifken mesajıma saatlerce dönmediği olur.",ters:true},
+    {q:"Bana yakın olmak, dokunmak için fırsat yaratır."},
+    {q:"Sevgisini sadece sözle değil, davranışla gösterir."}
+  ],
+  profiller:[
+    {min:72,baslik:"Davranışları güçlü sevgi işaretleri veriyor 💛",metin:"Araştırmaların 'sevginin davranışsal göstergeleri' dediği neredeyse her alanda yüksek puan verdin: önemseme, bağlılık, sana dönüş ve ilişkiye yatırım. Sözlerden bağımsız olarak, davranış tablosu tutarlı biçimde 'seviyor' diyor.",oneri:"Bu tabloyu korumanın yolu karşılıklılık: onun ilgi çağrılarına senin de dönmen. Gottman'a göre iyi giden ilişkileri ayakta tutan şey büyük jestler değil, bu küçük dönüşlerin sürekliliği."},
+    {min:48,baslik:"İlgi var ama tutarsız — netleşme aşaması",metin:"Bazı alanlarda güçlü işaretler var (muhtemelen ilgi ve yakınlık), bazı alanlarda ise davranışlar sözlerin gerisinde kalıyor. Bu tablo çoğu zaman 'sevmiyor' değil, 'henüz emin değil ya da göstermekte zorlanıyor' anlamına gelir.",oneri:"Düşük puan verdiğin sorulara tek tek bak: hangi alanda eksik hissediyorsun? O alanı suçlama dili kullanmadan konuşmak ('şunu yaptığında çok iyi hissediyorum, daha sık olsa ne güzel olur') davranışı değiştirmenin en araştırma-destekli yolu."},
+    {min:24,baslik:"Karışık sinyaller — sözler ve davranışlar örtüşmüyor",metin:"Testin işaret ettiği tablo: ilgi anları var ama süreklilik, yatırım ve önemseme boyutları zayıf. Araştırmalar net: sevgiyi en iyi yordayan şey yoğun anlar değil, tutarlı davranıştır.",oneri:"Kendine şu soruyu sor: 'Bu ilişkide gördüğüm ilgi, benim verdiğimin kaçta kaçı?' Cevabın seni üzüyorsa, beklentilerini açıkça ifade etmek ve karşılığını gözlemlemek için kendine bir süre tanı. Belirsizlik, netlikten daha çok yorar."},
+    {min:0,baslik:"Davranışsal işaretler zayıf — kendine sorman gereken sorular var",metin:"Bu sonuç 'seni kimse sevmez' demek değil; bu kişinin davranışlarının, sevgi araştırmalarının kriterlerini şu anda karşılamadığını gösteriyor. Umut verici anlar olabilir, ama tablo genelinde önemseme ve yatırım görünmüyor.",oneri:"En değerli sorun şu: 'Ben bu ilişkide neyi umut ettiğim için kalıyorum?' Bu soruya vereceğin dürüst cevap, yüz testten daha değerli."}
+  ]
+},
+{
+  id:"baglanma-stili",
+  baslik:"Bağlanma Stilin Ne?",
+  aciklama:"18 soruda ilişkilerdeki temel örüntünü keşfet: güvenli mi, kaygılı mı, kaçıngan mı?",
+  kaynak:"Hazan & Shaver'ın yetişkin bağlanma kuramı (1987) ve Fraley, Waller & Brennan'ın iki boyutlu modeli (2000) çerçevesinden uyarlanmıştır.",
+  sure:"~3 dk", cevaplar:CEVAP5, tip:"eksen2",
+  sorular:[
+    {q:"Mesajıma geç dönülünce ilişkiyle ilgili kötü senaryolar kurarım.",eksen:"kaygi"},
+    {q:"Partnerimin beni gerçekten sevdiğinden sık sık şüphe duyarım.",eksen:"kaygi"},
+    {q:"Terk edilme korkusu, ilişkideki kararlarımı etkiler.",eksen:"kaygi"},
+    {q:"Ben onu sevdiğim kadar o beni sevmiyor diye korkarım.",eksen:"kaygi"},
+    {q:"Onay almadığımda kendimi değersiz hissederim.",eksen:"kaygi"},
+    {q:"İlişki iyi giderken bile 'ya biterse' diye düşünürüm.",eksen:"kaygi"},
+    {q:"Partnerim başkalarıyla vakit geçirdiğinde dışlanmış hissederim.",eksen:"kaygi"},
+    {q:"Sevildiğimi sık sık teyit etme ihtiyacı duyarım.",eksen:"kaygi"},
+    {q:"Küçük bir soğukluğu bile büyük bir tehdit gibi yaşarım.",eksen:"kaygi"},
+    {q:"Duygularımı açmak bana zor gelir.",eksen:"kacinma"},
+    {q:"Biri bana çok yakınlaşınca geri çekilme ihtiyacı duyarım.",eksen:"kacinma"},
+    {q:"Sorunlarımı paylaşmak yerine kendi başıma çözmeyi tercih ederim.",eksen:"kacinma"},
+    {q:"Partnerime güvenip yaslanmak bana rahat gelir.",eksen:"kacinma",ters:true},
+    {q:"İlişki ciddileştikçe kendimi sıkışmış hissederim.",eksen:"kacinma"},
+    {q:"Bağımsızlığım benim için yakınlıktan daha önemlidir.",eksen:"kacinma"},
+    {q:"Zor zamanlarımda yalnız kalmayı seçerim.",eksen:"kacinma"},
+    {q:"İç dünyamı partnerimle paylaşmak beni rahatlatır.",eksen:"kacinma",ters:true},
+    {q:"Partnerim duygusal destek istediğinde ne yapacağımı bilemem.",eksen:"kacinma"}
+  ],
+  profillerEksen:{
+    "guvenli":{baslik:"Güvenli Bağlanma 🌿",metin:"Hem yakınlık kurmakta hem de bağımsız kalmakta rahatsın. Araştırmalara göre bu stil, ilişki doyumunun en güçlü yordayıcılarından. Bu, sorun yaşamayacağın anlamına gelmez — ama sorunları büyütmeden konuşabilme kapasiten yüksek.",oneri:"Güçlü yanın: istikrar. Dikkat: güvenli bağlanan kişiler bazen partnerlerinin kaygı ya da kaçınma örüntülerini 'anlamsız' bulup küçümseyebilir. Partnerinin stili seninkinden farklıysa, onun tetiklenme anlarını kişisel algılama."},
+    "kaygili":{baslik:"Kaygılı Bağlanma 🌊",metin:"Sevgin derin ama zihnin sık sık 'ya giderse' alarmı çalıyor. Bu stil genelde erken dönemde tutarsız ilgiyle şekillenir: sevgi var ama ne zaman geleceği belirsizdi — zihnin de sürekli tetikte kalmayı öğrendi.",oneri:"İşe yarayan şey: duyguyu bastırmak değil, alarmın gerçek mi yalancı mı olduğunu ayırt etmeyi öğrenmek. Mesaja geç dönülmesi bir veri değildir; davranış örüntüsü veridir. Kaygın yükseldiğinde 'somut kanıtım ne?' sorusu iyi bir ilk adım."},
+    "kacingan":{baslik:"Kaçıngan Bağlanma 🏔",metin:"Kendi ayakların üzerinde durmayı iyi biliyorsun; zorlandığın yer, birinin sana gerçekten yaklaşmasına izin vermek. Bu stil genelde 'duygularınla kendin ilgilen' mesajıyla büyümekle ilişkilendirilir — bağımsızlık senin güvenlik stratejin oldu.",oneri:"Dikkat: kaçınma, partnerinde 'ona ulaşamıyorum' hissi yaratır ve o yüzden en çok kaygılı partnerleri tetikler. Küçük bir egzersiz: haftada bir kez, kendini geri çekmek istediğin anda tam tersini yapıp hissettiğini tek cümleyle söyle. Kasların böyle gelişiyor."},
+    "korkulu":{baslik:"Korkulu-Kaçıngan Bağlanma 🌗",metin:"Hem yakınlığı çok istiyorsun hem de yaklaşınca alarm çalıyor — it-kak dinamiği. Bu en yorucu stil çünkü iki sistem aynı anda çalışıyor: 'gel' ve 'git'. Genelde güvenin ciddi biçimde sarsıldığı deneyimlerle bağlantılıdır.",oneri:"Bu örüntüyle tek başına boğuşmak zorunda değilsin; bağlanma stilleri değişebilir (araştırmalar 'kazanılmış güvenli bağlanma'nın mümkün olduğunu gösteriyor). Bir uzmanla çalışmak bu stilde özellikle değerli. Bu testin sonucu bir başlangıç noktası — uzman desteğinin yerine geçmez."}
+  }
+},
+{
+  id:"iliski-saglami",
+  baslik:"İlişkiniz Ne Kadar Sağlam?",
+  aciklama:"20 soruda ilişkinin taşıyıcı kolonlarını ve risk işaretlerini gör.",
+  kaynak:"Gottman'ın 'Dört Atlı' bulguları ve Sağlam İlişki Evi modeli çerçevesinden uyarlanmıştır (Gottman & Levenson uzun dönem çift çalışmaları).",
+  sure:"~3 dk", cevaplar:CEVAP5, tip:"toplam",
+  sorular:[
+    {q:"Tartışırken konu, kişiliğe saldırıya döner ('sen zaten hep böylesin').",ters:true},
+    {q:"Biri eleştirince diğeri hemen savunmaya geçer, karşı suçlama başlar.",ters:true},
+    {q:"Aramızda göz devirme, alay etme, küçümseyici ifadeler olur.",ters:true},
+    {q:"Tartışma sırasında birimiz tamamen kapanır, duvar örer.",ters:true},
+    {q:"Küslüklerimiz günlerce sürer; kimse ilk adımı atmaz.",ters:true},
+    {q:"Aynı kavgayı hiçbir çözüme varmadan tekrar tekrar ederiz.",ters:true},
+    {q:"Onunla konuşurken sözlerimi sansürlemek zorunda hissederim.",ters:true},
+    {q:"Bir sorunu gündeme getirmek genelde daha büyük kavga çıkarır.",ters:true},
+    {q:"Partnerimin şu sıralar hayatında neler olduğunu (işi, dertleri, sevinçleri) bilirim."},
+    {q:"O da benim iç dünyamda ne olup bittiğini bilir."},
+    {q:"Gün içinde birbirimize küçük ilgi işaretleri göndeririz (mesaj, espri, dokunuş)."},
+    {q:"Partnerimde hâlâ hayranlık duyduğum yönler var ve bunu ona söylerim."},
+    {q:"O da beni takdir ettiğini hissettirir."},
+    {q:"Tartışsak bile birbirimize saygımızı koruruz."},
+    {q:"Kavga sonrası barışma yollarımız var (espri, sarılma, konuşma)."},
+    {q:"Gelecek hayallerimiz büyük ölçüde örtüşüyor."},
+    {q:"Zor dönemlerde 'aynı takımdayız' duygusunu hissederiz."},
+    {q:"Birlikte hâlâ gülebiliyoruz."},
+    {q:"Fiziksel yakınlığımızdan ikimiz de memnunuz."},
+    {q:"Bu ilişkide kendim olabildiğimi hissediyorum."}
+  ],
+  profiller:[
+    {min:60,baslik:"Sağlam temel 🏡",metin:"İlişkinizde Gottman'ın 'ustalar' dediği çiftlerin imzası var: risk işaretleri (eleştiri, küçümseme, duvar örme) düşük; birbirinizi tanıma, takdir ve onarım becerileri yüksek. Bu, kavga etmediğiniz anlamına gelmiyor — kavgayı yönetebildiğiniz anlamına geliyor.",oneri:"Sağlam ilişkilerin tuzağı rehavet: 'zaten iyiyiz' diyip küçük dönüşleri ihmal etmek. Haftada bir 'senin dünyanda neler var?' sohbeti, bu puanı korumak için yapılmış en basit yatırım."},
+    {min:36,baslik:"Temel sağlam ama bakım istiyor 🔧",metin:"İlişkide sevgi ve iyi niyet görünüyor; ama bazı risk örüntüleri (muhtemelen tartışma biçimleriyle ilgili olanlar) yerleşmeye başlamış. İyi haber: Gottman'ın araştırmalarına göre belirleyici olan kavga sayısı değil, onarım girişimlerinin tutup tutmadığı.",oneri:"Ters puan verdiğin sorulara bak: hangi 'atlı' baskın? Eleştiriyse şikayeti 'sen' değil 'ben' diliyle kurmayı dene; duvar örmeyse tartışmayı 20 dk mola ile bölmeyi. Tek bir örüntüyü değiştirmek bile tabloyu ciddi düzeltir."},
+    {min:0,baslik:"Alarm bölgesi 🚨",metin:"Testin işaret ettiği örüntüler (sürekli eleştiri, küçümseme, savunma, duvar örme) Gottman'ın araştırmalarında ilişkinin geleceği açısından en riskli sinyaller. Bu, 'bitti' demek değil — ama 'kendiliğinden düzelir' de demek değil.",oneri:"İki dürüst soru: (1) İkiniz de bu tabloyu değiştirmek istiyor musunuz? (2) Bunu kendi başınıza mı yapmaya çalışacaksınız? Çift terapisi tam bu tablo için var ve işe yaradığı iyi belgelenmiş. Ciddi örüntülerde profesyonel destek şart — bu test sadece aynayı tutar."}
+  ]
+}
+];
+
+// ============ UYGULAMA ============
+let aktifTest=null, soruIx=0, puanlar=[];
+
+function anasayfa(){
+  goster("liste"); aktifTest=null;
+  const el=document.getElementById("liste"); el.innerHTML="";
+  TESTLER.forEach(t=>{
+    el.innerHTML+=`<div class="card">
+      ${t.tip==="onasor"?'<span class="rozet">💬 ONA SOR · partnerinle oyna</span>':''}
+      <h3>${t.baslik}</h3>
+      <div class="meta">${t.sorular.length} soru · ${t.sure}</div>
+      <p style="font-size:.93rem">${t.aciklama}</p>
+      <div class="kaynak">📚 ${t.kaynak}</div>
+      <button class="btn" onclick="basla('${t.id}')">Teste Başla</button>
+    </div>`;
+  });
+}
+function goster(id){["liste","test","sonuc"].forEach(e=>document.getElementById("ekran-"+e).classList.add("hide"));document.getElementById("ekran-"+id).classList.remove("hide");window.scrollTo(0,0);}
+function basla(id){aktifTest=TESTLER.find(t=>t.id===id);soruIx=0;puanlar=[];goster("test");aktifTest.yonerge?yonergeGoster():soruGoster();}
+function yonergeGoster(){
+  document.getElementById("pbar").style.width="0%";
+  document.getElementById("soru").textContent="📣 "+aktifTest.yonerge;
+  const c=document.getElementById("cevaplar");c.innerHTML="";
+  const b=document.createElement("button");b.className="btn";b.textContent="Anladım, başlıyoruz 💛";
+  b.onclick=()=>soruGoster();c.appendChild(b);
+}
+function soruGoster(){
+  const t=aktifTest,s=t.sorular[soruIx];
+  document.getElementById("pbar").style.width=(soruIx/t.sorular.length*100)+"%";
+  document.getElementById("soru").textContent=(soruIx+1)+". "+s.q;
+  const c=document.getElementById("cevaplar");c.innerHTML="";
+  const secenekler=s.sec?s.sec.map(o=>o.t):t.cevaplar;
+  secenekler.forEach((etiket,i)=>{
+    const b=document.createElement("button");b.className="cevap";b.textContent=etiket;
+    b.onclick=()=>{puanlar[soruIx]=s.sec?s.sec[i].p:(s.ters?(t.cevaplar.length-1-i):i);soruIx++;soruIx<t.sorular.length?soruGoster():bitir();};
+    c.appendChild(b);
+  });
+}
+function geri(){if(soruIx>0){soruIx--;soruGoster();}else anasayfa();}
+function bitir(){
+  const t=aktifTest;let profil,puan,max,basOn="";
+  if(t.tip==="onasor"){
+    puan=puanlar.reduce((a,b)=>a+b,0);
+    max=t.sorular.reduce((a,s)=>a+Math.max(...s.sec.map(o=>o.p)),0);
+    const yuzde=Math.round(puan/max*100);
+    const eks={};
+    t.sorular.forEach((s,i)=>{const e=s.eksen||"genel";eks[e]=eks[e]||[0,0];eks[e][0]+=puanlar[i];eks[e][1]+=Math.max(...s.sec.map(o=>o.p));});
+    const ad={tanima:"Seni tanıyor mu",yatirim:"Duygusal yatırım"};
+    document.getElementById("s-puan").textContent=Object.entries(eks).map(([e,v])=>(ad[e]||e)+": %"+Math.round(v[0]/v[1]*100)).join(" · ");
+    profil=t.profillerYuzde.find(p=>yuzde>=p.min);
+    basOn="%"+yuzde+" — ";
+  }else if(t.tip==="eksen2"){
+    let kaygi=0,kacinma=0,nK=0,nC=0;
+    t.sorular.forEach((s,i)=>{s.eksen==="kaygi"?(kaygi+=puanlar[i],nK++):(kacinma+=puanlar[i],nC++);});
+    const kY=kaygi>nK*2, cY=kacinma>nC*2;
+    profil=t.profillerEksen[kY?(cY?"korkulu":"kaygili"):(cY?"kacingan":"guvenli")];
+    puan=kaygi+kacinma;max=(nK+nC)*4;
+    document.getElementById("s-puan").textContent=`Kaygı: ${kaygi}/${nK*4} · Kaçınma: ${kacinma}/${nC*4}`;
+  }else{
+    puan=puanlar.reduce((a,b)=>a+b,0);max=t.sorular.length*4;
+    profil=t.profiller.find(p=>puan>=p.min);
+    document.getElementById("s-puan").textContent=`Puanın: ${puan} / ${max}`;
+  }
+  document.getElementById("s-testadi").textContent=t.baslik;
+  document.getElementById("s-baslik").textContent=basOn+profil.baslik;
+  document.getElementById("s-bar").style.width=(puan/max*100)+"%";
+  document.getElementById("s-metin").textContent=profil.metin;
+  document.getElementById("s-oneri").innerHTML="<strong>Ne yapabilirsin?</strong><br>"+profil.oneri;
+  document.getElementById("s-kaynak").textContent="📚 "+t.kaynak+" — Sonuçlar eğlence ve öz-farkındalık amaçlıdır; psikolojik tanı aracı değildir.";
+  goster("sonuc");
+}
+function paylas(){
+  const metin=`"${aktifTest.baslik}" testini çözdüm: ${document.getElementById("s-baslik").textContent}\nSen de dene 👉 kalbinesor.com`;
+  if(navigator.share){navigator.share({text:metin}).catch(()=>{});}
+  else{navigator.clipboard.writeText(metin);alert("Sonuç kopyalandı — istediğin yere yapıştırabilirsin 💛");}
+}
+anasayfa();
+</script>
+
+<script>
+if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js").catch(()=>{});}
+</script>
+
+<div id="kurBanner" style="display:none;position:fixed;bottom:14px;left:14px;right:14px;max-width:532px;margin:0 auto;background:#3B1F33;color:#FAF5F0;border-radius:16px;padding:12px 16px;z-index:99;box-shadow:0 10px 30px rgba(0,0,0,.25);font-size:.9rem;align-items:center;gap:10px">
+  <span style="flex:1">📲 Kalbine Sor'u telefonuna uygulama olarak ekle</span>
+  <button onclick="pwaKur()" style="background:#B3446C;color:#fff;border:none;border-radius:99px;padding:8px 16px;font-weight:800;font-family:inherit;cursor:pointer">Ekle</button>
+  <button onclick="this.parentElement.style.display='none'" style="background:none;border:none;color:#FAF5F0;font-size:1.1rem;cursor:pointer">✕</button>
+</div>
+<script>
+let pwaEvent=null;
+window.addEventListener("beforeinstallprompt",(e)=>{e.preventDefault();pwaEvent=e;const b=document.getElementById("kurBanner");b.style.display="flex";});
+function pwaKur(){if(pwaEvent){pwaEvent.prompt();pwaEvent=null;}document.getElementById("kurBanner").style.display="none";}
+</script>
+</body>
+</html>

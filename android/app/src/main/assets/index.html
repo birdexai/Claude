@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#B3446C">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Kalbine Sor">
+<title>Kalbine Sor — AI İlişki Koçun</title>
+<meta name="description" content="Ona ne mesaj atacağını bilemediğin anlar için: yapay zekâ destekli ilişki koçun. Yargısız dinler, birlikte düşünür, mesajını birlikte yazar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,700;1,500&family=Nunito+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gul:#B3446C; --erik:#3B1F33; --krem:#FAF5F0; --amber:#E0A458; --pudra:#F2DCE3;
+    --radius:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito Sans',-apple-system,Segoe UI,Arial,sans-serif;background:var(--krem);color:var(--erik);line-height:1.6}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.2}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  header{padding:18px 0}
+  .nav{display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:700;font-size:1.25rem;color:var(--erik);text-decoration:none}
+  .brand svg{width:38px;height:38px}
+  .btn{display:inline-block;background:var(--gul);color:#fff;padding:14px 26px;border-radius:999px;text-decoration:none;font-weight:800;border:none;font-size:1rem;cursor:pointer;transition:transform .15s}
+  .btn:active{transform:scale(.97)}
+  .btn.ghost{background:transparent;color:var(--gul);border:2px solid var(--gul);padding:12px 24px}
+  .hero{padding:36px 0 20px;display:grid;gap:28px}
+  .hero h1{font-size:clamp(2rem,6vw,3.1rem)}
+  .hero h1 em{color:var(--gul);font-style:italic}
+  .hero p.lead{font-size:1.12rem;max-width:34em}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .micro{font-size:.82rem;opacity:.75}
+  /* Telefon mockup */
+  .phone{background:#fff;border:1px solid #eadfe4;border-radius:28px;box-shadow:0 18px 50px rgba(59,31,51,.12);padding:18px;max-width:360px;margin:0 auto;width:100%}
+  .bubble{padding:12px 15px;border-radius:16px;margin:9px 0;max-width:85%;font-size:.95rem}
+  .bubble.user{background:var(--gul);color:#fff;margin-left:auto;border-bottom-right-radius:4px}
+  .bubble.coach{background:var(--pudra);border-bottom-left-radius:4px}
+  .bubble .tag{display:block;font-size:.7rem;opacity:.65;margin-bottom:3px}
+  section{padding:44px 0}
+  section h2{font-size:clamp(1.5rem,4.5vw,2.1rem);margin-bottom:22px}
+  .cards{display:grid;gap:16px}
+  .card{background:#fff;border:1px solid #eadfe4;border-radius:var(--radius);padding:22px}
+  .card .num{display:inline-flex;width:34px;height:34px;border-radius:50%;background:var(--gul);color:#fff;align-items:center;justify-content:center;font-weight:800;margin-bottom:10px}
+  .price-grid{display:grid;gap:16px}
+  .price{background:#fff;border:2px solid #eadfe4;border-radius:var(--radius);padding:24px;text-align:center;position:relative}
+  .price.featured{border-color:var(--gul)}
+  .price .rozet{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--amber);color:var(--erik);font-size:.75rem;font-weight:800;padding:3px 14px;border-radius:999px;white-space:nowrap}
+  .price h3{font-size:1.1rem;margin-bottom:6px}
+  .price .tl{font-size:2rem;font-weight:800;font-family:'Fraunces',serif;color:var(--gul)}
+  .price ul{list-style:none;margin:14px 0;font-size:.92rem}
+  .price li{padding:4px 0}
+  details{background:#fff;border:1px solid #eadfe4;border-radius:14px;padding:16px 18px;margin-bottom:10px}
+  summary{font-weight:800;cursor:pointer}
+  details p{margin-top:10px;font-size:.95rem}
+  form.early{background:#fff;border:1px solid #eadfe4;border-radius:var(--radius);padding:24px;display:grid;gap:12px;max-width:480px}
+  form.early input[type=text],form.early input[type=email]{padding:13px 15px;border:1.5px solid #d9c9d1;border-radius:12px;font-size:1rem;font-family:inherit}
+  form.early label.kvkk{display:flex;gap:8px;font-size:.8rem;align-items:flex-start}
+  .notice{background:var(--pudra);border-radius:14px;padding:16px 18px;font-size:.88rem}
+  footer{background:var(--erik);color:#e9dce4;padding:36px 0;margin-top:30px;font-size:.85rem}
+  footer a{color:#f2c9d8}
+  footer .cols{display:grid;gap:18px}
+  @media(min-width:760px){
+    .hero{grid-template-columns:1.1fr .9fr;align-items:center;padding:60px 0 30px}
+    .cards{grid-template-columns:repeat(3,1fr)}
+    .price-grid{grid-template-columns:repeat(3,1fr)}
+    footer .cols{grid-template-columns:2fr 1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <nav class="nav">
+    <a class="brand" href="#">
+      <svg viewBox="0 0 200 200"><rect width="200" height="200" rx="45" fill="#B3446C"/><path d="M100 152C96 148 52 116 46 86 42 64 56 48 76 48c12 0 21 7 24 14 3-7 12-14 24-14 20 0 34 16 30 38-6 30-50 62-54 66Z" fill="#FAF5F0"/><path d="M100 152l-12 18 18-14Z" fill="#FAF5F0"/><circle cx="78" cy="92" r="7" fill="#B3446C"/><circle cx="100" cy="92" r="7" fill="#B3446C"/><circle cx="122" cy="92" r="7" fill="#B3446C"/></svg>
+      kalbine sor
+    </a>
+    <a class="btn ghost" href="#erken">Erken Erişim</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div>
+      <h1>Seviyor mu? Tahmin etme, <em>kalbine sor.</em></h1>
+      <p class="lead">Gerçek psikoloji araştırmalarından uyarlanmış ilişki testleri — internetteki uydurma testlerden değil. Sonucunu al, istersen AI koçunla konuş.</p>
+      <div class="cta-row" style="margin-top:20px">
+        <a class="btn" href="./test/index.html">Ücretsiz Testi Çöz</a>
+        <span class="micro">24 soru · ~4 dakika · kayıt istemez</span>
+      </div>
+      <p class="micro" style="margin-top:14px">⚠️ Kalbine Sor bir yapay zekâ sohbet uygulamasıdır; psikolojik danışmanlık veya sağlık hizmeti değildir.</p>
+    </div>
+    <div class="phone" aria-hidden="true">
+      <div class="bubble user">3 gündür mesajlarıma tek kelime cevap veriyor. Sence soğudu mu benden?</div>
+      <div class="bubble coach"><span class="tag">kalbine sor</span>Bu belirsizlik gerçekten yorucu, hemen "soğudu" demeden önce birlikte bakalım: son normal konuşmanız ne zamandı, arada ne değişti?</div>
+      <div class="bubble user">Pazar günü tartıştık aslında…</div>
+      <div class="bubble coach"><span class="tag">kalbine sor</span>O zaman elimizde bir başlangıç noktası var 💛 İstersen ona küslüğü büyütmeden kapı aralayan kısa bir mesaj taslağı yazalım — sen son halini verirsin.</div>
+    </div>
+  </div>
+
+  <section class="wrap" id="nasil">
+    <h2>Nasıl çalışır?</h2>
+    <div class="cards">
+      <div class="card"><span class="num">1</span><h3>Testi çöz</h3><p>Rubin'in Sevgi Ölçeği, bağlanma kuramı ve Gottman araştırmalarından uyarlanmış testler — kaynağı her testin altında yazar.</p></div>
+      <div class="card"><span class="num">2</span><h3>Sonucunu gör</h3><p>Puanın, profilin ve "şimdi ne yapabilirsin" önerilerin — kesin hüküm yok, gerçekçi yorum var.</p></div>
+      <div class="card"><span class="num">3</span><h3>Onunla oyna</h3><p>"Ona Sor" testlerinde soruları partnerine sorarsın, cevabına göre işaretlersin — sonunda sevgi yüzdesi: %78 gibi. Test aynı zamanda bir çift oyunu.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap" id="fiyat">
+    <h2>Fiyatlar</h2>
+    <div class="price-grid">
+      <div class="price">
+        <h3>Testler</h3>
+        <div class="tl">Ücretsiz</div>
+        <ul><li>Tüm temel testler</li><li>Puanın + profilin + öneriler</li><li>Kayıt ve kart istemez</li></ul>
+        <a class="btn ghost" href="./test/index.html">Testi Çöz</a>
+      </div>
+      <div class="price featured">
+        <span class="rozet">EN ÇOK TERCİH EDİLEN</span>
+        <h3>Detaylı Sonuç Raporu</h3>
+        <div class="tl">49 TL</div>
+        <ul><li>Soru soru kişisel analiz</li><li>Güçlü/zayıf alan haritası</li><li>Adım adım "ne yapmalı" planı</li><li>PDF olarak sende kalır</li></ul>
+        <!-- OPERASYON: Shopier ürün linkini buraya ekle -->
+        <a class="btn" href="./test/index.html" data-shopier="RAPOR">Önce Testi Çöz</a>
+      </div>
+      <div class="price">
+        <h3>Tüm Erişim</h3>
+        <div class="tl">199 TL<span style="font-size:.9rem;font-weight:400"> · tek seferlik</span></div>
+        <ul><li>Tüm detaylı raporlar</li><li>"Ona Sor: Sevgi Ölçer" tam sürüm</li><li>Çift uyum testleri</li><li>Abonelik yok, ömür boyu</li></ul>
+        <!-- OPERASYON: Shopier ürün linkini buraya ekle -->
+        <a class="btn ghost" href="./test/index.html" data-shopier="TUM_ERISIM">Önce Testi Çöz</a>
+      </div>
+    </div>
+    <p class="micro" style="margin-top:12px">Ödemeler Shopier güvencesiyle alınır; kart bilgin bize hiç ulaşmaz. Fiyatlara KDV dahildir. Dijital içerik hizmetlerinde ifa başladıktan sonra cayma hakkı istisnaları uygulanabilir — ayrıntı için Mesafeli Satış Sözleşmesi'ne bak.</p>
+  </section>
+
+  <section class="wrap" id="guven">
+    <h2>Sık sorulanlar</h2>
+    <details><summary>Bu bir terapi mi?</summary><p>Hayır. Kalbine Sor, yapay zekâ destekli bir sohbet ve öz-farkındalık uygulamasıdır; psikolojik danışmanlık, terapi veya sağlık hizmeti değildir ve bunların yerine geçmez. Zor bir dönemden geçiyorsan bir ruh sağlığı uzmanına başvurmanı destekleriz — uygulama içinde yönlendirme kaynakları da var.</p></details>
+    <details><summary>Testler gerçekten bilimsel mi?</summary><p>Testlerimiz yayımlanmış psikoloji araştırmalarından uyarlanır — Rubin'in Sevgi Ölçeği (1970), Aron'un 36 Soru deneyi (1997), Gottman'ın 40 yıllık çift araştırmaları gibi. Kaynağı her testin altında açıkça yazar. Yapay zekâ uydurması ya da internetten kopyalanmış sorular değildir; ama tanı aracı da değildir — öz-farkındalık ve eğlence amaçlıdır.</p></details>
+    <details><summary>Yazdıklarım güvende mi?</summary><p>Sohbetlerin şifreli bağlantıyla iletilir, üçüncü kişilerle paylaşılmaz ve reklam hedeflemesi için kullanılmaz. Dilediğin an hesabını ve tüm verilerini sildirebilirsin. Ayrıntılar KVKK Aydınlatma Metni'nde.</p></details>
+    <details><summary>Param boşa gider mi?</summary><p>İlk sohbet ücretsiz — beğenmezsen hiç ödeme yapmazsın. Paket aldıktan sonra teknik bir sorun yaşarsan destek hattımızdan (WhatsApp) ulaş, çözemezsek iade ederiz.</p></details>
+    <details><summary>Geleceğimi söyler mi? Fal bakar mı?</summary><p>Hayır. Kalbine Sor fal bakmaz, gelecek okumaz, "kesin dönecek" gibi vaatlerde bulunmaz. Sana bugün elindeki durumla en sağlıklı adımı atmanda eşlik eder.</p></details>
+  </section>
+
+  <section class="wrap" id="erken">
+    <h2>Erken erişim listesine katıl</h2>
+    <p style="margin-bottom:16px">Uygulama çok yakında açılıyor. İlk kullanıcılara <strong>Sohbet Paketi %50 indirimli</strong>.</p>
+    <!-- OPERASYON: form endpoint'i (Formspree/Google Form/Tally) oluşturup action'a yaz -->
+    <form class="early" action="FORM_ENDPOINT_BURAYA" method="POST">
+      <input type="text" name="isim" placeholder="Adın" required>
+      <input type="email" name="eposta" placeholder="E-posta adresin" required>
+      <label class="kvkk"><input type="checkbox" required> <span>Erken erişim duyurusu için e-posta adresimin işlenmesine ilişkin <a href="#kvkk">KVKK Aydınlatma Metni</a>'ni okudum; ticari elektronik ileti almayı kabul ediyorum.</span></label>
+      <button class="btn" type="submit">Listeye Katıl</button>
+    </form>
+  </section>
+
+  <section class="wrap">
+    <div class="notice" id="kriz">
+      <strong>Önemli:</strong> Sen ya da bir yakının şiddet görüyorsa veya kendine zarar verme düşüncelerin varsa lütfen bekleme: <strong>112 Acil</strong> · <strong>ALO 183</strong> Sosyal Destek Hattı · <strong>KADES</strong> uygulaması. Kalbine Sor bu durumlarda profesyonel yardımın yerini tutamaz.
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap cols">
+    <div>
+      <strong style="font-family:'Fraunces',serif;font-size:1.1rem">kalbine sor</strong>
+      <p style="margin-top:8px">Yapay zekâ destekli ilişki koçun. Psikolojik danışmanlık veya sağlık hizmeti değildir.</p>
+      <p style="margin-top:8px">Destek: <a href="https://wa.me/90XXXXXXXXXX">WhatsApp destek hattı</a> · destek@kalbinesor.com</p>
+    </div>
+    <div>
+      <strong>Yasal</strong>
+      <p><a href="#" id="mesafeli">Mesafeli Satış Sözleşmesi</a><br>
+      <a href="#" id="onbilgi">Ön Bilgilendirme Formu</a><br>
+      <a href="#kvkk">KVKK Aydınlatma Metni</a><br>
+      <a href="#">Çerez Politikası</a></p>
+      <!-- OPERASYON: Bu metinler yayına alınmadan önce hazırlanmalı (şablonlar FIYATLANDIRMA-VE-PLAN.md'de) -->
+    </div>
+    <div>
+      <strong>Takip et</strong>
+      <p><a href="https://instagram.com/kalbinesor">Instagram @kalbinesor</a></p>
+      <p style="margin-top:8px;opacity:.7">© 2026 Kalbine Sor</p>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js").catch(()=>{});}
+</script>
+</body>
+</html>
