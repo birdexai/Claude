@@ -381,6 +381,143 @@ const TESTLER = [
     {min:36,baslik:"Temel sağlam ama bakım istiyor 🔧",metin:"İlişkide sevgi ve iyi niyet görünüyor; ama bazı risk örüntüleri (muhtemelen tartışma biçimleriyle ilgili olanlar) yerleşmeye başlamış. İyi haber: Gottman'ın araştırmalarına göre belirleyici olan kavga sayısı değil, onarım girişimlerinin tutup tutmadığı.",oneri:"Ters puan verdiğin sorulara bak: hangi 'atlı' baskın? Eleştiriyse şikayeti 'sen' değil 'ben' diliyle kurmayı dene; duvar örmeyse tartışmayı 20 dk mola ile bölmeyi. Tek bir örüntüyü değiştirmek bile tabloyu ciddi düzeltir."},
     {min:0,baslik:"Alarm bölgesi 🚨",metin:"Testin işaret ettiği örüntüler (sürekli eleştiri, küçümseme, savunma, duvar örme) Gottman'ın araştırmalarında ilişkinin geleceği açısından en riskli sinyaller. Bu, 'bitti' demek değil — ama 'kendiliğinden düzelir' de demek değil.",oneri:"İki dürüst soru: (1) İkiniz de bu tabloyu değiştirmek istiyor musunuz? (2) Bunu kendi başınıza mı yapmaya çalışacaksınız? Çift terapisi tam bu tablo için var ve işe yaradığı iyi belgelenmiş. Ciddi örüntülerde profesyonel destek şart — bu test sadece aynayı tutar."}
   ]
+},
+
+{
+  id:"tutku-olcer",
+  baslik:"Hâlâ Aşık mısın? Tutku Ölçer",
+  aciklama:"12 soruda ilişkindeki tutkunun nabzını ölç.",
+  kaynak:"Hatfield & Sprecher'in Tutkulu Aşk Ölçeği'nden (1986) uyarlanmıştır.",
+  sure:"~3 dk", cevaplar:CEVAP5, tip:"toplam",
+  sorular:[
+    {q:"Onu düşünmediğim bir gün neredeyse yok."},
+    {q:"Onu mutlu görmek günümü güzelleştiriyor."},
+    {q:"Ona yakın olmak hâlâ heyecan veriyor."},
+    {q:"Bazen aklımdan çıkaramadığım için işime odaklanamıyorum."},
+    {q:"Onsuz bir hayat düşüncesi içimi sıkıyor."},
+    {q:"Yeni bir şey yaşadığımda ilk ona anlatmak istiyorum."},
+    {q:"Göz göze geldiğimizde içimde hâlâ bir şey kıpırdıyor."},
+    {q:"Onun dokunuşu herkesinkinden farklı geliyor."},
+    {q:"İlk günlerdeki heyecanı ara ara hâlâ hissediyorum."},
+    {q:"Onu başkasıyla hayal etmek canımı acıtıyor."},
+    {q:"Birlikte geçireceğimiz zamanı iple çekiyorum."},
+    {q:"'Aşk' kelimesini duyunca aklıma o geliyor."}
+  ],
+  profiller:[
+    {min:38,baslik:"Tutku dorukta 🔥",metin:"Tutkulu aşkın klasik işaretlerinin neredeyse hepsi sende aktif: zihinsel meşguliyet, fiziksel çekim, heyecan. Araştırmalar (Acevedo & Aron, 2012) bunun uzun ilişkilerde bile sürebildiğini gösteriyor — sen buna kanıtsın.",oneri:"Tutkuyu besleyen şey yenilik: birlikte hiç yapmadığınız bir şey planla. Aron'un deneyleri, yeni ve heyecanlı ortak deneyimlerin tutkuyu tazelediğini gösteriyor."},
+    {min:26,baslik:"Aşk olgunlaşıyor 🌾",metin:"Tutku hâlâ orada ama ilk günlerin ateşi yerini daha sakin, derin bir bağa bırakıyor. Bu, araştırmaların 'yoldaş aşkına geçiş' dediği doğal bir evrim — kayıp değil, dönüşüm.",oneri:"Tutkuyu tamamen sakinliğe bırakmak zorunda değilsin: haftada bir 'flört gecesi' klişesi, araştırmalarda gerçekten işe yarayan az sayıda şeyden biri."},
+    {min:14,baslik:"Kor közleniyor — bakım ister 🕯",metin:"Tutku göstergelerinin çoğu zayıflamış. Bu her ilişkide dönemsel olarak olur (stres, rutin, yorgunluk); önemli olan közün tamamen sönmeden fark edilmesi.",oneri:"Küçük başla: fiziksel yakınlığı gündelik hayata geri getir (sarılma, el tutma — beklenti olmadan). Tutku çoğu zaman büyük jestlerle değil, küçük temaslarla geri gelir."},
+    {min:0,baslik:"Tutku uykuda 🌑",metin:"Şu an tutku boyutu büyük ölçüde sessiz. Bu tek başına ilişkinin bittiği anlamına gelmez — ama görmezden gelinecek bir veri de değil.",oneri:"Kendine iki soru: (1) Bu sönüş ne zamandır sürüyor? (2) Geri istemeye istekli misin? İkinci sorunun cevabı evetse, bunu partnerinle konuşmak ilk adım."}
+  ]
+},
+{
+  id:"ask-tarzin",
+  baslik:"Aşk Tarzın Hangisi?",
+  aciklama:"12 soruda 6 aşk stilinden hangisinin sende baskın olduğunu keşfet.",
+  kaynak:"Lee'nin Aşk Renkleri kuramı (1973) ve Hendrick Aşk Tutumları Ölçeği (1986) çerçevesinden uyarlanmıştır.",
+  sure:"~3 dk", cevaplar:CEVAP5, tip:"stil",
+  stilAd:{eros:"Romantik (Eros)",ludus:"Oyuncu (Ludus)",storge:"Arkadaş-Sevgili (Storge)",pragma:"Akılcı (Pragma)",mania:"Fırtınalı (Mania)",agape:"Adayan (Agape)"},
+  sorular:[
+    {q:"İlk görüşte çekim benim için belirleyicidir.",stil:"eros"},
+    {q:"Aşkta yoğun romantizm ve derin duygu ararım.",stil:"eros"},
+    {q:"Aşkı fazla ciddiye almadan, hafif yaşamayı severim.",stil:"ludus"},
+    {q:"Tek bir kişiye bağlanmak bana zor gelir.",stil:"ludus"},
+    {q:"En iyi aşk, arkadaşlıktan doğandır.",stil:"storge"},
+    {q:"Güven, benim için heyecandan önce gelir.",stil:"storge"},
+    {q:"Partner seçerken mantıklı kriterlerim vardır (uyum, hedefler, hayat tarzı).",stil:"pragma"},
+    {q:"Aşk uzun vadeli bir ortaklıktır; sadece duyguyla yürümez.",stil:"pragma"},
+    {q:"Aşık olunca duygularım iniş çıkışlı ve çok yoğun olur.",stil:"mania"},
+    {q:"Karşılık göremediğimde dünyam kararır.",stil:"mania"},
+    {q:"Sevdiğimin mutluluğunu kendiminkinden önde tutarım.",stil:"agape"},
+    {q:"Aşkta vermek, almaktan daha doğal gelir.",stil:"agape"}
+  ],
+  profillerStil:{
+    eros:{baslik:"Romantik (Eros) 🌹",metin:"Senin için aşk; çekim, estetik ve yoğun duygudur. Eros stili, araştırmalarda ilişki doyumuyla en güçlü pozitif ilişki gösteren stillerden.",oneri:"Gücün tutkun; riskin, ilk yoğunluk düşünce 'aşk bitti' sanmak. Duygunun dalgalanması normaldir — dalganın dibinde karar verme."},
+    ludus:{baslik:"Oyuncu (Ludus) 🎭",metin:"Aşkı özgürlük ve eğlence alanı olarak yaşıyorsun; bağlanma baskısı seni kaçırır. Bu bir 'kusur' değil, bir stil — ama partnerin farklı stildeyse çarpışma kaçınılmaz.",oneri:"En kritik şey dürüstlük: ne arayıp ne aramadığını baştan söylemek, hem seni hem karşındakini korur."},
+    storge:{baslik:"Arkadaş-Sevgili (Storge) 🫂",metin:"Senin aşkın yavaş demlenir: önce güven, sonra sevgi. Araştırmalar bu stilin uzun ömürlü, sakin ve dayanıklı ilişkiler kurduğunu gösteriyor.",oneri:"Riskin: 'heyecan yok' diye seni hızlı tüketen fırtınalı tiplerle kendini kıyaslamak. Senin süper gücün istikrar — onu küçümseme."},
+    pragma:{baslik:"Akılcı (Pragma) 🧭",metin:"Aşkı kalbinle birlikte aklınla da seçersin: uyum, hedefler, hayat pratiği. Bu stil özellikle uzun vadeli kararlar söz konusu olduğunda güçlü bir pusula.",oneri:"Dikkat: kriter listesi bazen kalbin sesini bastırır. Ara sıra listeni kapatıp sadece 'yanındayken nasıl hissediyorum?' diye sor."},
+    mania:{baslik:"Fırtınalı (Mania) 🌪",metin:"Aşkın sende volümü hep yüksek: büyük mutluluklar, büyük kaygılar. Bu stil çoğu zaman kaygılı bağlanmayla el ele gider — sevgin gerçek, ama alarm sistemi de çok hassas.",oneri:"Duyguyu bastırma; şiddetini yönetmeyi öğren. 'Bağlanma Stilin' testini de çöz — bu fırtınanın kaynağını orada daha net göreceksin."},
+    agape:{baslik:"Adayan (Agape) 🕊",metin:"Vermek senin aşk dilin; fedakârlıkta zorlanmazsın. Bu, stillerin en cömerdi — ama karşılıksız kaldığında en çok yıpratanı.",oneri:"Şunu unutma: sürekli veren taraf olmak erdem değil, dengesizliktir. Senin ihtiyaçların da ilişkinin gündemine girmeyi hak ediyor."}
+  }
+},
+{
+  id:"kiskanclik",
+  baslik:"Kıskançlık Seviyen",
+  aciklama:"12 soruda kıskançlığının düşünce, duygu ve davranış haritasını çıkar.",
+  kaynak:"White'ın Romantik Kıskançlık Ölçeği (1981) çerçevesinden uyarlanmıştır (bilişsel/duygusal/davranışsal boyutlar).",
+  sure:"~3 dk", cevaplar:CEVAP5, tip:"toplam",
+  sorular:[
+    {q:"Onun eski sevgililerini düşünüp huzursuz olurum."},
+    {q:"Birine gülümsemesini bile içimden sorguladığım olur."},
+    {q:"Bana söylemediği şeyler olduğunu sık sık düşünürüm."},
+    {q:"Sosyal medyada kimleri beğendiğini zihnimde takip ederim."},
+    {q:"Başkasına ilgi gösterdiğinde midem düğümlenir."},
+    {q:"Kıskançlık hissi bazen beni benden alır."},
+    {q:"Onun dikkatini çeken kişilere karşı öfke duyarım."},
+    {q:"Kıskandığımda kendimi değersiz hissederim."},
+    {q:"Telefonunu kontrol etme isteği duyarım."},
+    {q:"Nerede ve kiminle olduğunu sık sık sorarım."},
+    {q:"Sosyal medya hesaplarını düzenli kolaçan ederim."},
+    {q:"Kıskançlık yüzünden tartışma çıkardığım olur."}
+  ],
+  profiller:[
+    {min:37,baslik:"Kıskançlık dümende 🌋",metin:"Düşünce, duygu ve davranış boyutlarının üçünde de kıskançlık yüksek çalışıyor. Bu seviye hem seni hem ilişkiyi yoruyor — ve araştırmalara göre kontrol davranışları (telefon kontrolü, sorgulama) güveni onarmaz, tam tersine erozyona uğratır.",oneri:"Kıskançlık çoğu zaman ilişkiden değil, değersizlik korkusundan beslenir. 'Bağlanma Stilin' testini çöz; tablo tanıdık gelirse bir uzmanla çalışmak bu döngüyü kırmanın en hızlı yolu."},
+    {min:25,baslik:"Alarm sık çalıyor 🔔",metin:"Kıskançlığın ara sıra değil, düzenli olarak devrede. Duygunun kendisi doğal; sorun, yalancı alarmlarla gerçek sinyalleri ayırt etmekte zorlanmak.",oneri:"Kıskançlık yükseldiğinde tek soru sor: 'Elimde davranışsal kanıt var mı, yoksa senaryo mu yazıyorum?' Kanıt yoksa duyguyu partnerine suçlama olmadan söyle: 'Şu durumda kıskançlık hissettim' — sorgulamaktan çok daha iyi çalışır."},
+    {min:13,baslik:"Sağlıklı doz 💛",metin:"Kıskançlığın var ama dümende değil — araştırmacıların 'bağın işareti' saydığı ılımlı bölgedesin. Ara sıra hissedip yönetebiliyorsun.",oneri:"Bu dengeyi koru: kıskançlık hissettiğinde bastırmak yerine kısaca ifade etmek ('bunu görünce bir şey hissettim') dozu düşük tutmanın en iyi yolu."},
+    {min:0,baslik:"Sakin liman 🌊",metin:"Kıskançlık senin ilişki deneyiminde neredeyse hiç yer kaplamıyor. Bu genelde güvenli bağlanma ve sağlam özgüvenin işareti.",oneri:"Tek kontrol sorusu: bu sakinlik güvenden mi, yoksa mesafeden mi geliyor? İlgisizlikten gelen 'kıskanmam' ile güvenden gelen 'kıskanmam' farklı şeylerdir — dürüst cevap sende."}
+  ]
+},
+{
+  id:"hizli-checkup",
+  baslik:"Hızlı Check-up",
+  aciklama:"7 soruda ilişki doyumunun anlık fotoğrafı — 90 saniyede.",
+  kaynak:"Hendrick'in İlişki Değerlendirme Ölçeği'nden (1988) uyarlanmıştır.",
+  sure:"~2 dk", cevaplar:CEVAP5, tip:"toplam",
+  sorular:[
+    {q:"Genel olarak bu ilişkiden memnunum."},
+    {q:"Bu ilişki beklentilerimi karşılıyor."},
+    {q:"Partnerim ihtiyaçlarımı iyi karşılıyor."},
+    {q:"Çevremde gördüğüm ilişkilere kıyasla bizimki iyi durumda."},
+    {q:"Bu ilişkiye başladığıma pişman değilim."},
+    {q:"Partnerimi seviyorum."},
+    {q:"İlişkimizde beni ciddi kaygılandıran sorunlar var.",ters:true}
+  ],
+  profiller:[
+    {min:22,baslik:"Yeşil bölge 🟢",metin:"Doyum göstergelerin yüksek: beklenti, ihtiyaç ve sevgi hatlarının üçü de çalışıyor. Bu kısa test derin analiz değil ama fotoğraf net — bugün itibarıyla iyi bir yerdesiniz.",oneri:"Fotoğrafı filme çevir: bu testi ayda bir çöz, puanın seyrini izle. Doyum düşüşleri erken yakalandığında kolay onarılır."},
+    {min:14,baslik:"Sarı bölge 🟡",metin:"İlişki ayakta ama bazı göstergeler kıpır kıpır: muhtemelen beklentiler ile gerçeklik arasında açılan bir makas var. Sarı bölge, ilişkilerin en yaygın ve en müdahaleye açık bölgesidir.",oneri:"En düşük puan verdiğin soruya bak — konuşulacak konu tam orada. Derinleşmek için 'İlişkiniz Ne Kadar Sağlam?' testine geç: hangi örüntünün puan düşürdüğünü gösterir."},
+    {min:0,baslik:"Kırmızı bölge 🔴",metin:"Doyum göstergelerinin çoğu düşük. Bu tek başına 'bitir' anlamına gelmez — ama 'böyle devam etmesin' anlamına kesin gelir.",oneri:"İki yol var: birlikte onarmak (bunu istemek için iki taraf da gerekli) ya da dürüst bir değerlendirme. Ciddi ve süreğen mutsuzlukta çift terapisi gerçekten işe yarayan bir araç — güçsüzlerin değil, ciddiye alanların tercihi."}
+  ]
+},
+{
+  id:"ask-tipi",
+  baslik:"Aşkınız Hangi Tip?",
+  aciklama:"12 soruda ilişkinizin üç bileşenini ölç, 8 aşk tipinden hangisi olduğunuzu gör.",
+  kaynak:"Sternberg'in Üçgen Aşk Kuramı'ndan (1986) uyarlanmıştır: yakınlık + tutku + bağlılık.",
+  sure:"~3 dk", cevaplar:CEVAP5, tip:"eksen3",
+  sorular:[
+    {q:"Ona her şeyimi anlatabilirim.",eksen:"yakinlik"},
+    {q:"Kendimi ona gerçekten yakın hissediyorum.",eksen:"yakinlik"},
+    {q:"Zor bir anımda ilk onu ararım.",eksen:"yakinlik"},
+    {q:"Beni gerçekten anladığını hissediyorum.",eksen:"yakinlik"},
+    {q:"Ona baktığımda hâlâ heyecanlanıyorum.",eksen:"tutku"},
+    {q:"Aramızdaki fiziksel çekim güçlü.",eksen:"tutku"},
+    {q:"Gün içinde onu sık sık düşünüyorum.",eksen:"tutku"},
+    {q:"Romantik anlarımız beni hâlâ titretiyor.",eksen:"tutku"},
+    {q:"Bu ilişkiyi uzun vadede sürdürme kararlılığım net.",eksen:"baglilik"},
+    {q:"Zor dönemlerde bile vazgeçmeyi düşünmüyorum.",eksen:"baglilik"},
+    {q:"Geleceğimi onunla planlıyorum.",eksen:"baglilik"},
+    {q:"Bu sevgiyi korumak için sorumluluk hissediyorum.",eksen:"baglilik"}
+  ],
+  profillerUc:{
+    "111":{baslik:"Tam Aşk 💎",metin:"Sternberg'in 'consummate love' dediği nadir kombinasyon: yakınlık, tutku ve bağlılığın üçü de yüksek. Kurama göre bu, aşkın en dolu hali — ve korunması kurulmasından zordur.",oneri:"Sternberg'in uyarısı net: tam aşk statik değildir, bileşenlerden biri ihmalle söner. Üç bileşene de düzenli küçük yatırımlar yap — sohbet (yakınlık), flört (tutku), plan (bağlılık)."},
+    "110":{baslik:"Romantik Aşk 🌹",metin:"Yakınlık ve tutku güçlü; bağlılık boyutu henüz aynı seviyede değil. Bu, ilişkilerin en heyecanlı evrelerinden — ve doğal olarak bir yol ayrımına gider: derinleşmek ya da buharlaşmak.",oneri:"Bağlılık kendiliğinden oluşmaz, konuşarak kurulur. 'Biz nereye gidiyoruz?' sorusundan kaçmayın — doğru zamanda sorulduğunda romantizmi bozmaz, büyütür."},
+    "101":{baslik:"Yoldaş Aşkı 🫂",metin:"Yakınlık ve bağlılık sağlam; tutku boyutu sakinlemiş. Uzun ilişkilerin en yaygın ve en dayanıklı tipi — ama tutkunun tamamen sönmesi kader değil.",oneri:"Tutku Ölçer testini çöz ve sonucuna göre hareket et: yenilik, ortak heyecan ve fiziksel yakınlık tutkuyu yoldaş aşkının içine geri taşıyabilir (Acevedo & Aron bunun mümkün olduğunu gösterdi)."},
+    "011":{baslik:"Yıldırım Aşkı ⚡",metin:"Tutku ve bağlılık yüksek ama yakınlık (birbirini gerçekten tanıma) geride. Sternberg buna 'fatuous love' der: hızlı yanan, temeli sonradan atılan aşk.",oneri:"Temeli şimdi at: 'Ona Sor: Sevgi Ölçer' testini birlikte oynayın — birbirinizin haritasını ne kadar taşıdığınızı görün ve eksikleri sohbete dönüştürün."},
+    "100":{baslik:"Arkadaşça Sevgi 🤝",metin:"Yakınlık güçlü, tutku ve bağlılık sakin. Bu değerli bir bağ — ama romantik ilişki beklentisiyle yaşanıyorsa taraflardan birinde eksiklik hissi birikebilir.",oneri:"Dürüst soru: bu ilişkiden ne bekliyorsun? Cevabın 'daha fazlası' ise bunu şimdi konuşmak, yıllar sonra konuşmaktan çok daha az acıtır."},
+    "010":{baslik:"Tutulma 🔥",metin:"Tutku tek başına sahnede: yoğun çekim var, derin tanıma ve bağlılık henüz yok. Sternberg buna 'infatuation' der — her büyük aşkın başlangıcı böyledir ama her tutulma büyük aşka dönüşmez.",oneri:"Keyfini çıkar ama kararları tutkunun zirvesinde verme. Tanıma arttıkça (yakınlık büyüdükçe) bu ateşin neye dönüştüğünü o zaman görürsün."},
+    "001":{baslik:"Kararlı Bağ 🧭",metin:"Bağlılık yüksek ama yakınlık ve tutku düşük — Sternberg'in 'empty love' dediği durum. Uzun ilişkilerde bir dönem böyle hissedilebilir; kalıcılaşması ise konuşulması gereken bir sinyal.",oneri:"Bağlılığın varlığı büyük bir avantaj: iskelet sağlam, içi yeniden doldurulabilir. Küçük başla — haftada bir gerçek sohbet (telefonsuz 30 dakika) yakınlığı geri inşa etmenin ilk tuğlası."},
+    "000":{baslik:"Henüz Tanımsız 🌫",metin:"Üç bileşen de şu an düşük görünüyor. Bu çok yeni bir ilişkinin doğal hali olabilir — ya da uzun süredir devam eden bir uzaklaşmanın fotoğrafı.",oneri:"Hangisi olduğunu süre söyler: ilişki yeniyse zaman tanı ve testi bir ay sonra tekrarla; yıllanmış bir ilişkiyse bu tablo, kendine dürüst sorular sormak için bir davet."}
+  }
 }
 ];
 
@@ -516,6 +653,22 @@ function bitir(){
     document.getElementById("s-puan").textContent="";
     profil=t.profillerYuzde.find(p=>yuzde>=p.min);
     halkaCiz(yuzde,"SEVGİ ÖLÇER");
+  }else if(t.tip==="stil"){
+    const S={},N={};
+    t.sorular.forEach((s,i)=>{S[s.stil]=(S[s.stil]||0)+puanlar[i];N[s.stil]=(N[s.stil]||0)+4;});
+    let baskin=null;Object.keys(S).forEach(k=>{if(baskin===null||S[k]>S[baskin])baskin=k;});
+    profil=t.profillerStil[baskin];
+    document.getElementById("halkaAlan").style.display="none";
+    eksenCiz(Object.keys(S).map(k=>({ad:t.stilAd[k],yuzde:Math.round(S[k]/N[k]*100)})).sort((a,b)=>b.yuzde-a.yuzde));
+    document.getElementById("s-puan").textContent="";
+  }else if(t.tip==="eksen3"){
+    const E={yakinlik:[0,0],tutku:[0,0],baglilik:[0,0]};
+    t.sorular.forEach((s,i)=>{E[s.eksen][0]+=puanlar[i];E[s.eksen][1]+=4;});
+    const yz=k=>Math.round(E[k][0]/E[k][1]*100);
+    profil=t.profillerUc[(yz("yakinlik")>=60?"1":"0")+(yz("tutku")>=60?"1":"0")+(yz("baglilik")>=60?"1":"0")];
+    document.getElementById("halkaAlan").style.display="none";
+    eksenCiz([{ad:"Yakınlık",yuzde:yz("yakinlik")},{ad:"Tutku",yuzde:yz("tutku")},{ad:"Bağlılık",yuzde:yz("baglilik")}]);
+    document.getElementById("s-puan").textContent="";
   }else if(t.tip==="eksen2"){
     let kaygi=0,kacinma=0,nK=0,nC=0;
     t.sorular.forEach((s,i)=>{s.eksen==="kaygi"?(kaygi+=puanlar[i],nK++):(kacinma+=puanlar[i],nC++);});

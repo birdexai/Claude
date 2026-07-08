@@ -3,125 +3,193 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
 <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#B3446C">
+<meta name="theme-color" content="#0E0614">
 <link rel="apple-touch-icon" href="/icon-192.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Kalbine Sor">
-<title>Kalbine Sor — AI İlişki Koçun</title>
-<meta name="description" content="Ona ne mesaj atacağını bilemediğin anlar için: yapay zekâ destekli ilişki koçun. Yargısız dinler, birlikte düşünür, mesajını birlikte yazar.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,700;1,500&family=Nunito+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<title>Kalbine Sor — Seviyor mu? Tahmin etme, testini çöz</title>
+<meta name="description" content="Gerçek psikoloji araştırmalarından uyarlanmış ilişki testleri. Seviyor mu? Ona Sor: Sevgi Ölçer. Ücretsiz, kayıtsız, 4 dakika.">
 <style>
   :root{
-    --gul:#B3446C; --erik:#3B1F33; --krem:#FAF5F0; --amber:#E0A458; --pudra:#F2DCE3;
-    --radius:18px;
+    --zemin:#0E0614; --kart:#1D0E22; --kart2:#261230; --cam:rgba(38,18,48,.72);
+    --cizgi:#3B1C44; --cizgi2:#5C2C63;
+    --murekkep:#FBF1F7; --soluk:#CBA6C4; --sonuk:#8F6590;
+    --gul:#FF5C8A; --gul2:#FF9AB8; --lila:#C7A5FF; --altin:#FFD98A;
+    --grad:linear-gradient(120deg,#FF5C8A,#FFB37C 45%,#C7A5FF);
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Nunito Sans',-apple-system,Segoe UI,Arial,sans-serif;background:var(--krem);color:var(--erik);line-height:1.6}
-  h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.2}
-  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
-  header{padding:18px 0}
+  html{background:var(--zemin);scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:var(--zemin);color:var(--murekkep);line-height:1.65;overflow-x:hidden}
+  #gokyuzu{position:fixed;inset:0;z-index:0;pointer-events:none}
+  .aurora{position:fixed;z-index:0;pointer-events:none;filter:blur(70px);opacity:.55;border-radius:50%}
+  .aurora.a1{width:70vmax;height:55vmax;top:-25vmax;right:-20vmax;background:radial-gradient(closest-side,rgba(255,92,138,.28),transparent)}
+  .aurora.a2{width:60vmax;height:60vmax;bottom:-28vmax;left:-22vmax;background:radial-gradient(closest-side,rgba(151,113,255,.22),transparent)}
+  @media (prefers-reduced-motion: no-preference){
+    .aurora.a1{animation:sal1 28s ease-in-out infinite alternate}
+    .aurora.a2{animation:sal2 36s ease-in-out infinite alternate}
+    @keyframes sal1{to{transform:translate(-9vmax,7vmax) scale(1.15)}}
+    @keyframes sal2{to{transform:translate(8vmax,-6vmax) scale(1.12)}}
+  }
+  .wrap{position:relative;z-index:2;max-width:1020px;margin:0 auto;padding:0 22px}
+  header{padding:20px 0}
   .nav{display:flex;align-items:center;justify-content:space-between}
-  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:700;font-size:1.25rem;color:var(--erik);text-decoration:none}
-  .brand svg{width:38px;height:38px}
-  .btn{display:inline-block;background:var(--gul);color:#fff;padding:14px 26px;border-radius:999px;text-decoration:none;font-weight:800;border:none;font-size:1rem;cursor:pointer;transition:transform .15s}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--murekkep)}
+  .brand svg{width:40px;height:40px;filter:drop-shadow(0 5px 18px rgba(255,92,138,.55))}
+  @media (prefers-reduced-motion: no-preference){
+    .kalp-atis{animation:atis 1.8s ease-in-out infinite;transform-origin:center}
+    @keyframes atis{0%,100%{transform:scale(1)}12%{transform:scale(1.09)}24%{transform:scale(1)}36%{transform:scale(1.05)}48%{transform:scale(1)}}
+  }
+  .brand b{font-family:Georgia,serif;font-style:italic;font-weight:500;font-size:1.35rem}
+  .btn{display:inline-block;background:var(--grad);background-size:170% 100%;color:#2A0E1C;padding:15px 30px;border-radius:999px;border:none;
+    font-size:1rem;font-weight:800;cursor:pointer;text-align:center;text-decoration:none;font-family:inherit;
+    transition:transform .12s,box-shadow .2s,background-position .5s;box-shadow:0 8px 28px rgba(255,92,138,.32)}
+  .btn:hover{box-shadow:0 10px 38px rgba(255,92,138,.5);background-position:90% 0}
   .btn:active{transform:scale(.97)}
-  .btn.ghost{background:transparent;color:var(--gul);border:2px solid var(--gul);padding:12px 24px}
-  .hero{padding:36px 0 20px;display:grid;gap:28px}
-  .hero h1{font-size:clamp(2rem,6vw,3.1rem)}
-  .hero h1 em{color:var(--gul);font-style:italic}
-  .hero p.lead{font-size:1.12rem;max-width:34em}
-  .cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-  .micro{font-size:.82rem;opacity:.75}
-  /* Telefon mockup */
-  .phone{background:#fff;border:1px solid #eadfe4;border-radius:28px;box-shadow:0 18px 50px rgba(59,31,51,.12);padding:18px;max-width:360px;margin:0 auto;width:100%}
-  .bubble{padding:12px 15px;border-radius:16px;margin:9px 0;max-width:85%;font-size:.95rem}
-  .bubble.user{background:var(--gul);color:#fff;margin-left:auto;border-bottom-right-radius:4px}
-  .bubble.coach{background:var(--pudra);border-bottom-left-radius:4px}
-  .bubble .tag{display:block;font-size:.7rem;opacity:.65;margin-bottom:3px}
-  section{padding:44px 0}
-  section h2{font-size:clamp(1.5rem,4.5vw,2.1rem);margin-bottom:22px}
-  .cards{display:grid;gap:16px}
-  .card{background:#fff;border:1px solid #eadfe4;border-radius:var(--radius);padding:22px}
-  .card .num{display:inline-flex;width:34px;height:34px;border-radius:50%;background:var(--gul);color:#fff;align-items:center;justify-content:center;font-weight:800;margin-bottom:10px}
-  .price-grid{display:grid;gap:16px}
-  .price{background:#fff;border:2px solid #eadfe4;border-radius:var(--radius);padding:24px;text-align:center;position:relative}
-  .price.featured{border-color:var(--gul)}
-  .price .rozet{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--amber);color:var(--erik);font-size:.75rem;font-weight:800;padding:3px 14px;border-radius:999px;white-space:nowrap}
-  .price h3{font-size:1.1rem;margin-bottom:6px}
-  .price .tl{font-size:2rem;font-weight:800;font-family:'Fraunces',serif;color:var(--gul)}
-  .price ul{list-style:none;margin:14px 0;font-size:.92rem}
-  .price li{padding:4px 0}
-  details{background:#fff;border:1px solid #eadfe4;border-radius:14px;padding:16px 18px;margin-bottom:10px}
-  summary{font-weight:800;cursor:pointer}
-  details p{margin-top:10px;font-size:.95rem}
-  form.early{background:#fff;border:1px solid #eadfe4;border-radius:var(--radius);padding:24px;display:grid;gap:12px;max-width:480px}
-  form.early input[type=text],form.early input[type=email]{padding:13px 15px;border:1.5px solid #d9c9d1;border-radius:12px;font-size:1rem;font-family:inherit}
-  form.early label.kvkk{display:flex;gap:8px;font-size:.8rem;align-items:flex-start}
-  .notice{background:var(--pudra);border-radius:14px;padding:16px 18px;font-size:.88rem}
-  footer{background:var(--erik);color:#e9dce4;padding:36px 0;margin-top:30px;font-size:.85rem}
-  footer a{color:#f2c9d8}
-  footer .cols{display:grid;gap:18px}
-  @media(min-width:760px){
-    .hero{grid-template-columns:1.1fr .9fr;align-items:center;padding:60px 0 30px}
-    .cards{grid-template-columns:repeat(3,1fr)}
-    .price-grid{grid-template-columns:repeat(3,1fr)}
+  .btn.ghost{background:none;box-shadow:none;color:var(--gul2);border:1.5px solid var(--cizgi2);padding:13px 26px}
+  .btn.ghost:hover{border-color:var(--gul)}
+  button:focus-visible,a:focus-visible{outline:2px solid var(--lila);outline-offset:3px;border-radius:999px}
+
+  /* hero */
+  .hero{display:grid;gap:40px;padding:52px 0 30px;align-items:center}
+  .etiket{display:flex;align-items:center;gap:10px;font-size:.68rem;font-weight:800;letter-spacing:.26em;color:var(--altin);margin-bottom:16px}
+  .etiket::after{content:"";width:70px;height:1px;background:linear-gradient(90deg,rgba(255,217,138,.5),transparent)}
+  .hero h1{font-family:Georgia,serif;font-weight:500;font-size:clamp(2.4rem,6.5vw,3.6rem);line-height:1.08;text-wrap:balance;margin-bottom:18px}
+  .hero h1 em{font-style:italic;background:linear-gradient(100deg,#FF5C8A,#FFD98A,#C7A5FF,#FF5C8A);background-size:280% 100%;
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  @media (prefers-reduced-motion: no-preference){
+    .hero h1 em{animation:parla 7s linear infinite}
+    @keyframes parla{to{background-position:280% 0}}
+  }
+  .hero .lead{color:var(--soluk);font-size:1.1rem;max-width:30em;margin-bottom:26px}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .micro{font-size:.8rem;color:var(--sonuk)}
+  /* hero halka görseli */
+  .halka-demo{position:relative;width:min(300px,72vw);margin:0 auto}
+  .halka-demo svg{transform:rotate(-90deg);filter:drop-shadow(0 0 28px rgba(255,92,138,.4));width:100%;height:auto}
+  .halka-demo .orta{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .halka-demo .yuzde{font-family:Georgia,serif;font-size:3.4rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+  .halka-demo .et{font-size:.62rem;letter-spacing:.28em;color:var(--sonuk);font-weight:800;margin-top:8px}
+
+  section{padding:56px 0}
+  h2.bolum{font-family:Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(1.7rem,4.5vw,2.3rem);margin-bottom:28px;text-wrap:balance}
+  .kartlar{display:grid;gap:18px}
+  .kart{background:var(--cam);backdrop-filter:blur(10px);border:1px solid var(--cizgi);border-radius:24px;padding:26px;transition:border-color .2s,box-shadow .25s}
+  .kart:hover{border-color:var(--cizgi2);box-shadow:0 14px 44px rgba(255,92,138,.12)}
+  .kart .num{display:inline-flex;width:38px;height:38px;border-radius:50%;background:var(--grad);color:#2A0E1C;align-items:center;justify-content:center;font-weight:900;margin-bottom:14px}
+  .kart h3{font-family:Georgia,serif;font-style:italic;font-weight:500;font-size:1.3rem;margin-bottom:8px}
+  .kart p{color:var(--soluk);font-size:.95rem}
+
+  .vitrin{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .tchip{font-size:.78rem;font-weight:700;padding:9px 16px;border-radius:99px;border:1px solid var(--cizgi2);color:var(--soluk)}
+  .tchip.o{background:var(--grad);color:#2A0E1C;border:none}
+
+  .fiyatlar{display:grid;gap:20px}
+  .fiyat{position:relative;background:var(--cam);border:1px solid var(--cizgi);border-radius:26px;padding:30px 26px;text-align:center}
+  .fiyat.one{border:1.5px solid transparent;background:linear-gradient(var(--kart2),var(--kart)) padding-box,linear-gradient(120deg,#FF5C8A,#FFD98A,#C7A5FF) border-box;box-shadow:0 16px 50px rgba(255,92,138,.2)}
+  .fiyat .rozet{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(120deg,#FFD98A,#FF9AB8);color:#2A0E1C;font-size:.64rem;font-weight:900;letter-spacing:.12em;padding:4px 15px;border-radius:99px;white-space:nowrap}
+  .fiyat h3{font-family:Georgia,serif;font-style:italic;font-weight:500;font-size:1.25rem;margin-bottom:8px}
+  .fiyat .tl{font-size:2.3rem;font-weight:700;font-family:Georgia,serif;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .fiyat ul{list-style:none;margin:18px 0;font-size:.92rem;color:var(--soluk)}
+  .fiyat li{padding:5px 0}
+  .fiyat .btn{display:block}
+
+  details{background:var(--cam);border:1px solid var(--cizgi);border-radius:16px;padding:18px 20px;margin-bottom:12px}
+  summary{font-weight:700;cursor:pointer;color:var(--murekkep)}
+  details p{margin-top:12px;font-size:.94rem;color:var(--soluk)}
+
+  form.erken{background:var(--cam);border:1.5px solid transparent;border-radius:26px;padding:28px;display:grid;gap:14px;max-width:500px;
+    background:linear-gradient(var(--kart),var(--kart)) padding-box,linear-gradient(120deg,#FF5C8A,#FFD98A,#C7A5FF) border-box}
+  form.erken input[type=text],form.erken input[type=email]{padding:14px 16px;background:rgba(14,6,20,.55);border:1.5px solid var(--cizgi);
+    border-radius:14px;font-size:1rem;font-family:inherit;color:var(--murekkep)}
+  form.erken input::placeholder{color:var(--sonuk)}
+  form.erken input:focus{outline:none;border-color:var(--gul)}
+  form.erken label.kvkk{display:flex;gap:9px;font-size:.78rem;color:var(--sonuk);align-items:flex-start}
+  form.erken a{color:var(--gul2)}
+
+  .notis{background:var(--kart2);border:1px solid var(--cizgi2);border-radius:16px;padding:18px 20px;font-size:.88rem;color:var(--soluk)}
+  .notis strong{color:var(--altin)}
+  footer{position:relative;z-index:2;border-top:1px solid var(--cizgi);padding:44px 0;margin-top:40px;font-size:.85rem;color:var(--soluk)}
+  footer a{color:var(--gul2)}
+  footer .cols{display:grid;gap:22px}
+  footer b{font-family:Georgia,serif;font-style:italic;font-weight:500;font-size:1.15rem;color:var(--murekkep)}
+  @media(min-width:800px){
+    .hero{grid-template-columns:1.15fr .85fr;padding:70px 0 40px}
+    .kartlar{grid-template-columns:repeat(3,1fr)}
+    .fiyatlar{grid-template-columns:repeat(3,1fr)}
     footer .cols{grid-template-columns:2fr 1fr 1fr}
   }
 </style>
 </head>
 <body>
+<canvas id="gokyuzu" aria-hidden="true"></canvas>
+<div class="aurora a1" aria-hidden="true"></div>
+<div class="aurora a2" aria-hidden="true"></div>
 
 <header class="wrap">
   <nav class="nav">
     <a class="brand" href="#">
-      <svg viewBox="0 0 200 200"><rect width="200" height="200" rx="45" fill="#B3446C"/><path d="M100 152C96 148 52 116 46 86 42 64 56 48 76 48c12 0 21 7 24 14 3-7 12-14 24-14 20 0 34 16 30 38-6 30-50 62-54 66Z" fill="#FAF5F0"/><path d="M100 152l-12 18 18-14Z" fill="#FAF5F0"/><circle cx="78" cy="92" r="7" fill="#B3446C"/><circle cx="100" cy="92" r="7" fill="#B3446C"/><circle cx="122" cy="92" r="7" fill="#B3446C"/></svg>
-      kalbine sor
+      <svg viewBox="0 0 200 200" class="kalp-atis"><rect width="200" height="200" rx="45" fill="#FF5C8A"/><path d="M100 152C96 148 52 116 46 86 42 64 56 48 76 48c12 0 21 7 24 14 3-7 12-14 24-14 20 0 34 16 30 38-6 30-50 62-54 66Z" fill="#0E0614"/><circle cx="78" cy="92" r="7" fill="#FF5C8A"/><circle cx="100" cy="92" r="7" fill="#FF5C8A"/><circle cx="122" cy="92" r="7" fill="#FF5C8A"/></svg>
+      <b>kalbine sor</b>
     </a>
-    <a class="btn ghost" href="#erken">Erken Erişim</a>
+    <a class="btn ghost" href="./test/index.html">Testleri Gör</a>
   </nav>
 </header>
 
 <main>
   <div class="wrap hero">
     <div>
-      <h1>Seviyor mu? Tahmin etme, <em>kalbine sor.</em></h1>
-      <p class="lead">Gerçek psikoloji araştırmalarından uyarlanmış ilişki testleri — internetteki uydurma testlerden değil. Sonucunu al, istersen AI koçunla konuş.</p>
-      <div class="cta-row" style="margin-top:20px">
+      <p class="etiket">ARAŞTIRMA TEMELLİ İLİŞKİ TESTLERİ</p>
+      <h1>Seviyor mu?<br>Tahmin etme, <em>kalbine sor.</em></h1>
+      <p class="lead">Gerçek psikoloji deneylerinden uyarlanmış testler — internetteki uydurma testlerden değil. Soruları ona sor, cevabını işaretle, sevgi yüzdesini gör.</p>
+      <div class="cta-row">
         <a class="btn" href="./test/index.html">Ücretsiz Testi Çöz</a>
-        <span class="micro">24 soru · ~4 dakika · kayıt istemez</span>
+        <span class="micro">Kayıt yok · kart yok · ~4 dakika</span>
       </div>
-      <p class="micro" style="margin-top:14px">⚠️ Kalbine Sor bir yapay zekâ sohbet uygulamasıdır; psikolojik danışmanlık veya sağlık hizmeti değildir.</p>
+      <p class="micro" style="margin-top:16px">Testler eğlence ve öz-farkındalık amaçlıdır; psikolojik tanı aracı değildir.</p>
     </div>
-    <div class="phone" aria-hidden="true">
-      <div class="bubble user">3 gündür mesajlarıma tek kelime cevap veriyor. Sence soğudu mu benden?</div>
-      <div class="bubble coach"><span class="tag">kalbine sor</span>Bu belirsizlik gerçekten yorucu, hemen "soğudu" demeden önce birlikte bakalım: son normal konuşmanız ne zamandı, arada ne değişti?</div>
-      <div class="bubble user">Pazar günü tartıştık aslında…</div>
-      <div class="bubble coach"><span class="tag">kalbine sor</span>O zaman elimizde bir başlangıç noktası var 💛 İstersen ona küslüğü büyütmeden kapı aralayan kısa bir mesaj taslağı yazalım — sen son halini verirsin.</div>
+    <div class="halka-demo" aria-hidden="true">
+      <svg viewBox="0 0 196 196">
+        <defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#FF5C8A"/><stop offset="55%" stop-color="#FFB37C"/><stop offset="100%" stop-color="#C7A5FF"/>
+        </linearGradient></defs>
+        <circle cx="98" cy="98" r="84" fill="none" stroke="#261230" stroke-width="11"/>
+        <circle cx="98" cy="98" r="84" fill="none" stroke="url(#hg)" stroke-width="11" stroke-linecap="round"
+          stroke-dasharray="527.79" stroke-dashoffset="116"/>
+      </svg>
+      <div class="orta"><span class="yuzde">%78</span><span class="et">SEVGİ ÖLÇER</span></div>
     </div>
   </div>
 
   <section class="wrap" id="nasil">
-    <h2>Nasıl çalışır?</h2>
-    <div class="cards">
-      <div class="card"><span class="num">1</span><h3>Testi çöz</h3><p>Rubin'in Sevgi Ölçeği, bağlanma kuramı ve Gottman araştırmalarından uyarlanmış testler — kaynağı her testin altında yazar.</p></div>
-      <div class="card"><span class="num">2</span><h3>Sonucunu gör</h3><p>Puanın, profilin ve "şimdi ne yapabilirsin" önerilerin — kesin hüküm yok, gerçekçi yorum var.</p></div>
-      <div class="card"><span class="num">3</span><h3>Onunla oyna</h3><p>"Ona Sor" testlerinde soruları partnerine sorarsın, cevabına göre işaretlersin — sonunda sevgi yüzdesi: %78 gibi. Test aynı zamanda bir çift oyunu.</p></div>
+    <h2 class="bolum">Nasıl çalışır?</h2>
+    <div class="kartlar">
+      <div class="kart"><span class="num">1</span><h3>Testi seç</h3><p>Rubin'in Sevgi Ölçeği, Aron'un 36 Soru deneyi, Gottman'ın 40 yıllık çift araştırmaları — kaynağı her testin üzerinde yazar.</p></div>
+      <div class="kart"><span class="num">2</span><h3>Onunla oyna</h3><p>"Ona Sor" testlerinde soruları partnerine sorarsın, cevabına göre işaretlersin. Test aynı zamanda bir çift oyunu.</p></div>
+      <div class="kart"><span class="num">3</span><h3>Yüzdeni gör</h3><p>Sevgi Ölçer halkan dolar: %78 gibi. Altında "seni tanıyor mu" ve "duygusal yatırım" kırılımları — kesin hüküm yok, gerçekçi yorum var.</p></div>
+    </div>
+    <div class="vitrin">
+      <span class="tchip o">💬 Ona Sor: Sevgi Ölçer</span>
+      <span class="tchip o">💬 Beni Ne Kadar Tanıyor?</span>
+      <span class="tchip">Seviyor mu?</span>
+      <span class="tchip">Bağlanma Stilin</span>
+      <span class="tchip">Aşkınız Hangi Tip?</span>
+      <span class="tchip">Tutku Ölçer</span>
+      <span class="tchip">Kıskançlık Seviyen</span>
+      <span class="tchip">+ her hafta yenisi</span>
     </div>
   </section>
 
   <section class="wrap" id="fiyat">
-    <h2>Fiyatlar</h2>
-    <div class="price-grid">
-      <div class="price">
+    <h2 class="bolum">Fiyatlar</h2>
+    <div class="fiyatlar">
+      <div class="fiyat">
         <h3>Testler</h3>
         <div class="tl">Ücretsiz</div>
-        <ul><li>Tüm temel testler</li><li>Puanın + profilin + öneriler</li><li>Kayıt ve kart istemez</li></ul>
+        <ul><li>Tüm temel testler</li><li>Yüzde + profil + öneriler</li><li>Kayıt ve kart istemez</li></ul>
         <a class="btn ghost" href="./test/index.html">Testi Çöz</a>
       </div>
-      <div class="price featured">
+      <div class="fiyat one">
         <span class="rozet">EN ÇOK TERCİH EDİLEN</span>
         <h3>Detaylı Sonuç Raporu</h3>
         <div class="tl">49 TL</div>
@@ -129,41 +197,41 @@
         <!-- OPERASYON: Shopier ürün linkini buraya ekle -->
         <a class="btn" href="./test/index.html" data-shopier="RAPOR">Önce Testi Çöz</a>
       </div>
-      <div class="price">
+      <div class="fiyat">
         <h3>Tüm Erişim</h3>
-        <div class="tl">199 TL<span style="font-size:.9rem;font-weight:400"> · tek seferlik</span></div>
-        <ul><li>Tüm detaylı raporlar</li><li>"Ona Sor: Sevgi Ölçer" tam sürüm</li><li>Çift uyum testleri</li><li>Abonelik yok, ömür boyu</li></ul>
+        <div class="tl">199 TL<span style="font-size:.85rem;color:var(--sonuk)"> tek seferlik</span></div>
+        <ul><li>Tüm detaylı raporlar</li><li>"Ona Sor" tam sürüm</li><li>Çift uyum testleri</li><li>Abonelik yok, ömür boyu</li></ul>
         <!-- OPERASYON: Shopier ürün linkini buraya ekle -->
         <a class="btn ghost" href="./test/index.html" data-shopier="TUM_ERISIM">Önce Testi Çöz</a>
       </div>
     </div>
-    <p class="micro" style="margin-top:12px">Ödemeler Shopier güvencesiyle alınır; kart bilgin bize hiç ulaşmaz. Fiyatlara KDV dahildir. Dijital içerik hizmetlerinde ifa başladıktan sonra cayma hakkı istisnaları uygulanabilir — ayrıntı için Mesafeli Satış Sözleşmesi'ne bak.</p>
+    <p class="micro" style="margin-top:14px">Ödemeler Shopier güvencesiyle alınır; kart bilgin bize hiç ulaşmaz. Fiyatlara KDV dahildir. Dijital içerikte cayma hakkı istisnaları için Mesafeli Satış Sözleşmesi'ne bak.</p>
   </section>
 
   <section class="wrap" id="guven">
-    <h2>Sık sorulanlar</h2>
-    <details><summary>Bu bir terapi mi?</summary><p>Hayır. Kalbine Sor, yapay zekâ destekli bir sohbet ve öz-farkındalık uygulamasıdır; psikolojik danışmanlık, terapi veya sağlık hizmeti değildir ve bunların yerine geçmez. Zor bir dönemden geçiyorsan bir ruh sağlığı uzmanına başvurmanı destekleriz — uygulama içinde yönlendirme kaynakları da var.</p></details>
-    <details><summary>Testler gerçekten bilimsel mi?</summary><p>Testlerimiz yayımlanmış psikoloji araştırmalarından uyarlanır — Rubin'in Sevgi Ölçeği (1970), Aron'un 36 Soru deneyi (1997), Gottman'ın 40 yıllık çift araştırmaları gibi. Kaynağı her testin altında açıkça yazar. Yapay zekâ uydurması ya da internetten kopyalanmış sorular değildir; ama tanı aracı da değildir — öz-farkındalık ve eğlence amaçlıdır.</p></details>
-    <details><summary>Yazdıklarım güvende mi?</summary><p>Sohbetlerin şifreli bağlantıyla iletilir, üçüncü kişilerle paylaşılmaz ve reklam hedeflemesi için kullanılmaz. Dilediğin an hesabını ve tüm verilerini sildirebilirsin. Ayrıntılar KVKK Aydınlatma Metni'nde.</p></details>
-    <details><summary>Param boşa gider mi?</summary><p>İlk sohbet ücretsiz — beğenmezsen hiç ödeme yapmazsın. Paket aldıktan sonra teknik bir sorun yaşarsan destek hattımızdan (WhatsApp) ulaş, çözemezsek iade ederiz.</p></details>
-    <details><summary>Geleceğimi söyler mi? Fal bakar mı?</summary><p>Hayır. Kalbine Sor fal bakmaz, gelecek okumaz, "kesin dönecek" gibi vaatlerde bulunmaz. Sana bugün elindeki durumla en sağlıklı adımı atmanda eşlik eder.</p></details>
+    <h2 class="bolum">Sık sorulanlar</h2>
+    <details><summary>Testler gerçekten bilimsel mi?</summary><p>Testlerimiz yayımlanmış psikoloji araştırmalarından uyarlanır — Rubin'in Sevgi Ölçeği (1970), Aron'un 36 Soru deneyi (1997), Sternberg'in Üçgen Aşk Kuramı (1986), Gottman'ın çift araştırmaları gibi. Kaynak her testin üzerinde açıkça yazar. Ama tanı aracı değildir — öz-farkındalık ve eğlence amaçlıdır.</p></details>
+    <details><summary>Bu bir terapi mi?</summary><p>Hayır. Kalbine Sor bir test ve öz-farkındalık uygulamasıdır; psikolojik danışmanlık, terapi veya sağlık hizmeti değildir ve bunların yerine geçmez. Zor bir dönemdeysen bir ruh sağlığı uzmanına başvurmanı destekleriz.</p></details>
+    <details><summary>Yazdıklarım güvende mi?</summary><p>Cevapların telefonunda kalır; sohbet/cevap içeriğin üçüncü kişilerle paylaşılmaz, reklam hedeflemesi için kullanılmaz. Ayrıntılar KVKK Aydınlatma Metni'nde.</p></details>
+    <details><summary>Param boşa gider mi?</summary><p>Testler zaten ücretsiz — beğenmezsen hiç ödeme yapmazsın. Rapor aldıktan sonra teknik sorun yaşarsan WhatsApp destek hattından ulaş; çözemezsek iade ederiz.</p></details>
+    <details><summary>Fal bakıyor musunuz?</summary><p>Hayır. Kalbine Sor fal bakmaz, gelecek okumaz, "kesin dönecek" demez. Bugün elindeki davranış verisiyle en sağlıklı yorumu yapmana eşlik eder.</p></details>
   </section>
 
   <section class="wrap" id="erken">
-    <h2>Erken erişim listesine katıl</h2>
-    <p style="margin-bottom:16px">Uygulama çok yakında açılıyor. İlk kullanıcılara <strong>Sohbet Paketi %50 indirimli</strong>.</p>
-    <!-- OPERASYON: form endpoint'i (Formspree/Google Form/Tally) oluşturup action'a yaz -->
-    <form class="early" action="FORM_ENDPOINT_BURAYA" method="POST">
+    <h2 class="bolum">Erken erişim listesine katıl</h2>
+    <p style="color:var(--soluk);margin-bottom:20px">Yeni testler ve <strong style="color:var(--altin)">ilk kullanıcılara %50 rapor indirimi</strong> önce listeye gider.</p>
+    <!-- OPERASYON: form endpoint'i (Formspree/Tally) oluşturup action'a yaz -->
+    <form class="erken" action="FORM_ENDPOINT_BURAYA" method="POST">
       <input type="text" name="isim" placeholder="Adın" required>
       <input type="email" name="eposta" placeholder="E-posta adresin" required>
-      <label class="kvkk"><input type="checkbox" required> <span>Erken erişim duyurusu için e-posta adresimin işlenmesine ilişkin <a href="#kvkk">KVKK Aydınlatma Metni</a>'ni okudum; ticari elektronik ileti almayı kabul ediyorum.</span></label>
-      <button class="btn" type="submit">Listeye Katıl</button>
+      <label class="kvkk"><input type="checkbox" required> <span>Erken erişim duyurusu için e-postamın işlenmesine ilişkin <a href="#kvkk">KVKK Aydınlatma Metni</a>'ni okudum; ticari elektronik ileti almayı kabul ediyorum.</span></label>
+      <button class="btn" type="submit">Listeye Katıl ✨</button>
     </form>
   </section>
 
   <section class="wrap">
-    <div class="notice" id="kriz">
-      <strong>Önemli:</strong> Sen ya da bir yakının şiddet görüyorsa veya kendine zarar verme düşüncelerin varsa lütfen bekleme: <strong>112 Acil</strong> · <strong>ALO 183</strong> Sosyal Destek Hattı · <strong>KADES</strong> uygulaması. Kalbine Sor bu durumlarda profesyonel yardımın yerini tutamaz.
+    <div class="notis" id="kriz">
+      <strong>Önemli:</strong> Sen ya da bir yakının şiddet görüyorsa veya kendine zarar verme düşüncelerin varsa lütfen bekleme: <strong>112 Acil</strong> · <strong>ALO 183</strong> · <strong>KADES</strong> uygulaması. Hiçbir test, profesyonel yardımın yerini tutamaz.
     </div>
   </section>
 </main>
@@ -171,29 +239,50 @@
 <footer>
   <div class="wrap cols">
     <div>
-      <strong style="font-family:'Fraunces',serif;font-size:1.1rem">kalbine sor</strong>
-      <p style="margin-top:8px">Yapay zekâ destekli ilişki koçun. Psikolojik danışmanlık veya sağlık hizmeti değildir.</p>
-      <p style="margin-top:8px">Destek: <a href="https://wa.me/90XXXXXXXXXX">WhatsApp destek hattı</a> · destek@kalbinesor.com</p>
+      <b>kalbine sor</b>
+      <p style="margin-top:10px">Araştırma temelli ilişki testleri. Psikolojik danışmanlık veya sağlık hizmeti değildir.</p>
+      <p style="margin-top:10px">Destek: <a href="https://wa.me/90XXXXXXXXXX">WhatsApp destek hattı</a> · destek@kalbinesor.com</p>
     </div>
     <div>
-      <strong>Yasal</strong>
-      <p><a href="#" id="mesafeli">Mesafeli Satış Sözleşmesi</a><br>
-      <a href="#" id="onbilgi">Ön Bilgilendirme Formu</a><br>
+      <strong style="color:var(--murekkep)">Yasal</strong>
+      <p style="margin-top:8px"><a href="#">Mesafeli Satış Sözleşmesi</a><br>
+      <a href="#">Ön Bilgilendirme Formu</a><br>
       <a href="#kvkk">KVKK Aydınlatma Metni</a><br>
       <a href="#">Çerez Politikası</a></p>
-      <!-- OPERASYON: Bu metinler yayına alınmadan önce hazırlanmalı (şablonlar FIYATLANDIRMA-VE-PLAN.md'de) -->
     </div>
     <div>
-      <strong>Takip et</strong>
-      <p><a href="https://instagram.com/kalbinesor">Instagram @kalbinesor</a></p>
-      <p style="margin-top:8px;opacity:.7">© 2026 Kalbine Sor</p>
+      <strong style="color:var(--murekkep)">Takip et</strong>
+      <p style="margin-top:8px"><a href="https://instagram.com/kalbinesor">Instagram @kalbinesor</a></p>
+      <p style="margin-top:10px;color:var(--sonuk)">© 2026 Kalbine Sor</p>
     </div>
   </div>
 </footer>
 
-
 <script>
-if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js").catch(()=>{});}
+(function(){
+  const cv=document.getElementById("gokyuzu"),ctx=cv.getContext("2d");
+  const OK=matchMedia("(prefers-reduced-motion: no-preference)").matches;
+  let W,H,P=[];
+  function kur(){
+    const dpr=Math.min(devicePixelRatio||1,2);
+    W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;
+    cv.style.width=W+"px";cv.style.height=H+"px";ctx.setTransform(dpr,0,0,dpr,0,0);
+    P=[];for(let i=0;i<50;i++)P.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.4,f:Math.random()*6.28,h:Math.random()<.13,v:Math.random()*.16+.04});
+  }
+  function ciz(t){
+    ctx.clearRect(0,0,W,H);
+    P.forEach(p=>{
+      const a=.22+.42*Math.abs(Math.sin(t/1400+p.f));
+      if(p.h){ctx.globalAlpha=a*.8;ctx.font="9px serif";ctx.fillStyle="#FF8FB0";ctx.fillText("\u2665",p.x,p.y);}
+      else{ctx.globalAlpha=a;ctx.fillStyle="#E8D9F5";ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.28);ctx.fill();}
+      p.y-=p.v;if(p.y<-12){p.y=H+10;p.x=Math.random()*W;}
+    });
+    ctx.globalAlpha=1;
+  }
+  kur();addEventListener("resize",kur);
+  if(OK){(function d(t){ciz(t||0);requestAnimationFrame(d);})();}else ciz(0);
+})();
+if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js").catch(function(){});}
 </script>
 </body>
 </html>
