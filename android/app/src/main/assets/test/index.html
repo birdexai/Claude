@@ -212,76 +212,114 @@
 
 <script>
 // ============ TEST VERİLERİ ============
-// Şema: TEST-KATALOGU.md'de. Yeni test = bu diziye yeni nesne.
-const CEVAP5 = ["Hiç öyle değil","Pek değil","Bazen","Çoğunlukla","Tamamen öyle"];
-// "Ona Sor" formatı puanlı cevap setleri
-const BILGI = [
-  {t:"Anında ve tam bildi — üstüne detay bile ekledi 🎯",p:3},
-  {t:"Yaklaşık bildi; ana hattı doğruydu",p:2},
-  {t:"Yanlış bildi ama gerçekten düşünüp uğraştı",p:1},
-  {t:"'Ne bileyim ben' — geçiştirdi",p:0}];
-const TEPKI = [
-  {t:"Durup düşündü, içten ve dolu bir cevap verdi 💛",p:3},
-  {t:"Kısa ama samimi cevapladı",p:2},
-  {t:"Şakaya vurdu, konuyu yumuşatıp kaçtı",p:1},
-  {t:"Cevaplamadı ya da konuyu değiştirdi",p:0}];
-
+// TÜM testler şıklıdır: her soruda kendine özgü cevap şıkları, şık başına puan/stil.
 const TESTLER = [
 {
   id:"ona-sor-sevgi-olcer",
   baslik:"Ona Sor: Sevgi Ölçer",
-  aciklama:"Bu testte soruları ONA soracaksın. Cevaplarına ve tepkilerine göre işaretle — sonunda sevgi yüzdesi karşında.",
-  kaynak:"Aron'un ünlü 36 Soru deneyi (1997) ve Gottman'ın Sevgi Haritaları araştırmasından uyarlanmıştır.",
-  sure:"~10 dk · onunla birlikte", tip:"onasor",
-  yonerge:"Bu test tek başına çözülmez 😉 Soruları partnerine soracaksın — yüz yüze, telefonda ya da mesajla. Verdiği cevaba ve tepkisine göre dürüstçe işaretle: sonuç ancak senin dürüstlüğün kadar gerçek olur. Hazırsan başlayalım.",
+  aciklama:"12 soru. Soruyu ona sor, ŞIKLARI DA OKU — o seçsin, sen işaretle. Sonunda sevgi yüzdesi.",
+  kaynak:"Aron'un 36 Soru deneyi (1997), Gottman'ın çift araştırmaları ve Rusbult'un Yatırım Modeli'nden şıklı formata uyarlanmıştır.",
+  sure:"~8 dk · onunla birlikte", tip:"onasor",
+  yonerge:"Bu bir çift oyunu 😉 Her soruyu ona sesli sor ve ŞIKLARI DA OKU. O hangisini seçerse onu işaretle. Cevabını yönlendirme — bırak kendisi seçsin!",
   sorular:[
-    {q:"Isınma 🍽 Ona sor: 'Benim en sevdiğim yemek ne?'",eksen:"tanima",sec:BILGI},
-    {q:"Ona sor: 'Benim en yakın arkadaşım kim?'",eksen:"tanima",sec:BILGI},
-    {q:"Ona sor: 'Şu an hayatımdaki en büyük stres kaynağım ne?'",eksen:"tanima",sec:BILGI},
-    {q:"Ona sor: 'Benim en büyük hayalim ne?'",eksen:"tanima",sec:BILGI},
-    {q:"Ona sor: 'Beni bir anda neşelendiren şey nedir?'",eksen:"tanima",sec:BILGI},
-    {q:"Ona sor: 'En çok neyden korkarım?'",eksen:"tanima",sec:BILGI},
-    {q:"Ona sor: 'Geçen hafta beni üzen ya da yoran şey neydi?'",eksen:"tanima",sec:BILGI},
-    {q:"Ona sor: 'Benimle ilgili en sevdiğin üç şey ne?'",eksen:"yatirim",sec:TEPKI},
-    {q:"Ona sor: 'İlk tanıştığımız günden aklında ne kaldı?'",eksen:"yatirim",sec:TEPKI},
-    {q:"Ona sor: 'Benimle hayalini kurduğun bir şey var mı?'",eksen:"yatirim",sec:TEPKI},
-    {q:"Ona sor: 'Sence benim en güçlü yanım ne?'",eksen:"yatirim",sec:TEPKI},
-    {q:"Ona sor: 'Son zamanlarda bende seni endişelendiren bir şey oldu mu?'",eksen:"yatirim",sec:TEPKI},
-    {q:"Ona sor: 'Benim için bir günü mükemmel yapmak istesen ne yapardın?'",eksen:"yatirim",sec:TEPKI},
-    {q:"Ona sor: 'İkimizi tek kelimeyle anlatsan, o kelime ne olurdu?'",eksen:"yatirim",sec:TEPKI},
-    {q:"Final 💛 Ona sor: 'Beni neden seviyorsun?'",eksen:"yatirim",sec:TEPKI}
+    {q:"Ona sor: 'Kötü bir gün geçirdiğimi söylesem ilk ne yaparsın?'",eksen:"yatirim",sec:[
+      {t:"A) Her şeyi bırakır, yanına gelirim ya da ararım",p:3},
+      {t:"B) Önce dinlerim, sonra moralini düzeltirim",p:2},
+      {t:"C) Espriyle dağıtmaya çalışırım",p:1},
+      {t:"D) Rahat bırakırım, kendine gelirsin",p:0}]},
+    {q:"Ona sor: 'Beni tek kelimeyle anlatsan hangisi olurdu?'",eksen:"yakinlik",sec:[
+      {t:"A) Huzurum / evim",p:3},
+      {t:"B) Aşkım / heyecanım",p:2},
+      {t:"C) Eğlencem / kankam",p:1},
+      {t:"D) Bilmem ki… zor soru",p:0}]},
+    {q:"Ona sor: 'İlişkimizde en sevdiğin an türü hangisi?'",eksen:"yakinlik",sec:[
+      {t:"A) Baş başa derin sohbet ettiğimiz anlar",p:3},
+      {t:"B) Birlikte gülüp eğlendiğimiz anlar",p:2},
+      {t:"C) Arkadaş ortamında birlikte olmak",p:1},
+      {t:"D) Herkes kendi işindeyken aynı evde olmak",p:0}]},
+    {q:"Ona sor: 'Bir yıl sonrasını düşününce ben neredeyim?'",eksen:"yatirim",sec:[
+      {t:"A) Yanımda — planlarımın içindesin",p:3},
+      {t:"B) Büyük ihtimalle birlikteyiz",p:2},
+      {t:"C) Zaman gösterir",p:1},
+      {t:"D) O kadar ilerisini düşünmem",p:0}]},
+    {q:"Ona sor: 'Bir hafta görüşemesek en çok neyimi özlersin?'",eksen:"yakinlik",sec:[
+      {t:"A) Her şeyini — tek şey seçemem",p:3},
+      {t:"B) Sesini / kokunu / sarılmayı (somut bir şey söyledi)",p:2},
+      {t:"C) Beraber takılmayı",p:1},
+      {t:"D) Bir hafta çabuk geçer ya",p:0}]},
+    {q:"Ona sor: 'Ailene ve arkadaşlarına benden nasıl bahsediyorsun?'",eksen:"yatirim",sec:[
+      {t:"A) Övünerek — seni herkes biliyor",p:3},
+      {t:"B) Ara sıra anlatırım",p:2},
+      {t:"C) Soran olursa söylerim",p:1},
+      {t:"D) Pek bahsetmem, özelim özel",p:0}]},
+    {q:"Ona sor: 'Aramızda sorun olduğunda ilk dürtün ne olur?'",eksen:"yatirim",sec:[
+      {t:"A) Hemen konuşup çözmek",p:3},
+      {t:"B) Biraz sakinleşip sonra konuşmak",p:2},
+      {t:"C) Zamanın çözmesini beklemek",p:1},
+      {t:"D) Konuyu hiç açmamak",p:0}]},
+    {q:"Ona sor: 'Benim için rahatından vazgeçtiğin bir şey say desem?'",eksen:"yatirim",sec:[
+      {t:"A) Anında birkaç örnek sayarım",p:3},
+      {t:"B) Biraz düşünsem bulurum",p:2},
+      {t:"C) Genelde sen vazgeçiyorsun benim için 😅",p:1},
+      {t:"D) Vazgeçmek mi? Aklıma gelmiyor",p:0}]},
+    {q:"Ona sor: 'Beni en son ne zaman özledin?'",eksen:"yakinlik",sec:[
+      {t:"A) Bugün / dün",p:3},
+      {t:"B) Bu hafta içinde",p:2},
+      {t:"C) En son uzak kaldığımızda",p:1},
+      {t:"D) Yan yanayız zaten, özlemek mi?",p:0}]},
+    {q:"Ona sor: 'İlişkimiz için en büyük hayalin hangisine yakın?'",eksen:"yakinlik",sec:[
+      {t:"A) Birlikte yaşlanmak, yuva kurmak",p:3},
+      {t:"B) Birlikte gezmek, biriktirmek, yaşamak",p:2},
+      {t:"C) Böyle güzel devam etsin",p:1},
+      {t:"D) Hayal kurmayı sevmem",p:0}]},
+    {q:"Ona sor: 'Kavga etsek bile benden vazgeçmeni engelleyen ne?'",eksen:"yatirim",sec:[
+      {t:"A) Sen — sensiz olmuyor",p:3},
+      {t:"B) Yaşadıklarımız, verdiğimiz emek",p:2},
+      {t:"C) Birbirimize alışmışız",p:1},
+      {t:"D) Kim vazgeçtiğimi söyledi? 😏",p:0}]},
+    {q:"Son soru 😅 Ona sor: 'Dürüst ol, ilişkimize 10 üzerinden kaç verirsin?'",eksen:"yakinlik",sec:[
+      {t:"A) 9 - 10",p:3},
+      {t:"B) 7 - 8",p:2},
+      {t:"C) 5 - 6",p:1},
+      {t:"D) Cevap vermek istemedi",p:0}]}
   ],
   profillerYuzde:[
-    {min:80,baslik:"Güçlü sevgi tablosu 💛",metin:"Hem seni gerçekten tanıyor hem de sorulara verdiği tepkiler yüksek duygusal yatırım gösteriyor. Gottman'ın diliyle: senin 'sevgi haritanı' taşıyor — ve bu tesadüfen olmaz; dinleyerek, önemseyerek, zaman ayırarak olur.",oneri:"Bu sonucu ona göster: hem güzel bir an yaşarsınız hem de zorlandığı sorulardan tatlı bir sohbet çıkar. Testin en güzel yan etkisi zaten bu — oynarken yakınlaştınız (Aron'un deneyi tam olarak bunu kanıtlamıştı)."},
-    {min:60,baslik:"Seviyor ama haritan eksik",metin:"Tepkileri sıcak — duygusal yatırım orada. Ama seni tanıma tarafında boşluklar çıktı. Bu genelde sevgisizlik değil; dikkat eksikliği ya da ilişkinin henüz derinleşme fırsatı bulamamış olması.",oneri:"Bilemediği soruların cevaplarını ona sen anlat — ama sınav havasında değil, sohbet olarak. Gottman'a göre sevgi haritası çizilebilir bir şeydir: anlattıkça oluşur."},
-    {min:40,baslik:"Karışık tablo",metin:"Bazı sorularda parladı, çoğunda ya bilemedi ya da geçiştirdi. Tek test kesin hüküm vermez — yorgun ya da mesafeli bir gününe denk gelmiş olabilir. Ama bu tablo genelin yansımasıysa, ilişkide 'tanınmak ve önemsenmek' ihtiyacın tam karşılanmıyor olabilir.",oneri:"Birkaç hafta sonra testi tekrarla (geçmişin kaydediliyor). Bu arada net bir deneme yap: ona kendinle ilgili önemli bir şey anlat ve bir hafta sonra hatırlayıp hatırlamadığına bak."},
-    {min:0,baslik:"Zayıf sinyaller",metin:"Soruların çoğunda ya bilemedi ya da cevaplamaktan kaçındı. Bu sonuç 'seni sevmiyor' diye kesin hüküm değildir; ama araştırmaların sevgiyle ilişkilendirdiği iki temel şey — seni tanımak ve sorularına duygusal emek vermek — bu oyunda ortaya çıkmadı.",oneri:"Kendine sorman gereken soru şu: 'Bu ilişkide görülmek ve önemsenmek ihtiyacım karşılanıyor mu?' Cevabın hayırsa, bunu onunla açıkça konuşmayı hak ediyorsun."}
+    {min:80,baslik:"Güçlü sevgi tablosu 💛",metin:"Seçtiği şıklar tutarlı biçimde yüksek yatırım ve derin bağ anlatıyor: planlarında varsın, çevresinde varsın, zora düştüğünde konuşmayı seçiyor. Araştırmaların diliyle: hem bağlılık hem yakınlık sinyalleri güçlü.",oneri:"Sonucu ona göster — hem güzel bir an yaşarsınız hem de düşük puanlı tek tük şık varsa oradan tatlı bir sohbet çıkar. Bu oyunun asıl kazancı zaten o sohbet (Aron'un deneyi tam bunu kanıtladı)."},
+    {min:60,baslik:"Seviyor — ama bazı teller gevşek",metin:"Çoğu şıkta sıcak ve yatırımlı cevaplar verdi; birkaç alanda ise mesafeli seçimler var. Bu genelde sevgisizlik değil, o alanların hiç konuşulmamış olması.",oneri:"Düşük puanlı şıklara bak: hangi konudaydılar? O konuyu suçlamadan aç: 'Şu soruda verdiğin cevabı merak ettim…' — oyun bahane, sohbet gerçek."},
+    {min:40,baslik:"Karışık sinyaller",metin:"Cevapları bir sıcak bir mesafeli — tutarlı bir yatırım tablosu çizmedi. Tek oyun kesin hüküm vermez (utanmış, dalga geçmiş ya da yorgun olabilir); ama bu tablo genelin yansımasıysa, ilişkinin yönü konuşulmayı bekliyor.",oneri:"Birkaç hafta sonra tekrar oynayın. Bu arada net bir gözlem yap: sözleri mi davranışları mı daha sıcak? Araştırmalara göre ikisi çatışıyorsa davranışa inanılır."},
+    {min:0,baslik:"Zayıf sinyaller",metin:"Seçtiği şıkların çoğu düşük yatırım ucunda: gelecek planında belirsizlik, çevresine taşımama, sorundan kaçınma. Bu senin değerinle ilgili değil — onun bu ilişkiye şu an ne kadar koyduğuyla ilgili.",oneri:"Kendine sorman gereken soru: 'Bu tabloya rağmen kalıyorsam, neyi umut ediyorum?' O umudun somut bir karşılığı var mı — bunu dürüstçe tartmak, yüz oyundan değerli."}
   ]
 },
 {
   id:"beni-taniyor-mu",
-  baslik:"Beni Ne Kadar Tanıyor?",
-  aciklama:"10 soruyu ona sor, bilip bilmediğini işaretle — sevgi haritasının röntgeni.",
-  kaynak:"Gottman'ın Sevgi Haritaları araştırmasından uyarlanmıştır: partnerinin iç dünyasını bilmek, uzun ömürlü ilişkilerin ortak özelliği.",
-  sure:"~5 dk · onunla birlikte", tip:"onasor",
-  yonerge:"Soruları ona sor (yüz yüze ya da mesajla) ve cevabını işaretle. İpucu verme, yardım etme — harita onun kafasında ya var ya yok 😉",
+  baslik:"Beni Ne Kadar Tanıyor? (Eşleşme Oyunu)",
+  aciklama:"8 soru, 4'er şık. Önce SEN gizlice cevabını seç; sonra aynı şıkları ONA oku, onun seçtiğini işaretle. Eşleşme yüzdeniz çıkar!",
+  kaynak:"Gottman'ın Sevgi Haritaları 20 Soru Oyunu'nun puanlama mantığından uyarlanmıştır (partnerin iç dünyasını bilmek, uzun ömürlü ilişkilerin ortak özelliği).",
+  sure:"~6 dk · onunla birlikte", tip:"eslesme",
+  yonerge:"Kurallar basit: her soru iki kez gelecek. Önce 🙈 SEN cevabını seç (ekranı ona gösterme!). Sonra 💬 aynı soruyu şıklarıyla ONA oku — onun seçtiğini işaretle. Cevabınız eşleşirse puan! Hazır mısın?",
   sorular:[
-    {q:"Ona sor: 'Benim en sevdiğim yemek ne?'",eksen:"tanima",sec:BILGI},
-    {q:"Ona sor: 'Şu an en yakın olduğum insan kim?'",eksen:"tanima",sec:BILGI},
-    {q:"Ona sor: 'Hayatımdaki en büyük stres kaynağım ne?'",eksen:"tanima",sec:BILGI},
-    {q:"Ona sor: 'En büyük hayalim ne?'",eksen:"tanima",sec:BILGI},
-    {q:"Ona sor: 'Çocukluğumdan en çok anlattığım anı hangisi?'",eksen:"tanima",sec:BILGI},
-    {q:"Ona sor: 'Hangi şarkı/dizi/film benim vazgeçilmezim?'",eksen:"tanima",sec:BILGI},
-    {q:"Ona sor: 'Doğum günümde nasıl bir kutlama isterim?'",eksen:"tanima",sec:BILGI},
-    {q:"Ona sor: 'Beni en çok ne sinirlendirir?'",eksen:"tanima",sec:BILGI},
-    {q:"Ona sor: 'En korktuğum şey ne?'",eksen:"tanima",sec:BILGI},
-    {q:"Ona sor: 'Beni en çok ne kırar?'",eksen:"tanima",sec:BILGI}
+    {q:"Seni en iyi anlatan hafta sonu hangisi?",sec:[
+      {t:"A) Evde battaniye, dizi/film"},{t:"B) Doğaya kaçmak"},{t:"C) Arkadaşlarla buluşmak"},{t:"D) Uyumak ve hiçbir şey yapmamak"}]},
+    {q:"Moralin bozukken en çok neye ihtiyacın olur?",sec:[
+      {t:"A) Konuşup içimi dökmeye"},{t:"B) Sarılmaya — söz istemez"},{t:"C) Yalnız kalmaya"},{t:"D) Kafa dağıtmaya (gezmek, yemek)"}]},
+    {q:"Hangisi seni daha derinden kırar?",sec:[
+      {t:"A) Yalan"},{t:"B) İlgisizlik"},{t:"C) Başkasıyla kıyaslanmak"},{t:"D) Verilen sözün tutulmaması"}]},
+    {q:"Hangi hediye seni daha çok mutlu eder?",sec:[
+      {t:"A) El yazısı mektup / anlamlı küçük bir şey"},{t:"B) Uzun süredir istediğim 'o' şey"},{t:"C) Sürpriz bir deneyim (konser, kaçamak)"},{t:"D) Bana ayrılmış dolu dolu bir gün"}]},
+    {q:"En büyük korkuna en yakın olan hangisi?",sec:[
+      {t:"A) Sevdiklerimi kaybetmek"},{t:"B) Başarısız olmak"},{t:"C) Yalnız kalmak"},{t:"D) Sağlığımı kaybetmek"}]},
+    {q:"Stresliyken ilk belirtin ne olur?",sec:[
+      {t:"A) Sessizleşirim"},{t:"B) Sinirlenirim, tahammülüm düşer"},{t:"C) Durmadan konuşurum"},{t:"D) Uykum/iştahım bozulur"}]},
+    {q:"Seni anında güldüren şey?",sec:[
+      {t:"A) Saçma internet videoları"},{t:"B) Zekice laf sokmalar / kelime oyunları"},{t:"C) Sakarlıklar, fiziksel komiklik"},{t:"D) Ortak anılarımıza gülmek"}]},
+    {q:"İdeal tatilin hangisi?",sec:[
+      {t:"A) Deniz, kum, güneş"},{t:"B) Şehir keşfi, sokaklar, müzeler"},{t:"C) Dağ, doğa, sessizlik"},{t:"D) Otelden çıkmadan tam pansiyon tembellik"}]}
   ],
   profillerYuzde:[
-    {min:80,baslik:"Haritan onda 🗺💛",metin:"Gottman'ın 'sevgi haritası' dediği şeyin ta kendisi: iç dünyanı taşıyor. Araştırmalara göre bu, ilişkinin zor dönemlerde bile ayakta kalmasının en güçlü desteklerinden.",oneri:"Aynı testi rolleri değiştirerek oynayın — bakalım sen onun haritasını ne kadar taşıyorsun?"},
-    {min:55,baslik:"Ana hatlar tamam, detaylar eksik",metin:"Büyük resmi biliyor ama ince ayrıntılarda boşluklar var. Bu çoğu ilişkide normaldir — harita bir kere çizilip bitmez, güncel tutulması gerekir.",oneri:"Bilemediklerini sohbete dönüştür: 'Bak bunu bilemedin, anlatayım' — Gottman çiftlere tam olarak bu oyunu önerir."},
-    {min:30,baslik:"Yüzeyde kalmış",metin:"Seni genel hatlarıyla tanıyor ama iç dünyana dair sorularda zorlandı. İlişki yeniyse doğal; uzun süredir birlikteyseniz üzerine düşünmeye değer bir sinyal.",oneri:"Haritayı birlikte çizin: haftada bir 'senin dünyanda neler var?' sohbeti — 10 dakikalık bu alışkanlık araştırmalarda en etkili yakınlık pratiklerinden."},
-    {min:0,baslik:"Seni henüz tanımıyor",metin:"Soruların çoğunu bilemedi. Bu 'kötü insan' demek değil; ama seni tanımak için henüz yeterli merak ve emek göstermediğini söylüyor.",oneri:"Şunu gözlemle: sen anlattığında dinliyor mu, soru soruyor mu? Merak, sevginin en erken işaretlerinden biridir — yokluğu da öyle."}
+    {min:75,baslik:"Haritan onda 🗺💛",metin:"Cevaplarınızın çoğu eşleşti — Gottman'ın 'sevgi haritası' dediği şey tam bu: iç dünyanı gerçekten biliyor. Araştırmalara göre bu bilgi, ilişkinin zor dönemlerinde en koruyucu güç.",oneri:"Rolleri değiştirip tekrar oynayın: bakalım sen onun haritasını ne kadar taşıyorsun? (Gerçek skor iki yönlü eşleşmedir.)"},
+    {min:50,baslik:"Ana hatları biliyor, detaylar eksik",metin:"Yarıdan fazlası eşleşti: seni tanıyor ama bazı odalara hiç girmemiş. Bu çoğu ilişkide normaldir — harita bir kere çizilmez, güncellenir.",oneri:"Eşleşmeyen soruları sohbete çevirin: 'Bak burada beni bilememişsin, anlatayım' — Gottman çiftlere tam olarak bu oyunu bu yüzden önerir."},
+    {min:25,baslik:"Yüzeyde kalmış",metin:"Eşleşme az: seni genel hatlarıyla tanıyor ama iç dünyana dair seçimlerde ıskaladı. İlişki yeniyse doğal; uzunsa üzerine düşünülecek bir sinyal.",oneri:"Haritayı birlikte çizin: haftada bir 10 dakikalık 'senin dünyanda ne var?' sohbeti, araştırmalardaki en etkili yakınlık pratiklerinden."},
+    {min:0,baslik:"Seni henüz tanımıyor",metin:"Neredeyse hiç eşleşme yok. Bu 'kötü biri' demek değil; ama seni öğrenmek için henüz yeterince merak ve emek göstermediğini söylüyor.",oneri:"Şunu gözle: sen kendinden bahsederken soru soruyor mu, dinliyor mu? Merak, sevginin en erken işaretidir — yokluğu da öyle."}
   ]
 },
 {
@@ -377,206 +415,314 @@ const TESTLER = [
 {
   id:"baglanma-stili",
   baslik:"Bağlanma Stilin Ne?",
-  aciklama:"18 soruda ilişkilerdeki temel örüntünü keşfet: güvenli mi, kaygılı mı, kaçıngan mı?",
-  kaynak:"Hazan & Shaver'ın yetişkin bağlanma kuramı (1987) ve Fraley, Waller & Brennan'ın iki boyutlu modeli (2000) çerçevesinden uyarlanmıştır.",
-  sure:"~3 dk", cevaplar:CEVAP5, tip:"eksen2",
+  aciklama:"12 gerçek hayat senaryosu — her birinde sana en yakın tepkiyi seç; bağlanma stilin ortaya çıksın.",
+  kaynak:"Levine & Heller'ın 'Attached' testi ve yetişkin bağlanma araştırmalarından (Hazan & Shaver 1987; ECR) senaryo formatına uyarlanmıştır.",
+  sure:"~4 dk", tip:"eksen2",
   sorular:[
-    {q:"Mesajıma geç dönülünce ilişkiyle ilgili kötü senaryolar kurarım.",eksen:"kaygi"},
-    {q:"Partnerimin beni gerçekten sevdiğinden sık sık şüphe duyarım.",eksen:"kaygi"},
-    {q:"Terk edilme korkusu, ilişkideki kararlarımı etkiler.",eksen:"kaygi"},
-    {q:"Ben onu sevdiğim kadar o beni sevmiyor diye korkarım.",eksen:"kaygi"},
-    {q:"Onay almadığımda kendimi değersiz hissederim.",eksen:"kaygi"},
-    {q:"İlişki iyi giderken bile 'ya biterse' diye düşünürüm.",eksen:"kaygi"},
-    {q:"Partnerim başkalarıyla vakit geçirdiğinde dışlanmış hissederim.",eksen:"kaygi"},
-    {q:"Sevildiğimi sık sık teyit etme ihtiyacı duyarım.",eksen:"kaygi"},
-    {q:"Küçük bir soğukluğu bile büyük bir tehdit gibi yaşarım.",eksen:"kaygi"},
-    {q:"Duygularımı açmak bana zor gelir.",eksen:"kacinma"},
-    {q:"Biri bana çok yakınlaşınca geri çekilme ihtiyacı duyarım.",eksen:"kacinma"},
-    {q:"Sorunlarımı paylaşmak yerine kendi başıma çözmeyi tercih ederim.",eksen:"kacinma"},
-    {q:"Partnerime güvenip yaslanmak bana rahat gelir.",eksen:"kacinma",ters:true},
-    {q:"İlişki ciddileştikçe kendimi sıkışmış hissederim.",eksen:"kacinma"},
-    {q:"Bağımsızlığım benim için yakınlıktan daha önemlidir.",eksen:"kacinma"},
-    {q:"Zor zamanlarımda yalnız kalmayı seçerim.",eksen:"kacinma"},
-    {q:"İç dünyamı partnerimle paylaşmak beni rahatlatır.",eksen:"kacinma",ters:true},
-    {q:"Partnerim duygusal destek istediğinde ne yapacağımı bilemem.",eksen:"kacinma"}
+    {q:"Mesaj attın, saatler geçti, cevap yok. İçinden geçen en gerçekçi olan?",sec:[
+      {t:"A) 'Meşguldür' der, işime dönerim",k:0,c:0},
+      {t:"B) Kötü senaryolar dönmeye başlar; telefonu bırakamam",k:2,c:0},
+      {t:"C) 'Zaten fazla mı yazıyorum' deyip ben de geri çekilirim",k:0,c:2},
+      {t:"D) İçim içimi yer ama umursamıyormuş gibi soğuk davranırım",k:2,c:2}]},
+    {q:"'Seni ailemle tanıştırmak istiyorum' dedi. İlk hissin?",sec:[
+      {t:"A) Sıkışma hissi — 'daha çok erken değil mi?'",k:0,c:2},
+      {t:"B) Heyecan — doğal bir sonraki adım",k:0,c:0},
+      {t:"C) Mutluluk + 'ya beğenmezlerse' kaygısı",k:2,c:0},
+      {t:"D) İstiyorum ama panikleyip bahane bulabilirim",k:2,c:2}]},
+    {q:"Berbat bir gün geçirdin. Ne yaparsın?",sec:[
+      {t:"A) Kendi başıma hallederim; anlatmak yük gibi gelir",k:0,c:2},
+      {t:"B) Anlatmak isterim ama 'ya sıkarsam' deyip vazgeçerim",k:2,c:2},
+      {t:"C) Ona anlatırım; paylaşınca hafiflerim",k:0,c:0},
+      {t:"D) Anlatırım ama doyamam; teselli az gelirse kırılırım",k:2,c:0}]},
+    {q:"Partnerin bir haftalığına arkadaş tatiline gidiyor. Tepkin?",sec:[
+      {t:"A) 'İyi eğlenceler' — özlerim ama hayat bu",k:0,c:0},
+      {t:"B) Görünürde 'sorun yok'; içeride terk edilme alarmı",k:2,c:2},
+      {t:"C) İçim rahat etmez; sık sık yazma ihtiyacı duyarım",k:2,c:0},
+      {t:"D) Açıkçası rahatlarım; kendi alanım genişler",k:0,c:2}]},
+    {q:"Tartışma çıktı. Senin tipik hamlen?",sec:[
+      {t:"A) Konuşmadan duramam; gece yarısı bile üstüne giderim",k:2,c:0},
+      {t:"B) Kapanırım: 'konuşacak bir şey yok'",k:0,c:2},
+      {t:"C) Önce üstüne giderim, sonra birden duvar örerim",k:2,c:2},
+      {t:"D) Sakinleşince oturup konuşuruz",k:0,c:0}]},
+    {q:"'Bu ilişki nereye gidiyor?' sorusu sende ne uyandırır?",sec:[
+      {t:"A) Rahatım; net cevabım var",k:0,c:0},
+      {t:"B) Bu soru hiç sorulmasın; etiketler bunaltır",k:0,c:2},
+      {t:"C) Cevabı çok istiyorum ama sorunca kaçacak diye soramıyorum",k:2,c:2},
+      {t:"D) Asıl korkum onun cevabı: 'ya emin değilse'",k:2,c:0}]},
+    {q:"Partnerin ağlıyor, desteğe ihtiyacı var. İçindeki ilk his?",sec:[
+      {t:"A) Panik: 'yeterince iyi teselli edemezsem beni daha az mı sever?'",k:2,c:0},
+      {t:"B) Yanında olmak doğal gelir; ne yapacağımı bilirim",k:0,c:0},
+      {t:"C) Donarım; yoğun duygu beni kaçırır",k:0,c:2},
+      {t:"D) Yaklaşmak isterim ama beceremem korkusuyla geri çekilirim",k:2,c:2}]},
+    {q:"Yeni biriyle tanıştın, ilgi karşılıklı. İlk haftalardaki iç sesin?",sec:[
+      {t:"A) 'Neden görüldüde bıraktı?' — hep tetikteyim",k:2,c:0},
+      {t:"B) İlgi artınca ben azaltırım; riske girmem",k:0,c:2},
+      {t:"C) Keyfini çıkarırım, akışına bırakırım",k:0,c:0},
+      {t:"D) Bir gün aşırı yakınım, ertesi gün kaçacak delik ararım",k:2,c:2}]},
+    {q:"Eski ilişkilerine dönüp bak: en tanıdık örüntü hangisi?",sec:[
+      {t:"A) Gel-git: ben kaçtım kovalandım / kovaladım kaçıldı",k:2,c:2},
+      {t:"B) Hep daha çok seven bendim; doyamadım",k:2,c:0},
+      {t:"C) 'Bunaldım' hissi ve benim uzaklaşmamla bitenler",k:0,c:2},
+      {t:"D) Genelde güven vardı; bitenler de saygıyla bitti",k:0,c:0}]},
+    {q:"Partnerin 'biraz kendime zaman lazım' dedi. Yorumun?",sec:[
+      {t:"A) Sağlıklı bir ihtiyaç; bana da iyi gelir",k:0,c:0},
+      {t:"B) 'Benden soğudu' — kanıt aramaya başlarım",k:2,c:0},
+      {t:"C) Harika, ben de tam bunu isteyecektim",k:0,c:2},
+      {t:"D) Dışım 'tabii canım', içim yıkım",k:2,c:2}]},
+    {q:"Sevildiğini en çok ne zaman hissedersin?",sec:[
+      {t:"A) Sürekli söylendiğinde — bir gün eksilse şüphe başlar",k:2,c:0},
+      {t:"B) Gündelik küçük tutarlılıklarda",k:0,c:0},
+      {t:"C) Bana alan bırakıldığında",k:0,c:2},
+      {t:"D) Tam hissedemiyorum; kanıt hep yetersiz",k:2,c:2}]},
+    {q:"İlişkide en büyük korkun?",sec:[
+      {t:"A) Kendimi kaybetmek / boğulmak",k:0,c:2},
+      {t:"B) Terk edilmek",k:2,c:0},
+      {t:"C) Hem terk edilmek hem sıkışmak — ikisi birden",k:2,c:2},
+      {t:"D) Büyük bir korkum yok; sorunlar çözülür",k:0,c:0}]}
   ],
   profillerEksen:{
-    "guvenli":{baslik:"Güvenli Bağlanma 🌿",metin:"Hem yakınlık kurmakta hem de bağımsız kalmakta rahatsın. Araştırmalara göre bu stil, ilişki doyumunun en güçlü yordayıcılarından. Bu, sorun yaşamayacağın anlamına gelmez — ama sorunları büyütmeden konuşabilme kapasiten yüksek.",oneri:"Güçlü yanın: istikrar. Dikkat: güvenli bağlanan kişiler bazen partnerlerinin kaygı ya da kaçınma örüntülerini 'anlamsız' bulup küçümseyebilir. Partnerinin stili seninkinden farklıysa, onun tetiklenme anlarını kişisel algılama."},
-    "kaygili":{baslik:"Kaygılı Bağlanma 🌊",metin:"Sevgin derin ama zihnin sık sık 'ya giderse' alarmı çalıyor. Bu stil genelde erken dönemde tutarsız ilgiyle şekillenir: sevgi var ama ne zaman geleceği belirsizdi — zihnin de sürekli tetikte kalmayı öğrendi.",oneri:"İşe yarayan şey: duyguyu bastırmak değil, alarmın gerçek mi yalancı mı olduğunu ayırt etmeyi öğrenmek. Mesaja geç dönülmesi bir veri değildir; davranış örüntüsü veridir. Kaygın yükseldiğinde 'somut kanıtım ne?' sorusu iyi bir ilk adım."},
-    "kacingan":{baslik:"Kaçıngan Bağlanma 🏔",metin:"Kendi ayakların üzerinde durmayı iyi biliyorsun; zorlandığın yer, birinin sana gerçekten yaklaşmasına izin vermek. Bu stil genelde 'duygularınla kendin ilgilen' mesajıyla büyümekle ilişkilendirilir — bağımsızlık senin güvenlik stratejin oldu.",oneri:"Dikkat: kaçınma, partnerinde 'ona ulaşamıyorum' hissi yaratır ve o yüzden en çok kaygılı partnerleri tetikler. Küçük bir egzersiz: haftada bir kez, kendini geri çekmek istediğin anda tam tersini yapıp hissettiğini tek cümleyle söyle. Kasların böyle gelişiyor."},
-    "korkulu":{baslik:"Korkulu-Kaçıngan Bağlanma 🌗",metin:"Hem yakınlığı çok istiyorsun hem de yaklaşınca alarm çalıyor — it-kak dinamiği. Bu en yorucu stil çünkü iki sistem aynı anda çalışıyor: 'gel' ve 'git'. Genelde güvenin ciddi biçimde sarsıldığı deneyimlerle bağlantılıdır.",oneri:"Bu örüntüyle tek başına boğuşmak zorunda değilsin; bağlanma stilleri değişebilir (araştırmalar 'kazanılmış güvenli bağlanma'nın mümkün olduğunu gösteriyor). Bir uzmanla çalışmak bu stilde özellikle değerli. Bu testin sonucu bir başlangıç noktası — uzman desteğinin yerine geçmez."}
+    "guvenli":{baslik:"Güvenli Bağlanma 🌿",metin:"Senaryolardaki seçimlerin hem yakınlıkta hem bağımsızlıkta rahat olduğunu gösteriyor. Araştırmalara göre bu stil, ilişki doyumunun en güçlü yordayıcılarından.",oneri:"Güçlü yanın istikrar. Dikkat: partnerin kaygılı ya da kaçıngansa onun tetiklenme anlarını 'anlamsız' bulma — stiller farklı dillerdir, çeviri ister."},
+    "kaygili":{baslik:"Kaygılı Bağlanma 🌊",metin:"Seçimlerin, zihninin sık sık 'ya giderse' alarmı çaldığını gösteriyor. Sevgin derin; alarm sistemin fazla hassas. Bu stil genelde erken dönemde tutarsız ilgiyle şekillenir.",oneri:"Alarm çaldığında tek soru: 'Somut kanıtım ne?' Geç dönülen mesaj veri değildir; davranış örüntüsü veridir. Bu ayrımı yapmayı öğrenmek, kaygılı stilin en güçlü panzehiri."},
+    "kacingan":{baslik:"Kaçıngan Bağlanma 🏔",metin:"Seçimlerin, yakınlık arttıkça geri çekilme örüntüsünü gösteriyor. Bağımsızlık senin güvenlik stratejin olmuş — muhtemelen 'duygularınla kendin ilgilen' mesajıyla büyüdün.",oneri:"Küçük egzersiz: geri çekilmek istediğin anda tam tersini yap — hissettiğini TEK cümleyle söyle. Kas böyle gelişir. Kaçınman, partnerinde 'ulaşamıyorum' yarası açar; bunu bilmek bile davranışı yumuşatır."},
+    "korkulu":{baslik:"Korkulu-Kaçıngan Bağlanma 🌗",metin:"Seçimlerinde iki sistem aynı anda çalışıyor: 'gel' ve 'git'. Yakınlığı çok istiyor, yaklaşınca alarma geçiyorsun — en yorucu örüntü bu.",oneri:"İyi haber: bağlanma stilleri değişebilir ('kazanılmış güvenli bağlanma' araştırmalarla gösterildi). Bu örüntüde bir uzmanla çalışmak özellikle değerli — test sadece aynayı tutar."}
   }
 },
 {
-  id:"iliski-saglami",
-  baslik:"İlişkiniz Ne Kadar Sağlam?",
-  aciklama:"20 soruda ilişkinin taşıyıcı kolonlarını ve risk işaretlerini gör.",
-  kaynak:"Gottman'ın 'Dört Atlı' bulguları ve Sağlam İlişki Evi modeli çerçevesinden uyarlanmıştır (Gottman & Levenson uzun dönem çift çalışmaları).",
-  sure:"~3 dk", cevaplar:CEVAP5, tip:"toplam",
+  id:"ask-tipi",
+  baslik:"Aşkınız Hangi Tip?",
+  aciklama:"12 soru, her birinde 4 şık — yakınlık, tutku ve bağlılık ölçülür; 8 aşk tipinden sizinki çıkar.",
+  kaynak:"Sternberg'in Üçgen Aşk Kuramı'ndan (1986) şıklı formata uyarlanmıştır.",
+  sure:"~4 dk", tip:"eksen3",
   sorular:[
-    {q:"Tartışırken konu, kişiliğe saldırıya döner ('sen zaten hep böylesin').",ters:true},
-    {q:"Biri eleştirince diğeri hemen savunmaya geçer, karşı suçlama başlar.",ters:true},
-    {q:"Aramızda göz devirme, alay etme, küçümseyici ifadeler olur.",ters:true},
-    {q:"Tartışma sırasında birimiz tamamen kapanır, duvar örer.",ters:true},
-    {q:"Küslüklerimiz günlerce sürer; kimse ilk adımı atmaz.",ters:true},
-    {q:"Aynı kavgayı hiçbir çözüme varmadan tekrar tekrar ederiz.",ters:true},
-    {q:"Onunla konuşurken sözlerimi sansürlemek zorunda hissederim.",ters:true},
-    {q:"Bir sorunu gündeme getirmek genelde daha büyük kavga çıkarır.",ters:true},
-    {q:"Partnerimin şu sıralar hayatında neler olduğunu (işi, dertleri, sevinçleri) bilirim."},
-    {q:"O da benim iç dünyamda ne olup bittiğini bilir."},
-    {q:"Gün içinde birbirimize küçük ilgi işaretleri göndeririz (mesaj, espri, dokunuş)."},
-    {q:"Partnerimde hâlâ hayranlık duyduğum yönler var ve bunu ona söylerim."},
-    {q:"O da beni takdir ettiğini hissettirir."},
-    {q:"Tartışsak bile birbirimize saygımızı koruruz."},
-    {q:"Kavga sonrası barışma yollarımız var (espri, sarılma, konuşma)."},
-    {q:"Gelecek hayallerimiz büyük ölçüde örtüşüyor."},
-    {q:"Zor dönemlerde 'aynı takımdayız' duygusunu hissederiz."},
-    {q:"Birlikte hâlâ gülebiliyoruz."},
-    {q:"Fiziksel yakınlığımızdan ikimiz de memnunuz."},
-    {q:"Bu ilişkide kendim olabildiğimi hissediyorum."}
+    {q:"İçini gerçekten döktüğün en son an?",eksen:"yakinlik",sec:[
+      {t:"A) Bu hafta — ona her şeyi anlatabiliyorum",p:3},{t:"B) Arada oluyor; çoğu şeyi paylaşırım",p:2},{t:"C) Sadece büyük konularda açılırım",p:1},{t:"D) İç dünyamı pek açmam",p:0}]},
+    {q:"Zor bir karar vermen gerekiyor. O bu sürecin neresinde?",eksen:"yakinlik",sec:[
+      {t:"A) İlk danıştığım kişi",p:3},{t:"B) Genelde fikrini alırım",p:2},{t:"C) Bazen söylerim, karar benim",p:1},{t:"D) Danışmak aklıma gelmiyor",p:0}]},
+    {q:"'Beni gerçekten anlıyor' cümlesi senin için?",eksen:"yakinlik",sec:[
+      {t:"A) Tamamen doğru",p:3},{t:"B) Çoğunlukla doğru",p:2},{t:"C) Ara sıra",p:1},{t:"D) Anlaşılmadığımı hissediyorum",p:0}]},
+    {q:"Birlikte sessiz kalmak sizde nasıl?",eksen:"yakinlik",sec:[
+      {t:"A) Sessizlik bile iyi — rahatız",p:3},{t:"B) Genelde rahat",p:2},{t:"C) Biraz gerginlik hissedilir",p:1},{t:"D) Sessizlik = aramızda duvar",p:0}]},
+    {q:"Ona baktığında hâlâ 'çekici' diyor musun?",eksen:"tutku",sec:[
+      {t:"A) Hem de nasıl",p:3},{t:"B) Evet",p:2},{t:"C) Alıştım artık; düşünmüyorum",p:1},{t:"D) Açıkçası hayır",p:0}]},
+    {q:"Romantik anlarınız (öpüşme, bakışma, dans)?",eksen:"tutku",sec:[
+      {t:"A) Hâlâ titretiyor",p:3},{t:"B) Sıcak ve güzel",p:2},{t:"C) Kısa bir rutine döndü",p:1},{t:"D) Nadiren oluyor",p:0}]},
+    {q:"Gün içinde aklına düşüyor mu?",eksen:"tutku",sec:[
+      {t:"A) Sık sık — bazen işimi bölüyor",p:3},{t:"B) Ara ara, güzel anlarda",p:2},{t:"C) Ancak bir şey hatırlatırsa",p:1},{t:"D) Fark ettim ki pek gelmiyor",p:0}]},
+    {q:"Fiziksel yakınlığınız için en dürüst tarif?",eksen:"tutku",sec:[
+      {t:"A) Canlı ve karşılıklı",p:3},{t:"B) İyi",p:2},{t:"C) Azaldı",p:1},{t:"D) Neredeyse yok",p:0}]},
+    {q:"Beş yıl sonrasını hayal et. O görüntüde var mı?",eksen:"baglilik",sec:[
+      {t:"A) Kesin var — merkezde",p:3},{t:"B) Büyük ihtimalle var",p:2},{t:"C) Bulanık",p:1},{t:"D) Göremiyorum",p:0}]},
+    {q:"Zor bir dönemde 'gitmek' fikri?",eksen:"baglilik",sec:[
+      {t:"A) Aklıma gelmiyor — çözeriz",p:3},{t:"B) Gelse de tutunurum",p:2},{t:"C) Ara sıra ciddi ciddi geliyor",p:1},{t:"D) Sık geliyor",p:0}]},
+    {q:"Bu ilişkiyi koruma sorumluluğunu ne kadar hissediyorsun?",eksen:"baglilik",sec:[
+      {t:"A) Tam — sevgiyi korumak benim de işim",p:3},{t:"B) Yüksek",p:2},{t:"C) Dalgalı",p:1},{t:"D) Zayıf",p:0}]},
+    {q:"'Biz' demek sana nasıl geliyor?",eksen:"baglilik",sec:[
+      {t:"A) Doğal — kimliğimin parçası",p:3},{t:"B) Rahat",p:2},{t:"C) Hâlâ alışamadım",p:1},{t:"D) 'Ben' demeyi yeğliyorum",p:0}]}
   ],
-  profiller:[
-    {min:60,baslik:"Sağlam temel 🏡",metin:"İlişkinizde Gottman'ın 'ustalar' dediği çiftlerin imzası var: risk işaretleri (eleştiri, küçümseme, duvar örme) düşük; birbirinizi tanıma, takdir ve onarım becerileri yüksek. Bu, kavga etmediğiniz anlamına gelmiyor — kavgayı yönetebildiğiniz anlamına geliyor.",oneri:"Sağlam ilişkilerin tuzağı rehavet: 'zaten iyiyiz' diyip küçük dönüşleri ihmal etmek. Haftada bir 'senin dünyanda neler var?' sohbeti, bu puanı korumak için yapılmış en basit yatırım."},
-    {min:36,baslik:"Temel sağlam ama bakım istiyor 🔧",metin:"İlişkide sevgi ve iyi niyet görünüyor; ama bazı risk örüntüleri (muhtemelen tartışma biçimleriyle ilgili olanlar) yerleşmeye başlamış. İyi haber: Gottman'ın araştırmalarına göre belirleyici olan kavga sayısı değil, onarım girişimlerinin tutup tutmadığı.",oneri:"Ters puan verdiğin sorulara bak: hangi 'atlı' baskın? Eleştiriyse şikayeti 'sen' değil 'ben' diliyle kurmayı dene; duvar örmeyse tartışmayı 20 dk mola ile bölmeyi. Tek bir örüntüyü değiştirmek bile tabloyu ciddi düzeltir."},
-    {min:0,baslik:"Alarm bölgesi 🚨",metin:"Testin işaret ettiği örüntüler (sürekli eleştiri, küçümseme, savunma, duvar örme) Gottman'ın araştırmalarında ilişkinin geleceği açısından en riskli sinyaller. Bu, 'bitti' demek değil — ama 'kendiliğinden düzelir' de demek değil.",oneri:"İki dürüst soru: (1) İkiniz de bu tabloyu değiştirmek istiyor musunuz? (2) Bunu kendi başınıza mı yapmaya çalışacaksınız? Çift terapisi tam bu tablo için var ve işe yaradığı iyi belgelenmiş. Ciddi örüntülerde profesyonel destek şart — bu test sadece aynayı tutar."}
-  ]
+  profillerUc:{
+    "111":{baslik:"Tam Aşk 💎",metin:"Sternberg'in 'consummate love' dediği nadir kombinasyon: yakınlık, tutku ve bağlılığın üçü de yüksek. Kurama göre aşkın en dolu hali — ve korunması, kurulmasından zordur.",oneri:"Üç bileşene düzenli küçük yatırım yap: sohbet (yakınlık), flört (tutku), plan (bağlılık). Sternberg'in uyarısı: ihmal edilen bileşen sessizce söner."},
+    "110":{baslik:"Romantik Aşk 🌹",metin:"Yakınlık ve tutku güçlü; bağlılık henüz aynı seviyede değil. En heyecanlı evrelerden — ve doğal bir yol ayrımına gider: derinleşmek ya da buharlaşmak.",oneri:"Bağlılık konuşarak kurulur: 'Biz nereye gidiyoruz?' sorusundan kaçmayın — doğru zamanda romantizmi bozmaz, büyütür."},
+    "101":{baslik:"Yoldaş Aşkı 🫂",metin:"Yakınlık ve bağlılık sağlam; tutku sakinlemiş. Uzun ilişkilerin en yaygın ve en dayanıklı tipi — ama tutkunun sönmesi kader değil.",oneri:"Tutku Ölçer testini çöz; sonuca göre yenilik ve fiziksel yakınlığı bilinçli geri çağırın (Acevedo & Aron: uzun ilişkide tutku mümkün)."},
+    "011":{baslik:"Yıldırım Aşkı ⚡",metin:"Tutku ve bağlılık yüksek, birbirinizi derinden tanıma (yakınlık) geride. Sternberg buna 'fatuous love' der: hızlı yanan, temeli sonradan atılan aşk.",oneri:"Temeli şimdi atın: 'Beni Ne Kadar Tanıyor?' eşleşme oyununu birlikte oynayın — eksik odaları sohbete dönüştürün."},
+    "100":{baslik:"Arkadaşça Sevgi 🤝",metin:"Yakınlık güçlü; tutku ve bağlılık sakin. Değerli bir bağ — ama romantik ilişki beklentisiyle yaşanıyorsa bir tarafta eksiklik hissi birikebilir.",oneri:"Dürüst soru: bu ilişkiden ne bekliyorsun? 'Daha fazlası' ise bunu şimdi konuşmak, yıllar sonra konuşmaktan az acıtır."},
+    "010":{baslik:"Tutulma 🔥",metin:"Tutku tek başına sahnede: çekim yoğun, tanıma ve bağlılık henüz yok. Her büyük aşk böyle başlar ama her tutulma büyük aşka dönüşmez.",oneri:"Keyfini çıkar; kararları tutkunun zirvesinde verme. Yakınlık büyüdükçe bu ateşin neye dönüştüğünü göreceksin."},
+    "001":{baslik:"Kararlı Bağ 🧭",metin:"Bağlılık yüksek, yakınlık ve tutku düşük — Sternberg'in 'boş aşk' dediği durum. Dönemsel olabilir; kalıcılaşması konuşulması gereken bir sinyal.",oneri:"İskelet sağlam, içi doldurulabilir: haftada bir telefonsuz 30 dakikalık gerçek sohbet, yakınlığı geri inşanın ilk tuğlası."},
+    "000":{baslik:"Henüz Tanımsız 🌫",metin:"Üç bileşen de düşük görünüyor. Çok yeni bir ilişkinin doğal hali olabilir — ya da uzun bir uzaklaşmanın fotoğrafı.",oneri:"Hangisi olduğunu süre söyler: yeniyse bir ay sonra tekrar çöz; yıllanmışsa bu tablo kendine dürüst sorular sormak için bir davet."}
+  }
 },
-
 {
   id:"tutku-olcer",
   baslik:"Hâlâ Aşık mısın? Tutku Ölçer",
-  aciklama:"12 soruda ilişkindeki tutkunun nabzını ölç.",
-  kaynak:"Hatfield & Sprecher'in Tutkulu Aşk Ölçeği'nden (1986) uyarlanmıştır.",
-  sure:"~3 dk", cevaplar:CEVAP5, tip:"toplam",
+  aciklama:"10 an, 10 soru — her birinde en dürüst şıkkı seç, tutkunun nabzı halkada dolsun.",
+  kaynak:"Hatfield & Sprecher'in Tutkulu Aşk Ölçeği'nden (1986) senaryo formatına uyarlanmıştır.",
+  sure:"~3 dk", tip:"toplam",
   sorular:[
-    {q:"Onu düşünmediğim bir gün neredeyse yok."},
-    {q:"Onu mutlu görmek günümü güzelleştiriyor."},
-    {q:"Ona yakın olmak hâlâ heyecan veriyor."},
-    {q:"Bazen aklımdan çıkaramadığım için işime odaklanamıyorum."},
-    {q:"Onsuz bir hayat düşüncesi içimi sıkıyor."},
-    {q:"Yeni bir şey yaşadığımda ilk ona anlatmak istiyorum."},
-    {q:"Göz göze geldiğimizde içimde hâlâ bir şey kıpırdıyor."},
-    {q:"Onun dokunuşu herkesinkinden farklı geliyor."},
-    {q:"İlk günlerdeki heyecanı ara ara hâlâ hissediyorum."},
-    {q:"Onu başkasıyla hayal etmek canımı acıtıyor."},
-    {q:"Birlikte geçireceğimiz zamanı iple çekiyorum."},
-    {q:"'Aşk' kelimesini duyunca aklıma o geliyor."}
+    {q:"Adı telefon ekranında belirdiği ilk saniyede?",sec:[
+      {t:"A) İçimde hâlâ bir kıpırtı olur",p:3},{t:"B) Hoş bir sıcaklık; gülümserim",p:2},{t:"C) Nötr — kim aradıysa o",p:1},{t:"D) Bazen açmayı erteliyorum",p:0}]},
+    {q:"Onu kalabalıkta uzaktan gördüğünde?",sec:[
+      {t:"A) Hâlâ 'vay be, benimki' diyorum",p:3},{t:"B) İçim ısınıyor, yanına gidiyorum",p:2},{t:"C) Herhangi bir tanıdık görmüş gibiyim",p:1},{t:"D) Bazen fark etmemiş gibi yapıyorum",p:0}]},
+    {q:"Elini omzuna koyduğunda?",sec:[
+      {t:"A) O elektrik hâlâ var",p:3},{t:"B) Güven veren bir sıcaklık",p:2},{t:"C) Alışkanlık; ne iyi ne kötü",p:1},{t:"D) Bazen içimden çekilmek geçiyor",p:0}]},
+    {q:"Gün içinde aklına gelme sıklığı?",sec:[
+      {t:"A) Sık sık — bazen işimi bölüyor",p:3},{t:"B) Ara ara, güzel anlarda",p:2},{t:"C) Ancak bir şey hatırlatırsa",p:1},{t:"D) Fark ettim ki pek gelmiyor",p:0}]},
+    {q:"Bu akşam buluşacaksınız. Bekleyiş nasıl?",sec:[
+      {t:"A) İple çekiyorum; plan bile kurdum",p:3},{t:"B) Keyifle bekliyorum",p:2},{t:"C) Normal bir akşam işte",p:1},{t:"D) Bugün tek kalmayı tercih ederdim",p:0}]},
+    {q:"Biri onu övdü: 'çok çekici biri'. Sende?",sec:[
+      {t:"A) Gurur + tatlı bir sahiplenme kıvılcımı",p:3},{t:"B) 'Evet, öyledir' — gurur",p:2},{t:"C) 'Hı-hı' deyip geçerim",p:1},{t:"D) Umurumda değil",p:0}]},
+    {q:"Başına komik/önemli bir şey geldi. İlk dürtün?",sec:[
+      {t:"A) Anında ona yazmak, aramak",p:3},{t:"B) Akşam görüşünce anlatmak",p:2},{t:"C) Aklıma gelirse anlatırım",p:1},{t:"D) Anlatma ihtiyacı duymuyorum",p:0}]},
+    {q:"Öpüşmeleriniz için en dürüst tarif?",sec:[
+      {t:"A) Hâlâ kalbimi hızlandırıyor",p:3},{t:"B) Sıcak ve bağlayıcı",p:2},{t:"C) Selamlaşma gibi kısa bir rutin",p:1},{t:"D) Nadiren oluyor",p:0}]},
+    {q:"Onsuz geçen birkaç gün sana ne yapıyor?",sec:[
+      {t:"A) Ciddi özlem; sesi bile iyi geliyor",p:3},{t:"B) Özlüyorum ama hayat akıyor",p:2},{t:"C) Fark yaratmıyor",p:1},{t:"D) Açıkçası nefes alanı gibi geliyor",p:0}]},
+    {q:"'Bu insana âşığım' cümlesi içinden geçince?",sec:[
+      {t:"A) Tereddütsüz evet",p:3},{t:"B) Evet — ama ilk günkü gibi değil, daha sakin",p:2},{t:"C) Emin değilim",p:1},{t:"D) Uzun süredir kurmadım o cümleyi",p:0}]}
   ],
   profiller:[
-    {min:38,baslik:"Tutku dorukta 🔥",metin:"Tutkulu aşkın klasik işaretlerinin neredeyse hepsi sende aktif: zihinsel meşguliyet, fiziksel çekim, heyecan. Araştırmalar (Acevedo & Aron, 2012) bunun uzun ilişkilerde bile sürebildiğini gösteriyor — sen buna kanıtsın.",oneri:"Tutkuyu besleyen şey yenilik: birlikte hiç yapmadığınız bir şey planla. Aron'un deneyleri, yeni ve heyecanlı ortak deneyimlerin tutkuyu tazelediğini gösteriyor."},
-    {min:26,baslik:"Aşk olgunlaşıyor 🌾",metin:"Tutku hâlâ orada ama ilk günlerin ateşi yerini daha sakin, derin bir bağa bırakıyor. Bu, araştırmaların 'yoldaş aşkına geçiş' dediği doğal bir evrim — kayıp değil, dönüşüm.",oneri:"Tutkuyu tamamen sakinliğe bırakmak zorunda değilsin: haftada bir 'flört gecesi' klişesi, araştırmalarda gerçekten işe yarayan az sayıda şeyden biri."},
-    {min:14,baslik:"Kor közleniyor — bakım ister 🕯",metin:"Tutku göstergelerinin çoğu zayıflamış. Bu her ilişkide dönemsel olarak olur (stres, rutin, yorgunluk); önemli olan közün tamamen sönmeden fark edilmesi.",oneri:"Küçük başla: fiziksel yakınlığı gündelik hayata geri getir (sarılma, el tutma — beklenti olmadan). Tutku çoğu zaman büyük jestlerle değil, küçük temaslarla geri gelir."},
-    {min:0,baslik:"Tutku uykuda 🌑",metin:"Şu an tutku boyutu büyük ölçüde sessiz. Bu tek başına ilişkinin bittiği anlamına gelmez — ama görmezden gelinecek bir veri de değil.",oneri:"Kendine iki soru: (1) Bu sönüş ne zamandır sürüyor? (2) Geri istemeye istekli misin? İkinci sorunun cevabı evetse, bunu partnerinle konuşmak ilk adım."}
+    {min:25,baslik:"Tutku dorukta 🔥",metin:"Seçimlerin tutkulu aşkın klasik işaretlerini gösteriyor: zihinsel meşguliyet, çekim, heyecan. Araştırmalar (Acevedo & Aron, 2012) bunun uzun ilişkilerde bile sürebildiğini gösterdi — sen kanıtsın.",oneri:"Tutkuyu besleyen şey yenilik: birlikte hiç yapmadığınız bir şey planla. Aron'un deneyleri yeni ve heyecanlı ortak deneyimlerin tutkuyu tazelediğini gösteriyor."},
+    {min:17,baslik:"Aşk olgunlaşıyor 🌾",metin:"Tutku orada ama ilk günlerin ateşi yerini daha sakin, derin bir bağa bırakıyor. Bu, araştırmaların 'yoldaş aşkına geçiş' dediği doğal evrim — kayıp değil, dönüşüm.",oneri:"Tamamen sakinliğe bırakmak zorunda değilsin: haftalık 'flört gecesi' klişesi, araştırmalarda gerçekten işe yarayan az sayıda şeyden biri."},
+    {min:9,baslik:"Kor közleniyor 🕯",metin:"Tutku göstergelerinin çoğu sönük. Her ilişkide dönemsel olur (stres, rutin, yorgunluk); önemli olan köz tamamen sönmeden fark etmek.",oneri:"Küçük başla: beklentisiz fiziksel yakınlığı gündelik hayata geri getir (sarılma, el tutma). Tutku çoğu zaman büyük jestlerle değil küçük temaslarla döner."},
+    {min:0,baslik:"Tutku uykuda 🌑",metin:"Seçimlerinin çoğu 'sönmüş' uçta. Tek başına ilişki bitti demek değil — ama görmezden gelinecek bir veri de değil.",oneri:"İki soru: (1) Bu sönüş ne zamandır sürüyor? (2) Geri istemeye istekli misin? İkincisi 'evet'se, bunu partnerinle konuşmak ilk adım."}
   ]
 },
 {
   id:"ask-tarzin",
   baslik:"Aşk Tarzın Hangisi?",
-  aciklama:"12 soruda 6 aşk stilinden hangisinin sende baskın olduğunu keşfet.",
-  kaynak:"Lee'nin Aşk Renkleri kuramı (1973) ve Hendrick Aşk Tutumları Ölçeği (1986) çerçevesinden uyarlanmıştır.",
-  sure:"~3 dk", cevaplar:CEVAP5, tip:"stil",
-  stilAd:{eros:"Romantik (Eros)",ludus:"Oyuncu (Ludus)",storge:"Arkadaş-Sevgili (Storge)",pragma:"Akılcı (Pragma)",mania:"Fırtınalı (Mania)",agape:"Adayan (Agape)"},
+  aciklama:"10 senaryo, her birinde 3 farklı karakter cevabı — seçimlerin 6 aşk stilinden seninkini ortaya çıkarır.",
+  kaynak:"Lee'nin Aşk Renkleri kuramı (1973) ve Hendrick Aşk Tutumları Ölçeği'nden; şık dengesi Chapman/TKI zorunlu-seçim tasarımıyla kurulmuştur.",
+  sure:"~3 dk", tip:"stil",
+  stilAd:{eros:"Romantik (Eros)",ludus:"Özgür Ruh (Ludus)",storge:"Arkadaş-Sevgili (Storge)",pragma:"Akılcı (Pragma)",mania:"Fırtınalı (Mania)",agape:"Adayan (Agape)"},
   sorular:[
-    {q:"İlk görüşte çekim benim için belirleyicidir.",stil:"eros"},
-    {q:"Aşkta yoğun romantizm ve derin duygu ararım.",stil:"eros"},
-    {q:"Aşkı fazla ciddiye almadan, hafif yaşamayı severim.",stil:"ludus"},
-    {q:"Tek bir kişiye bağlanmak bana zor gelir.",stil:"ludus"},
-    {q:"En iyi aşk, arkadaşlıktan doğandır.",stil:"storge"},
-    {q:"Güven, benim için heyecandan önce gelir.",stil:"storge"},
-    {q:"Partner seçerken mantıklı kriterlerim vardır (uyum, hedefler, hayat tarzı).",stil:"pragma"},
-    {q:"Aşk uzun vadeli bir ortaklıktır; sadece duyguyla yürümez.",stil:"pragma"},
-    {q:"Aşık olunca duygularım iniş çıkışlı ve çok yoğun olur.",stil:"mania"},
-    {q:"Karşılık göremediğimde dünyam kararır.",stil:"mania"},
-    {q:"Sevdiğimin mutluluğunu kendiminkinden önde tutarım.",stil:"agape"},
-    {q:"Aşkta vermek, almaktan daha doğal gelir.",stil:"agape"}
+    {q:"Yeni tanıştın ve çok hoşlandın. İlk haftalarda hangisi sensin?",sec:[
+      {t:"A) Yoğun yaşarım: mesajlar, buluşmalar, kıvılcım",stil:"eros"},
+      {t:"B) Acele etmem; uyumumuza ve hedeflere bakarım",stil:"pragma"},
+      {t:"C) Keyfine bakarım; tek kapıya oynamam",stil:"ludus"}]},
+    {q:"'Seni seviyorum'u ilk ne zaman dersin?",sec:[
+      {t:"A) Hissettiğim an — beklemek yalan olur",stil:"eros"},
+      {t:"B) İyice güvendiğimde; arkadaşlıktan emin olunca",stil:"storge"},
+      {t:"C) Genelde erken derim; sonra cevabını bekleyip durur kalbim",stil:"mania"}]},
+    {q:"Partnerin zor bir dönemde. Senin yaklaşımın?",sec:[
+      {t:"A) Kendimi ikinci plana atarım; yeter ki o iyileşsin",stil:"agape"},
+      {t:"B) Sakin ve güvenilir destek olurum, hep oradayım",stil:"storge"},
+      {t:"C) Sorunu çözecek pratik planlar kurarım",stil:"pragma"}]},
+    {q:"Kıskançlıkla aran nasıl?",sec:[
+      {t:"A) İnişli çıkışlı; kaybetme korkusu beni sarabiliyor",stil:"mania"},
+      {t:"B) Bana göre değil — özgürlük iki taraflı",stil:"ludus"},
+      {t:"C) Tutkunun doğal gölgesi; hissederim ama yakmam",stil:"eros"}]},
+    {q:"İdeal ilişki tarifin hangisi?",sec:[
+      {t:"A) En yakın arkadaşınla aşk yaşamak",stil:"storge"},
+      {t:"B) Hayat hedefleri uyumlu sağlam bir ortaklık",stil:"pragma"},
+      {t:"C) Koşulsuz sevgi — vermek işin özü",stil:"agape"}]},
+    {q:"Ayrılık sonrası sen hangisisin?",sec:[
+      {t:"A) Yıkılırım; dünyam durur",stil:"mania"},
+      {t:"B) Üzülürüm ama çabuk toparlarım; hayat devam",stil:"ludus"},
+      {t:"C) Yavaş ve sessiz iyileşirim; dostluk kaybı gibi yaşarım",stil:"storge"}]},
+    {q:"Partnerinin sana hiç uymayan bir huyu var. Ne yaparsın?",sec:[
+      {t:"A) Sevgim büyükse kabullenirim; değişsin diye zorlamam",stil:"agape"},
+      {t:"B) Uzun vadede sorun mu diye mantığa vururum",stil:"pragma"},
+      {t:"C) Tutku sürdükçe kusur görünmüyor bana",stil:"eros"}]},
+    {q:"Aynı anda iki kişiden hoşlanmak sence?",sec:[
+      {t:"A) Bağlanmadıysam gayet olabilir",stil:"ludus"},
+      {t:"B) İmkânsız — ben tek kişiye saplanırım",stil:"mania"},
+      {t:"C) Olursa karşılaştırır, mantıklı olanı seçerim",stil:"pragma"}]},
+    {q:"Sevgini en çok nasıl gösterirsin?",sec:[
+      {t:"A) Fedakârlıkla — onun ihtiyacı benimkinden önce",stil:"agape"},
+      {t:"B) Romantizmle — dokunuş, söz, sürpriz",stil:"eros"},
+      {t:"C) Süreklilikle — her koşulda orada olarak",stil:"storge"}]},
+    {q:"İlişkide seni en çok ne korkutur?",sec:[
+      {t:"A) Terk edilmek",stil:"mania"},
+      {t:"B) Özgürlüğümü kaybetmek",stil:"ludus"},
+      {t:"C) Ona yeterince veremiyor olmak",stil:"agape"}]}
   ],
   profillerStil:{
-    eros:{baslik:"Romantik (Eros) 🌹",metin:"Senin için aşk; çekim, estetik ve yoğun duygudur. Eros stili, araştırmalarda ilişki doyumuyla en güçlü pozitif ilişki gösteren stillerden.",oneri:"Gücün tutkun; riskin, ilk yoğunluk düşünce 'aşk bitti' sanmak. Duygunun dalgalanması normaldir — dalganın dibinde karar verme."},
-    ludus:{baslik:"Oyuncu (Ludus) 🎭",metin:"Aşkı özgürlük ve eğlence alanı olarak yaşıyorsun; bağlanma baskısı seni kaçırır. Bu bir 'kusur' değil, bir stil — ama partnerin farklı stildeyse çarpışma kaçınılmaz.",oneri:"En kritik şey dürüstlük: ne arayıp ne aramadığını baştan söylemek, hem seni hem karşındakini korur."},
-    storge:{baslik:"Arkadaş-Sevgili (Storge) 🫂",metin:"Senin aşkın yavaş demlenir: önce güven, sonra sevgi. Araştırmalar bu stilin uzun ömürlü, sakin ve dayanıklı ilişkiler kurduğunu gösteriyor.",oneri:"Riskin: 'heyecan yok' diye seni hızlı tüketen fırtınalı tiplerle kendini kıyaslamak. Senin süper gücün istikrar — onu küçümseme."},
-    pragma:{baslik:"Akılcı (Pragma) 🧭",metin:"Aşkı kalbinle birlikte aklınla da seçersin: uyum, hedefler, hayat pratiği. Bu stil özellikle uzun vadeli kararlar söz konusu olduğunda güçlü bir pusula.",oneri:"Dikkat: kriter listesi bazen kalbin sesini bastırır. Ara sıra listeni kapatıp sadece 'yanındayken nasıl hissediyorum?' diye sor."},
-    mania:{baslik:"Fırtınalı (Mania) 🌪",metin:"Aşkın sende volümü hep yüksek: büyük mutluluklar, büyük kaygılar. Bu stil çoğu zaman kaygılı bağlanmayla el ele gider — sevgin gerçek, ama alarm sistemi de çok hassas.",oneri:"Duyguyu bastırma; şiddetini yönetmeyi öğren. 'Bağlanma Stilin' testini de çöz — bu fırtınanın kaynağını orada daha net göreceksin."},
-    agape:{baslik:"Adayan (Agape) 🕊",metin:"Vermek senin aşk dilin; fedakârlıkta zorlanmazsın. Bu, stillerin en cömerdi — ama karşılıksız kaldığında en çok yıpratanı.",oneri:"Şunu unutma: sürekli veren taraf olmak erdem değil, dengesizliktir. Senin ihtiyaçların da ilişkinin gündemine girmeyi hak ediyor."}
+    eros:{baslik:"Romantik (Eros) 🌹",metin:"Seçimlerin aşkı çekim, estetik ve yoğun duygu olarak yaşadığını gösteriyor. Eros, araştırmalarda ilişki doyumuyla en güçlü pozitif ilişkiyi gösteren stillerden.",oneri:"Gücün tutkun; riskin, ilk yoğunluk düşünce 'aşk bitti' sanmak. Duygunun dalgalanması normaldir — dalganın dibinde karar verme."},
+    ludus:{baslik:"Özgür Ruh (Ludus) 🎭",metin:"Aşkı özgürlük ve hafiflik alanı olarak yaşıyorsun; bağlanma baskısı seni kaçırır. Bu bir kusur değil, bir stil — ama farklı stildeki partnerle çarpışma kaçınılmaz.",oneri:"En kritik şey dürüstlük: ne arayıp ne aramadığını baştan söylemek hem seni hem karşındakini korur."},
+    storge:{baslik:"Arkadaş-Sevgili (Storge) 🫂",metin:"Senin aşkın yavaş demlenir: önce güven, sonra sevgi. Araştırmalar bu stilin uzun ömürlü ve dayanıklı ilişkiler kurduğunu gösteriyor.",oneri:"Riskin: 'heyecan yok' diye kendini fırtınalı tiplerle kıyaslamak. Senin süper gücün istikrar — küçümseme."},
+    pragma:{baslik:"Akılcı (Pragma) 🧭",metin:"Aşkı kalbinle birlikte aklınla seçersin: uyum, hedefler, hayat pratiği. Uzun vadeli kararlar için güçlü bir pusula.",oneri:"Dikkat: kriter listesi bazen kalbin sesini bastırır. Ara sıra listeyi kapat, sadece sor: 'Yanındayken nasıl hissediyorum?'"},
+    mania:{baslik:"Fırtınalı (Mania) 🌪",metin:"Aşkın volümü sende hep yüksek: büyük mutluluklar, büyük kaygılar. Bu stil çoğu zaman kaygılı bağlanmayla el ele gider — sevgin gerçek, alarm sistemin hassas.",oneri:"Duyguyu bastırma; şiddetini yönetmeyi öğren. 'Bağlanma Stilin' testini de çöz — fırtınanın kaynağını orada net göreceksin."},
+    agape:{baslik:"Adayan (Agape) 🕊",metin:"Vermek senin aşk dilin; fedakârlıkta zorlanmazsın. Stillerin en cömerdi — ve karşılıksız kaldığında en çok yıpratanı.",oneri:"Unutma: sürekli veren olmak erdem değil, dengesizliktir. Senin ihtiyaçların da ilişkinin gündemine girmeyi hak ediyor."}
   }
 },
 {
   id:"kiskanclik",
   baslik:"Kıskançlık Seviyen",
-  aciklama:"12 soruda kıskançlığının düşünce, duygu ve davranış haritasını çıkar.",
-  kaynak:"White'ın Romantik Kıskançlık Ölçeği (1981) çerçevesinden uyarlanmıştır (bilişsel/duygusal/davranışsal boyutlar).",
-  sure:"~3 dk", cevaplar:CEVAP5, tip:"toplam",
+  aciklama:"10 kıskançlık anı — her birinde en gerçekçi tepkini seç; düşünce-duygu-davranış haritanı gör.",
+  kaynak:"Pfeiffer & Wong'un Çok Boyutlu Kıskançlık Ölçeği'nin (1989) 'durum + tepki yelpazesi' kalıbından uyarlanmıştır.",
+  sure:"~3 dk", tip:"toplam",
   sorular:[
-    {q:"Onun eski sevgililerini düşünüp huzursuz olurum."},
-    {q:"Birine gülümsemesini bile içimden sorguladığım olur."},
-    {q:"Bana söylemediği şeyler olduğunu sık sık düşünürüm."},
-    {q:"Sosyal medyada kimleri beğendiğini zihnimde takip ederim."},
-    {q:"Başkasına ilgi gösterdiğinde midem düğümlenir."},
-    {q:"Kıskançlık hissi bazen beni benden alır."},
-    {q:"Onun dikkatini çeken kişilere karşı öfke duyarım."},
-    {q:"Kıskandığımda kendimi değersiz hissederim."},
-    {q:"Telefonunu kontrol etme isteği duyarım."},
-    {q:"Nerede ve kiminle olduğunu sık sık sorarım."},
-    {q:"Sosyal medya hesaplarını düzenli kolaçan ederim."},
-    {q:"Kıskançlık yüzünden tartışma çıkardığım olur."}
+    {q:"Telefonu masada ters duruyor ve bir bildirim geldi. Sen?",sec:[
+      {t:"A) Fark etmem bile",p:0},{t:"B) Kim diye merak ederim ama sormam",p:1},{t:"C) 'Kimdi?' diye sorarım; içim kurcalanır",p:2},{t:"D) Fırsatını bulursam bakarım",p:3}]},
+    {q:"Bir arkadaşının story'sinde, tanımadığın biriyle gülerken gördün. İlk hareketin?",sec:[
+      {t:"A) 'Güzel eğlenmişler' der geçerim",p:0},{t:"B) 'Kimmiş o?' içimden geçer, takılmam",p:1},{t:"C) Sorarım; cevap beni tam rahatlatmaz",p:2},{t:"D) O kişinin profilini bulup incelerim",p:3}]},
+    {q:"'İş yerinden biriyle çok iyi anlaşıyoruz' dedi. İçinden geçen?",sec:[
+      {t:"A) Ne güzel, iyi bir ortamı olsun",p:0},{t:"B) Hafif bir 'hmm' — sonra unuturum",p:1},{t:"C) O kişiyi sorgulamaya başlarım: kim, kaç yaşında, evli mi",p:2},{t:"D) O günden sonra iş saatlerini zihnimden takip ederim",p:3}]},
+    {q:"Eski sevgilisi fotoğrafını beğendi. Tepkin?",sec:[
+      {t:"A) Beğeni işte; anlam yüklemem",p:0},{t:"B) Gözüme takılır ama bir şey demem",p:1},{t:"C) 'Bunu gördün mü?' diye açarım konuyu",p:2},{t:"D) Eskiye dair her şeyi yeniden sorgularım; kavga çıkabilir",p:3}]},
+    {q:"Bu akşam sensiz bir davete gidiyor. Akşamın nasıl geçer?",sec:[
+      {t:"A) Kendi akşamımın keyfini çıkarırım",p:0},{t:"B) Arada aklıma gelir, 'iyi eğlensin' derim",p:1},{t:"C) Kimlerle olduğunu düşünmekten kendimi alamam; ara ara yazarım",p:2},{t:"D) Story'leri, etiketleri, kimin gittiğini takip ederim",p:3}]},
+    {q:"Sohbette ilk kez duyduğun bir isim geçti: 'Elif'le kahve içtik.' Sen?",sec:[
+      {t:"A) Sohbete devam ederim; isim isimdir",p:0},{t:"B) 'Elif kim?' diye doğal bir merakla sorarım",p:1},{t:"C) Soru üstüne soru sorarım; ton değişir",p:2},{t:"D) İsmi aklıma yazarım; sosyal medyada ararım",p:3}]},
+    {q:"Telefonuna yeni şifre koyduğunu fark ettin. İlk düşüncen?",sec:[
+      {t:"A) Herkesin şifresi var; benim de var",p:0},{t:"B) 'Değiştirmiş' diye not ederim, kurcalamam",p:1},{t:"C) 'Neden değiştirdin?' diye sorarım; cevap yetmez",p:2},{t:"D) Saklayacak bir şeyi olduğuna neredeyse eminimdir",p:3}]},
+    {q:"Sosyal medyada birine yazdığı yorum sana fazla samimi geldi. Sen?",sec:[
+      {t:"A) Üslubu böyle; herkese sıcaktır",p:0},{t:"B) Bir an duraksarım, sonra geçerim",p:1},{t:"C) Ekran görüntüsünü alıp ona gösteririm",p:2},{t:"D) O kişinin tüm etkileşim geçmişini kazarım",p:3}]},
+    {q:"Sana ayırdığı vakit azaldı, telefonda geçirdiği süre arttı. Yaklaşımın?",sec:[
+      {t:"A) Yoğun bir dönemdedir; açık açık sorarım, cevabına güvenirim",p:0},{t:"B) Gözlemlerim; sürerse konuşurum",p:1},{t:"C) 'Kiminle yazışıyorsun?' sorusu sıklaşır bende",p:2},{t:"D) Telefonu elinden düştüğü an ekrana bakarım",p:3}]},
+    {q:"Dürüst ol: kıskançlığın ilişkilerinde nasıl bir iz bıraktı?",sec:[
+      {t:"A) İz bırakacak kadar yer kaplamadı",p:0},{t:"B) Ara sıra tatlı-tuzlu tartışma, o kadar",p:1},{t:"C) Ciddi kavgalara sebep oldu",p:2},{t:"D) İlişki(ler) bu yüzden bitti / bitme noktasına geldi",p:3}]}
   ],
   profiller:[
-    {min:37,baslik:"Kıskançlık dümende 🌋",metin:"Düşünce, duygu ve davranış boyutlarının üçünde de kıskançlık yüksek çalışıyor. Bu seviye hem seni hem ilişkiyi yoruyor — ve araştırmalara göre kontrol davranışları (telefon kontrolü, sorgulama) güveni onarmaz, tam tersine erozyona uğratır.",oneri:"Kıskançlık çoğu zaman ilişkiden değil, değersizlik korkusundan beslenir. 'Bağlanma Stilin' testini çöz; tablo tanıdık gelirse bir uzmanla çalışmak bu döngüyü kırmanın en hızlı yolu."},
-    {min:25,baslik:"Alarm sık çalıyor 🔔",metin:"Kıskançlığın ara sıra değil, düzenli olarak devrede. Duygunun kendisi doğal; sorun, yalancı alarmlarla gerçek sinyalleri ayırt etmekte zorlanmak.",oneri:"Kıskançlık yükseldiğinde tek soru sor: 'Elimde davranışsal kanıt var mı, yoksa senaryo mu yazıyorum?' Kanıt yoksa duyguyu partnerine suçlama olmadan söyle: 'Şu durumda kıskançlık hissettim' — sorgulamaktan çok daha iyi çalışır."},
-    {min:13,baslik:"Sağlıklı doz 💛",metin:"Kıskançlığın var ama dümende değil — araştırmacıların 'bağın işareti' saydığı ılımlı bölgedesin. Ara sıra hissedip yönetebiliyorsun.",oneri:"Bu dengeyi koru: kıskançlık hissettiğinde bastırmak yerine kısaca ifade etmek ('bunu görünce bir şey hissettim') dozu düşük tutmanın en iyi yolu."},
-    {min:0,baslik:"Sakin liman 🌊",metin:"Kıskançlık senin ilişki deneyiminde neredeyse hiç yer kaplamıyor. Bu genelde güvenli bağlanma ve sağlam özgüvenin işareti.",oneri:"Tek kontrol sorusu: bu sakinlik güvenden mi, yoksa mesafeden mi geliyor? İlgisizlikten gelen 'kıskanmam' ile güvenden gelen 'kıskanmam' farklı şeylerdir — dürüst cevap sende."}
+    {min:23,baslik:"Kıskançlık dümende 🌋",metin:"Seçimlerin düşünce, duygu ve davranışın üçünde de kıskançlığın yüksek çalıştığını gösteriyor. Araştırmalara göre kontrol davranışları (telefon kontrolü, takip) güveni onarmaz; erozyona uğratır — ve en çok seni yorar.",oneri:"Kıskançlık çoğu zaman ilişkiden değil, değersizlik korkusundan beslenir. 'Bağlanma Stilin' testini çöz; tablo tanıdıksa bir uzmanla çalışmak bu döngüyü kırmanın en hızlı yolu."},
+    {min:15,baslik:"Alarm sık çalıyor 🔔",metin:"Kıskançlık sende ara sıra değil, düzenli devrede. Duygu doğal; sorun, yalancı alarmla gerçek sinyali ayırt etmekte zorlanmak.",oneri:"Alarm çaldığında tek soru: 'Elimde davranışsal kanıt var mı, senaryo mu yazıyorum?' Kanıt yoksa duyguyu suçlamasız söyle: 'Şunu görünce bir şey hissettim' — sorgudan çok daha iyi çalışır."},
+    {min:8,baslik:"Sağlıklı doz 💛",metin:"Kıskançlık var ama dümende değil — araştırmacıların 'bağın işareti' saydığı ılımlı bölgedesin: hissediyorsun ve yönetebiliyorsun.",oneri:"Bu dengeyi koru: hissettiğinde bastırmak yerine kısaca ifade etmek ('bunu görünce bir şey hissettim'), dozu düşük tutmanın en iyi yolu."},
+    {min:0,baslik:"Sakin liman 🌊",metin:"Kıskançlık senin ilişki deneyiminde neredeyse yer kaplamıyor. Genelde güvenli bağlanma ve sağlam özgüven işareti.",oneri:"Tek kontrol sorusu: bu sakinlik güvenden mi, mesafeden mi? İlgisizlikten gelen 'kıskanmam' ile güvenden gelen 'kıskanmam' farklıdır — dürüst cevap sende."}
+  ]
+},
+{
+  id:"iliski-saglami",
+  baslik:"İlişkiniz Ne Kadar Sağlam?",
+  aciklama:"12 sahne, her birinde sizin evinizde en çok yaşanana en yakın şıkkı seç.",
+  kaynak:"Gottman'ın 'Dört Atlı' bulguları ve Sağlam İlişki Evi modelinden (Gottman & Levenson uzun dönem çift çalışmaları) senaryo formatına uyarlanmıştır.",
+  sure:"~4 dk", tip:"toplam",
+  sorular:[
+    {q:"Bir tartışma başlıyor. Genelde nasıl başlar?",sec:[
+      {t:"A) Sakin; konu neyse onunla",p:3},{t:"B) Gergin ama saygılı",p:2},{t:"C) Suçlamayla: 'Sen zaten hep…'",p:1},{t:"D) Yüksek sesle, sertçe",p:0}]},
+    {q:"Tartışmanın ortasında en sık görülen sahne?",sec:[
+      {t:"A) Dinleyip anlamaya çalışıyoruz",p:3},{t:"B) Savunmalar var ama sonunda çözüme geliyoruz",p:2},{t:"C) Karşılıklı suçlama yarışı",p:1},{t:"D) Biri tamamen kapanıyor ya da çekip gidiyor",p:0}]},
+    {q:"Kavga bitti. Sonrası?",sec:[
+      {t:"A) Kısa sürede barışırız — espri, sarılma, konuşma",p:3},{t:"B) Bir gün içinde konuşup toparlarız",p:2},{t:"C) Günlerce küslük",p:1},{t:"D) Konu halının altına; birikiyor",p:0}]},
+    {q:"Onun şu sıralar yaşadıkları hakkında ne kadar bilgin var?",sec:[
+      {t:"A) Detaylı — derdini, sevincini, gündemini bilirim",p:3},{t:"B) Ana hatlarıyla",p:2},{t:"C) Az; pek konuşmuyoruz",p:1},{t:"D) Hiç; sormuyoruz birbirimize",p:0}]},
+    {q:"En son ne zaman 'iyi ki varsın' benzeri bir şey duydun ya da söyledin?",sec:[
+      {t:"A) Bu hafta",p:3},{t:"B) Bu ay",p:2},{t:"C) Hatırlamıyorum",p:1},{t:"D) Bizde öyle şeyler söylenmez",p:0}]},
+    {q:"Ortak gelecek konuşmaları (ev, tatil, hayaller) nasıl geçer?",sec:[
+      {t:"A) Heyecanla; hayallerimiz ortak",p:3},{t:"B) Ara ara, fena değil",p:2},{t:"C) O konular pek açılmaz",p:1},{t:"D) Açılınca ayrı telden çalarız",p:0}]},
+    {q:"Zor bir haftandasın. O ne yapıyor?",sec:[
+      {t:"A) Yükü fiilen paylaşıyor",p:3},{t:"B) Soruyor, moral veriyor",p:2},{t:"C) Fark etmiyor",p:1},{t:"D) Üstüne bir de o yük ekliyor",p:0}]},
+    {q:"Evde/aranızda sessizlik olduğunda bu sessizlik…",sec:[
+      {t:"A) Huzur",p:3},{t:"B) Nötr",p:2},{t:"C) Hafif gerginlik",p:1},{t:"D) Soğuk savaş",p:0}]},
+    {q:"Ona bir şey söylerken kendini sansürler misin?",sec:[
+      {t:"A) Hayır; her konuyu açabilirim",p:3},{t:"B) Nadiren, hassas konularda",p:2},{t:"C) Sık sık kelime seçerim",p:1},{t:"D) Çoğu konu mayınlı arazi",p:0}]},
+    {q:"Birlikte gülmek sizde ne sıklıkta?",sec:[
+      {t:"A) Her gün bir şeye güleriz",p:3},{t:"B) Sık sık",p:2},{t:"C) Nadir",p:1},{t:"D) En son ne zamandı, hatırlamıyorum",p:0}]},
+    {q:"'Aynı takımdayız' hissi?",sec:[
+      {t:"A) Her zaman — dünyaya karşı biz",p:3},{t:"B) Genelde",p:2},{t:"C) Bazen rakip gibiyiz",p:1},{t:"D) Çoğunlukla karşı taraflardayız",p:0}]},
+    {q:"Şefkat ve fiziksel yakınlık (sarılma, dokunma) sizde…",sec:[
+      {t:"A) Doğal ve düzenli",p:3},{t:"B) Var ama azaldı",p:2},{t:"C) Özel günlere kaldı",p:1},{t:"D) Neredeyse bitti",p:0}]}
+  ],
+  profiller:[
+    {min:27,baslik:"Sağlam temel 🏡",metin:"Seçimlerin Gottman'ın 'ustalar' dediği çiftlerin imzasını taşıyor: risk işaretleri (suçlama, küçümseme, duvar örme) düşük; tanıma, takdir ve onarım yüksek. Kavga etmiyorsunuz demek değil — kavgayı yönetebiliyorsunuz demek.",oneri:"Sağlam ilişkinin tuzağı rehavet. Haftada bir 'senin dünyanda neler var?' sohbeti, bu puanı korumanın en ucuz sigortası."},
+    {min:15,baslik:"Temel sağlam ama bakım istiyor 🔧",metin:"Sevgi ve iyi niyet görünüyor; ama bazı sahnelerde risk örüntüleri (muhtemelen tartışma biçimleri) yerleşmeye başlamış. İyi haber: Gottman'a göre belirleyici olan kavga sayısı değil, onarım girişimlerinin tutması.",oneri:"Düşük puan verdiğin sahnelere bak: hangisi sizin eviniz? O tek örüntüyü hedefle — örn. suçlamayla başlıyorsa cümleye 'sen' yerine 'ben' ile başlamak bile tabloyu ölçülür biçimde düzeltir."},
+    {min:0,baslik:"Alarm bölgesi 🚨",metin:"Seçtiğin sahneler (sürekli suçlama, küçümseme, duvar örme, sansür) Gottman'ın araştırmalarında ilişkinin geleceği için en riskli sinyaller. 'Bitti' demek değil — ama 'kendiliğinden düzelir' de demek değil.",oneri:"İki dürüst soru: (1) İkiniz de bu tabloyu değiştirmek istiyor musunuz? (2) Kendi başınıza mı deneyeceksiniz? Çift terapisi tam bu tablo için var ve işe yaradığı iyi belgelenmiş."}
   ]
 },
 {
   id:"hizli-checkup",
   baslik:"Hızlı Check-up",
-  aciklama:"7 soruda ilişki doyumunun anlık fotoğrafı — 90 saniyede.",
-  kaynak:"Hendrick'in İlişki Değerlendirme Ölçeği'nden (1988) uyarlanmıştır.",
-  sure:"~2 dk", cevaplar:CEVAP5, tip:"toplam",
+  aciklama:"7 soru, 2 dakika — ilişki doyumunun anlık fotoğrafı: yeşil, sarı ya da kırmızı bölge.",
+  kaynak:"Hendrick'in İlişki Değerlendirme Ölçeği'nden (1988) şıklı formata uyarlanmıştır.",
+  sure:"~2 dk", tip:"toplam",
   sorular:[
-    {q:"Genel olarak bu ilişkiden memnunum."},
-    {q:"Bu ilişki beklentilerimi karşılıyor."},
-    {q:"Partnerim ihtiyaçlarımı iyi karşılıyor."},
-    {q:"Çevremde gördüğüm ilişkilere kıyasla bizimki iyi durumda."},
-    {q:"Bu ilişkiye başladığıma pişman değilim."},
-    {q:"Partnerimi seviyorum."},
-    {q:"İlişkimizde beni ciddi kaygılandıran sorunlar var.",ters:true}
+    {q:"Bu ilişkiyi yakın bir arkadaşına anlatırken içinden gelen ilk cümle?",sec:[
+      {t:"A) 'İyi ki o var'",p:3},{t:"B) 'İyiyiz; ufak pürüzler işte'",p:2},{t:"C) 'Valla bilmiyorum…'",p:1},{t:"D) Şikâyet ederdim",p:0}]},
+    {q:"Başlarken beklediklerinle bugünü kıyasla:",sec:[
+      {t:"A) Beklediğimden bile iyi",p:3},{t:"B) Aşağı yukarı beklediğim gibi",p:2},{t:"C) Beklentimin altında",p:1},{t:"D) Bambaşka ve kötü yönde",p:0}]},
+    {q:"İhtiyaçların (ilgi, destek, alan) bu ilişkide…",sec:[
+      {t:"A) Karşılanıyor",p:3},{t:"B) Çoğunlukla karşılanıyor",p:2},{t:"C) Ara sıra karşılanıyor",p:1},{t:"D) Nadiren karşılanıyor",p:0}]},
+    {q:"Çevrendeki ilişkilere baktığında?",sec:[
+      {t:"A) İyi ki bizimki bizimki",p:3},{t:"B) Ortalamanın üstündeyiz",p:2},{t:"C) Ortalamayız",p:1},{t:"D) Başkalarınınkine imreniyorum",p:0}]},
+    {q:"Zamanı geri alsan?",sec:[
+      {t:"A) Yine onu seçerdim, düşünmeden",p:3},{t:"B) Muhtemelen yine onu",p:2},{t:"C) Emin değilim",p:1},{t:"D) Farklı seçerdim",p:0}]},
+    {q:"'Onu seviyorum' cümlesi şu an sende nasıl duruyor?",sec:[
+      {t:"A) Tam kalpten",p:3},{t:"B) Evet, seviyorum",p:2},{t:"C) Sevgi mi alışkanlık mı, karışık",p:1},{t:"D) Söylesem zorlama olur",p:0}]},
+    {q:"Seni gerçekten kaygılandıran konu var mı?",sec:[
+      {t:"A) Yok",p:3},{t:"B) Küçük şeyler",p:2},{t:"C) Bir-iki büyük konu var",p:1},{t:"D) Birden çok ve büyüyorlar",p:0}]}
   ],
   profiller:[
-    {min:22,baslik:"Yeşil bölge 🟢",metin:"Doyum göstergelerin yüksek: beklenti, ihtiyaç ve sevgi hatlarının üçü de çalışıyor. Bu kısa test derin analiz değil ama fotoğraf net — bugün itibarıyla iyi bir yerdesiniz.",oneri:"Fotoğrafı filme çevir: bu testi ayda bir çöz, puanın seyrini izle. Doyum düşüşleri erken yakalandığında kolay onarılır."},
-    {min:14,baslik:"Sarı bölge 🟡",metin:"İlişki ayakta ama bazı göstergeler kıpır kıpır: muhtemelen beklentiler ile gerçeklik arasında açılan bir makas var. Sarı bölge, ilişkilerin en yaygın ve en müdahaleye açık bölgesidir.",oneri:"En düşük puan verdiğin soruya bak — konuşulacak konu tam orada. Derinleşmek için 'İlişkiniz Ne Kadar Sağlam?' testine geç: hangi örüntünün puan düşürdüğünü gösterir."},
-    {min:0,baslik:"Kırmızı bölge 🔴",metin:"Doyum göstergelerinin çoğu düşük. Bu tek başına 'bitir' anlamına gelmez — ama 'böyle devam etmesin' anlamına kesin gelir.",oneri:"İki yol var: birlikte onarmak (bunu istemek için iki taraf da gerekli) ya da dürüst bir değerlendirme. Ciddi ve süreğen mutsuzlukta çift terapisi gerçekten işe yarayan bir araç — güçsüzlerin değil, ciddiye alanların tercihi."}
+    {min:17,baslik:"Yeşil bölge 🟢",metin:"Doyum göstergelerin yüksek: beklenti, ihtiyaç ve sevgi hatlarının üçü de çalışıyor. Bu kısa test derin analiz değil ama fotoğraf net — bugün itibarıyla iyi bir yerdesiniz.",oneri:"Fotoğrafı filme çevir: ayda bir çöz, puanın seyrini izle. Doyum düşüşleri erken yakalanınca kolay onarılır."},
+    {min:11,baslik:"Sarı bölge 🟡",metin:"İlişki ayakta ama bazı göstergeler kıpırdıyor: muhtemelen beklenti ile gerçeklik arasında açılan bir makas var. Sarı bölge, ilişkilerin en yaygın ve müdahaleye en açık bölgesidir.",oneri:"En düşük puanlı sorun neydi? Konuşulacak konu tam orası. Derinleşmek için 'İlişkiniz Ne Kadar Sağlam?' testine geç."},
+    {min:0,baslik:"Kırmızı bölge 🔴",metin:"Doyum göstergelerinin çoğu düşük. Tek başına 'bitir' demek değil — ama 'böyle devam etmesin' demek, kesin.",oneri:"İki yol: birlikte onarmak (iki taraf da istemeli) ya da dürüst bir değerlendirme. Süreğen mutsuzlukta çift terapisi gerçekten işe yarayan bir araçtır — güçsüzlerin değil, ciddiye alanların tercihi."}
   ]
-},
-{
-  id:"ask-tipi",
-  baslik:"Aşkınız Hangi Tip?",
-  aciklama:"12 soruda ilişkinizin üç bileşenini ölç, 8 aşk tipinden hangisi olduğunuzu gör.",
-  kaynak:"Sternberg'in Üçgen Aşk Kuramı'ndan (1986) uyarlanmıştır: yakınlık + tutku + bağlılık.",
-  sure:"~3 dk", cevaplar:CEVAP5, tip:"eksen3",
-  sorular:[
-    {q:"Ona her şeyimi anlatabilirim.",eksen:"yakinlik"},
-    {q:"Kendimi ona gerçekten yakın hissediyorum.",eksen:"yakinlik"},
-    {q:"Zor bir anımda ilk onu ararım.",eksen:"yakinlik"},
-    {q:"Beni gerçekten anladığını hissediyorum.",eksen:"yakinlik"},
-    {q:"Ona baktığımda hâlâ heyecanlanıyorum.",eksen:"tutku"},
-    {q:"Aramızdaki fiziksel çekim güçlü.",eksen:"tutku"},
-    {q:"Gün içinde onu sık sık düşünüyorum.",eksen:"tutku"},
-    {q:"Romantik anlarımız beni hâlâ titretiyor.",eksen:"tutku"},
-    {q:"Bu ilişkiyi uzun vadede sürdürme kararlılığım net.",eksen:"baglilik"},
-    {q:"Zor dönemlerde bile vazgeçmeyi düşünmüyorum.",eksen:"baglilik"},
-    {q:"Geleceğimi onunla planlıyorum.",eksen:"baglilik"},
-    {q:"Bu sevgiyi korumak için sorumluluk hissediyorum.",eksen:"baglilik"}
-  ],
-  profillerUc:{
-    "111":{baslik:"Tam Aşk 💎",metin:"Sternberg'in 'consummate love' dediği nadir kombinasyon: yakınlık, tutku ve bağlılığın üçü de yüksek. Kurama göre bu, aşkın en dolu hali — ve korunması kurulmasından zordur.",oneri:"Sternberg'in uyarısı net: tam aşk statik değildir, bileşenlerden biri ihmalle söner. Üç bileşene de düzenli küçük yatırımlar yap — sohbet (yakınlık), flört (tutku), plan (bağlılık)."},
-    "110":{baslik:"Romantik Aşk 🌹",metin:"Yakınlık ve tutku güçlü; bağlılık boyutu henüz aynı seviyede değil. Bu, ilişkilerin en heyecanlı evrelerinden — ve doğal olarak bir yol ayrımına gider: derinleşmek ya da buharlaşmak.",oneri:"Bağlılık kendiliğinden oluşmaz, konuşarak kurulur. 'Biz nereye gidiyoruz?' sorusundan kaçmayın — doğru zamanda sorulduğunda romantizmi bozmaz, büyütür."},
-    "101":{baslik:"Yoldaş Aşkı 🫂",metin:"Yakınlık ve bağlılık sağlam; tutku boyutu sakinlemiş. Uzun ilişkilerin en yaygın ve en dayanıklı tipi — ama tutkunun tamamen sönmesi kader değil.",oneri:"Tutku Ölçer testini çöz ve sonucuna göre hareket et: yenilik, ortak heyecan ve fiziksel yakınlık tutkuyu yoldaş aşkının içine geri taşıyabilir (Acevedo & Aron bunun mümkün olduğunu gösterdi)."},
-    "011":{baslik:"Yıldırım Aşkı ⚡",metin:"Tutku ve bağlılık yüksek ama yakınlık (birbirini gerçekten tanıma) geride. Sternberg buna 'fatuous love' der: hızlı yanan, temeli sonradan atılan aşk.",oneri:"Temeli şimdi at: 'Ona Sor: Sevgi Ölçer' testini birlikte oynayın — birbirinizin haritasını ne kadar taşıdığınızı görün ve eksikleri sohbete dönüştürün."},
-    "100":{baslik:"Arkadaşça Sevgi 🤝",metin:"Yakınlık güçlü, tutku ve bağlılık sakin. Bu değerli bir bağ — ama romantik ilişki beklentisiyle yaşanıyorsa taraflardan birinde eksiklik hissi birikebilir.",oneri:"Dürüst soru: bu ilişkiden ne bekliyorsun? Cevabın 'daha fazlası' ise bunu şimdi konuşmak, yıllar sonra konuşmaktan çok daha az acıtır."},
-    "010":{baslik:"Tutulma 🔥",metin:"Tutku tek başına sahnede: yoğun çekim var, derin tanıma ve bağlılık henüz yok. Sternberg buna 'infatuation' der — her büyük aşkın başlangıcı böyledir ama her tutulma büyük aşka dönüşmez.",oneri:"Keyfini çıkar ama kararları tutkunun zirvesinde verme. Tanıma arttıkça (yakınlık büyüdükçe) bu ateşin neye dönüştüğünü o zaman görürsün."},
-    "001":{baslik:"Kararlı Bağ 🧭",metin:"Bağlılık yüksek ama yakınlık ve tutku düşük — Sternberg'in 'empty love' dediği durum. Uzun ilişkilerde bir dönem böyle hissedilebilir; kalıcılaşması ise konuşulması gereken bir sinyal.",oneri:"Bağlılığın varlığı büyük bir avantaj: iskelet sağlam, içi yeniden doldurulabilir. Küçük başla — haftada bir gerçek sohbet (telefonsuz 30 dakika) yakınlığı geri inşa etmenin ilk tuğlası."},
-    "000":{baslik:"Henüz Tanımsız 🌫",metin:"Üç bileşen de şu an düşük görünüyor. Bu çok yeni bir ilişkinin doğal hali olabilir — ya da uzun süredir devam eden bir uzaklaşmanın fotoğrafı.",oneri:"Hangisi olduğunu süre söyler: ilişki yeniyse zaman tanı ve testi bir ay sonra tekrarla; yıllanmış bir ilişkiyse bu tablo, kendine dürüst sorular sormak için bir davet."}
-  }
 }
 ];
 
@@ -609,13 +755,13 @@ const HAREKET_OK = matchMedia("(prefers-reduced-motion: no-preference)").matches
   kur();addEventListener("resize",kur);
   if(HAREKET_OK){(function dongu(t){ciz(t||0);requestAnimationFrame(dongu);})();}
   else ciz(0);
-})();
-
+})();function toplamAdim(t){return t.tip==="eslesme"? t.sorular.length*2 : t.sorular.length;}
 function anasayfa(){
   goster("liste"); aktifTest=null;
   const el=document.getElementById("liste"); el.innerHTML="";
   TESTLER.forEach((t,ix)=>{
-    const chip = t.tip==="onasor" ? '<span class="chip onasor">💬 ONA SOR · PARTNERİNLE</span>' : '<span class="chip">KENDİN ÇÖZ</span>';
+    const cift = (t.tip==="onasor"||t.tip==="eslesme");
+    const chip = cift ? '<span class="chip onasor">💬 ONA SOR · PARTNERİNLE</span>' : '<span class="chip">KENDİN ÇÖZ</span>';
     el.innerHTML+=`<div class="card${ix===0?" one":""}">
       ${chip}
       <h3>${t.baslik}</h3>
@@ -625,7 +771,6 @@ function anasayfa(){
       <button class="btn" onclick="basla('${t.id}')">Teste Başla</button>
     </div>`;
   });
-  // kartlar sırayla doğsun
   el.querySelectorAll(".card").forEach((k,i)=>setTimeout(()=>k.classList.add("dogdu"), HAREKET_OK? 90*i : 0));
 }
 function goster(id){["liste","test","sonuc"].forEach(e=>document.getElementById("ekran-"+e).classList.add("hide"));document.getElementById("ekran-"+id).classList.remove("hide");window.scrollTo(0,0);}
@@ -640,22 +785,32 @@ function yonergeGoster(){
   b.onclick=()=>soruGoster();c.appendChild(b);canlandir();
 }
 function soruGoster(){
-  const t=aktifTest,s=t.sorular[soruIx];
-  document.getElementById("pbar").style.width=(soruIx/t.sorular.length*100)+"%";
-  document.getElementById("sayac").textContent=(soruIx+1)+" / "+t.sorular.length;
-  document.getElementById("soru").textContent=s.q;
+  const t=aktifTest, N=toplamAdim(t);
+  let s, baslik, sayacTxt;
+  if(t.tip==="eslesme"){
+    const qi=Math.floor(soruIx/2), faz=soruIx%2;
+    s=t.sorular[qi];
+    baslik=(faz===0?"🙈 ÖNCE SEN (ona gösterme!) — ":"💬 ŞİMDİ ONA SOR ve şıkları oku — ")+s.q;
+    sayacTxt="Soru "+(qi+1)+" / "+t.sorular.length+(faz===0?" · senin cevabın":" · onun cevabı");
+  }else{
+    s=t.sorular[soruIx];
+    baslik=s.q;
+    sayacTxt=(soruIx+1)+" / "+N;
+  }
+  document.getElementById("pbar").style.width=(soruIx/N*100)+"%";
+  document.getElementById("sayac").textContent=sayacTxt;
+  document.getElementById("soru").textContent=baslik;
   const c=document.getElementById("cevaplar");c.innerHTML="";
-  const secenekler=s.sec?s.sec.map(o=>o.t):t.cevaplar;
-  secenekler.forEach((etiket,i)=>{
-    const b=document.createElement("button");b.className="cevap";b.textContent=etiket;
-    b.onclick=()=>{puanlar[soruIx]=s.sec?s.sec[i].p:(s.ters?(t.cevaplar.length-1-i):i);soruIx++;soruIx<t.sorular.length?soruGoster():bitir();};
+  s.sec.forEach((o,i)=>{
+    const b=document.createElement("button");b.className="cevap";b.textContent=o.t;
+    b.onclick=()=>{puanlar[soruIx]=i;soruIx++;soruIx<N?soruGoster():bitir();};
     c.appendChild(b);
   });
   canlandir();
 }
 function geri(){if(soruIx>0){soruIx--;soruGoster();}else anasayfa();}
 
-function sayacCoz(hedef){ // %0 -> %hedef akıcı sayım
+function sayacCoz(hedef){
   const el=document.getElementById("halkaYuzde");
   if(!HAREKET_OK){el.textContent="%"+hedef;return;}
   const t0=performance.now(),sure=1300;
@@ -670,14 +825,14 @@ function kalpPatlat(yuzde){
   const alan=document.getElementById("halkaAlan");
   const semboller=["♥","✦","♥","❋"];const renkler=["#FF5C8A","#FFD98A","#C7A5FF","#FF9AB8"];
   for(let i=0;i<20;i++){
-    const s=document.createElement("span");s.className="kalpcik";s.textContent=semboller[i%4];
+    const sp=document.createElement("span");sp.className="kalpcik";sp.textContent=semboller[i%4];
     const aci=Math.random()*6.28,mes=90+Math.random()*90;
-    s.style.color=renkler[i%4];
-    s.style.setProperty("--dx",Math.cos(aci)*mes+"px");
-    s.style.setProperty("--dy",Math.sin(aci)*mes+"px");
-    s.style.setProperty("--dn",(Math.random()*80-40)+"deg");
-    s.style.setProperty("--gec",(Math.random()*.35)+"s");
-    alan.appendChild(s);setTimeout(()=>s.remove(),1600);
+    sp.style.color=renkler[i%4];
+    sp.style.setProperty("--dx",Math.cos(aci)*mes+"px");
+    sp.style.setProperty("--dy",Math.sin(aci)*mes+"px");
+    sp.style.setProperty("--dn",(Math.random()*80-40)+"deg");
+    sp.style.setProperty("--gec",(Math.random()*.35)+"s");
+    alan.appendChild(sp);setTimeout(()=>sp.remove(),1600);
   }
 }
 function halkaCiz(yuzde,etiket){
@@ -699,59 +854,75 @@ function eksenCiz(liste){
   }));
 }
 function bitir(){
-  const t=aktifTest;let profil,puan,max;
+  const t=aktifTest;let profil,basOn="";
   document.getElementById("s-eksenler").innerHTML="";
-  if(t.tip==="onasor"){
-    puan=puanlar.reduce((a,b)=>a+b,0);
-    max=t.sorular.reduce((a,s)=>a+Math.max(...s.sec.map(o=>o.p)),0);
+  document.getElementById("s-puan").textContent="";
+  const secPuan=(s,ix)=>s.sec[ix].p||0;
+  const secMax=s=>Math.max(...s.sec.map(o=>o.p||0));
+
+  if(t.tip==="eslesme"){
+    let es=0;
+    t.sorular.forEach((s,qi)=>{if(puanlar[qi*2]===puanlar[qi*2+1])es++;});
+    const yuzde=Math.round(es/t.sorular.length*100);
+    document.getElementById("s-puan").textContent=es+" / "+t.sorular.length+" cevap eşleşti";
+    profil=t.profillerYuzde.find(p=>yuzde>=p.min);
+    halkaCiz(yuzde,"EŞLEŞME");
+  }else if(t.tip==="onasor"){
+    let puan=0,max=0;const eks={};
+    t.sorular.forEach((s,i)=>{
+      const pp=secPuan(s,puanlar[i]),mm=secMax(s);
+      puan+=pp;max+=mm;
+      const e=s.eksen||"genel";eks[e]=eks[e]||[0,0];eks[e][0]+=pp;eks[e][1]+=mm;
+    });
     const yuzde=Math.round(puan/max*100);
-    const eks={};
-    t.sorular.forEach((s,i)=>{const e=s.eksen||"genel";eks[e]=eks[e]||[0,0];eks[e][0]+=puanlar[i];eks[e][1]+=Math.max(...s.sec.map(o=>o.p));});
-    const ad={tanima:"Seni tanıyor mu",yatirim:"Duygusal yatırım"};
+    const ad={yakinlik:"Yakınlık & bağ",yatirim:"Duygusal yatırım"};
     eksenCiz(Object.entries(eks).map(([e,v])=>({ad:ad[e]||e,yuzde:Math.round(v[0]/v[1]*100)})));
-    document.getElementById("s-puan").textContent="";
     profil=t.profillerYuzde.find(p=>yuzde>=p.min);
     halkaCiz(yuzde,"SEVGİ ÖLÇER");
-  }else if(t.tip==="stil"){
-    const S={},N={};
-    t.sorular.forEach((s,i)=>{S[s.stil]=(S[s.stil]||0)+puanlar[i];N[s.stil]=(N[s.stil]||0)+4;});
-    let baskin=null;Object.keys(S).forEach(k=>{if(baskin===null||S[k]>S[baskin])baskin=k;});
-    profil=t.profillerStil[baskin];
+  }else if(t.tip==="eksen2"){
+    let kaygi=0,kacinma=0,maxK=0,maxC=0;
+    t.sorular.forEach((s,i)=>{
+      const o=s.sec[puanlar[i]];
+      kaygi+=o.k||0;kacinma+=o.c||0;
+      maxK+=Math.max(...s.sec.map(x=>x.k||0));maxC+=Math.max(...s.sec.map(x=>x.c||0));
+    });
+    const kY=kaygi>maxK/3, cY=kacinma>maxC/3;
+    profil=t.profillerEksen[kY?(cY?"korkulu":"kaygili"):(cY?"kacingan":"guvenli")];
     document.getElementById("halkaAlan").style.display="none";
-    eksenCiz(Object.keys(S).map(k=>({ad:t.stilAd[k],yuzde:Math.round(S[k]/N[k]*100)})).sort((a,b)=>b.yuzde-a.yuzde));
-    document.getElementById("s-puan").textContent="";
+    eksenCiz([{ad:"Kaygı ekseni",yuzde:Math.round(kaygi/maxK*100)},{ad:"Kaçınma ekseni",yuzde:Math.round(kacinma/maxC*100)}]);
   }else if(t.tip==="eksen3"){
     const E={yakinlik:[0,0],tutku:[0,0],baglilik:[0,0]};
-    t.sorular.forEach((s,i)=>{E[s.eksen][0]+=puanlar[i];E[s.eksen][1]+=4;});
+    t.sorular.forEach((s,i)=>{E[s.eksen][0]+=secPuan(s,puanlar[i]);E[s.eksen][1]+=secMax(s);});
     const yz=k=>Math.round(E[k][0]/E[k][1]*100);
     profil=t.profillerUc[(yz("yakinlik")>=60?"1":"0")+(yz("tutku")>=60?"1":"0")+(yz("baglilik")>=60?"1":"0")];
     document.getElementById("halkaAlan").style.display="none";
     eksenCiz([{ad:"Yakınlık",yuzde:yz("yakinlik")},{ad:"Tutku",yuzde:yz("tutku")},{ad:"Bağlılık",yuzde:yz("baglilik")}]);
-    document.getElementById("s-puan").textContent="";
-  }else if(t.tip==="eksen2"){
-    let kaygi=0,kacinma=0,nK=0,nC=0;
-    t.sorular.forEach((s,i)=>{s.eksen==="kaygi"?(kaygi+=puanlar[i],nK++):(kacinma+=puanlar[i],nC++);});
-    const kY=kaygi>nK*2, cY=kacinma>nC*2;
-    profil=t.profillerEksen[kY?(cY?"korkulu":"kaygili"):(cY?"kacingan":"guvenli")];
+  }else if(t.tip==="stil"){
+    const S={},A={};
+    t.sorular.forEach((s,i)=>{
+      s.sec.forEach(o=>{A[o.stil]=(A[o.stil]||0)+1;});
+      const st=s.sec[puanlar[i]].stil;S[st]=(S[st]||0)+1;
+    });
+    let baskin=null;Object.keys(A).forEach(k=>{S[k]=S[k]||0;if(baskin===null||S[k]>S[baskin])baskin=k;});
+    profil=t.profillerStil[baskin];
     document.getElementById("halkaAlan").style.display="none";
-    eksenCiz([{ad:"Kaygı ekseni",yuzde:Math.round(kaygi/(nK*4)*100)},{ad:"Kaçınma ekseni",yuzde:Math.round(kacinma/(nC*4)*100)}]);
-    document.getElementById("s-puan").textContent="";
-  }else{
-    puan=puanlar.reduce((a,b)=>a+b,0);
-    max=t.sorular.reduce((a,s)=>a+(s.sec?Math.max(...s.sec.map(o=>o.p)):4),0);
+    eksenCiz(Object.keys(A).map(k=>({ad:t.stilAd[k],yuzde:Math.round(S[k]/A[k]*100)})).sort((a,b)=>b.yuzde-a.yuzde));
+  }else{ // toplam
+    let puan=0,max=0;
+    t.sorular.forEach((s,i)=>{puan+=secPuan(s,puanlar[i]);max+=secMax(s);});
     profil=t.profiller.find(p=>puan>=p.min);
     halkaCiz(Math.round(puan/max*100),"PUANIN");
     document.getElementById("s-puan").textContent=puan+" / "+max+" puan";
   }
   document.getElementById("s-testadi").textContent=t.baslik;
-  document.getElementById("s-baslik").textContent=profil.baslik;
+  document.getElementById("s-baslik").textContent=basOn+profil.baslik;
   document.getElementById("s-metin").textContent=profil.metin;
   document.getElementById("s-oneri").textContent=profil.oneri;
   document.getElementById("s-kaynak").textContent="📚 "+t.kaynak+" — Sonuçlar eğlence ve öz-farkındalık amaçlıdır; psikolojik tanı aracı değildir.";
   goster("sonuc");
 }
 function paylas(){
-  const metin=`"${aktifTest.baslik}" testini çözdüm: ${document.getElementById("s-baslik").textContent} (${document.getElementById("halkaYuzde").textContent})\nSen de dene 👉 kalbinesor.com`;
+  const metin=`"${aktifTest.baslik}" testini çözdüm: ${document.getElementById("s-baslik").textContent}\nSen de dene 👉 kalbinesor.com`;
   if(navigator.share){navigator.share({text:metin}).catch(()=>{});}
   else{navigator.clipboard.writeText(metin);alert("Sonuç kopyalandı — istediğin yere yapıştırabilirsin 💛");}
 }
